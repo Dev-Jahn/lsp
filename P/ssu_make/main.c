@@ -1,5 +1,10 @@
 #include "ssu_make.h"
 int main(int argc, char *argv[])
 {
-	"something changed"
+	for (int i=0;i<argc;i++)
+	{
+		printf("%s\n",argv[i]);
+	}
+	parse_cmd(argc, argv);
+	exit(0);
 }
