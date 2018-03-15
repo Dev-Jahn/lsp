@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 
+#define MAX_OPTION 6
 #define MAX_TARGET 5
 #define MAX_MACRO 5
 
@@ -25,17 +26,17 @@ typedef struct _STACK
 	int size;
 } STACK;
 
-typedef struct _OPTION
+typedef struct _PAIR
 {
-	char *type;
-	char *param;
-} OPTION;
+	char *key;
+	char *value;
+} PAIR;
 
 typedef struct _COMMAND
 {
-	OPTION opt[6];
+	PAIR opt[MAX_OPTION];
 	char* target[MAX_TARGET];
-	char* macro[MAX_MACRO];
+	PAIR macro[MAX_MACRO];
 } COMMAND;
 
 LIST *makeList();
