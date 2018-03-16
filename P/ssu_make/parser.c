@@ -1,10 +1,13 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <regex.h>
 #include "parser.h"
 
 COMMAND *parse_cmd(int argc, char *argv[])
 {
 	COMMAND *cmd = (COMMAND*)malloc(sizeof(COMMAND));
 
-	regex_t preg_opt, preg_mac;
+	regex_t regex_opt, regex_mac;
 	int cnt_opt=0, cnt_tar=0, cnt_mac=0;
 
 	//옵션지정토큰 1차 필터링 패턴
@@ -20,6 +23,7 @@ COMMAND *parse_cmd(int argc, char *argv[])
 	for (int i=1;i<argc;i++)
 	{
 		char *token = argv[i];
+		//매크로토큰 검출
 		if (compare(pat_mac,token))
 		{
 			cnt_mac++;
@@ -35,13 +39,34 @@ COMMAND *parse_cmd(int argc, char *argv[])
 
 int compare(const char *pattern, const char *string)
 {
-	regex_t preg;
-	if (regcomp(&preg, pattern, REG_EXTENDED) != 0)
-		return -1;
-	if (regexec(&preg, string, 0, NULL, 0) != 0)
-		return -1;
+	regex_t regex;
+	int err;
+	char errbuf[100];
+
+	if ((err = regcomp(&regex, pattern, REG_EXTENDED)) != 0)
+	{
+		regerror(err, &regex, errbuf, sizeof(errbuf));
+		fprintf(stderr,"Could not compile regex\n");
+		regfree(&regex);
+		exit(1);
+	}
+	if ((err = regexec(&regex, string, 0, NULL, 0)) != 0)
+	{
+		regerror(err, &regex, errbuf, sizeof(errbuf));
+		fprintf(stderr, "Match failed: %s\n",errbuf);
+		regfree(&regex);
+		exit(1);
+	}
 	else
+	{
+		regfree(&regex);
 		return 0;
+	}
 }
 
 char *trim(const char *pattern, const char *string)
+{
+	char *substring = (char*)malloc(sizeof(char));
+	
+	
+}
