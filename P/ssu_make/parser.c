@@ -29,9 +29,10 @@ COMMAND *parse_cmd(int argc, char *argv[])
 	char *pat_mac_r = "=\\w+";
 	//타겟 패턴
 	char *pat_tar = "\\w+";
-	for (int i=1;i<argc;i++)
+	//토큰 스택이 차있는 동안
+	while (tokenstk.size != 0)
 	{
-		char *token = argv[i];
+		char *token = pop( 
 		//매크로토큰 검출
 		if (compare(pat_mac,token))
 		{
@@ -74,7 +75,7 @@ int compare(const char *pattern, const char *string)
 		regerror(err, &regex, errbuf, sizeof(errbuf));
 		fprintf(stderr,"Could not compile regex\n");
 		regfree(&regex);
-		return -1;
+		return -1
 	}
 	if ((err = regexec(&regex, string, 1, pmatch, 0)) != 0)
 	{
