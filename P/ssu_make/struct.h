@@ -1,8 +1,6 @@
 #ifndef _STRUCT_H_
 #define _STRUCT_H_
 
-#include <stdlib.h>
-
 #define MAX_OPTION 6
 #define MAX_TARGET 5
 #define MAX_MACRO 5
@@ -13,12 +11,35 @@ typedef struct _NODE
 	struct _NODE *next;
 } NODE;
 
-typedef struct _LIST
+typedef struct _BLOCK
 {
-	NODE *cur;
-	NODE *head;
-	NODE *tail;
-} LIST;
+	char *key;
+	char **val;
+	int val_cnt;
+	char **cmd;
+	int cmd_cnt;
+} BLOCK;
+
+typedef struct _TREE_NODE
+{
+	BLOCK blk;
+	int child_cnt;
+	struct _TREE_NODE **child;
+} TNODE;
+
+typedef struct _TREE
+{
+	TNODE *root;
+} TREE;
+
+/*
+ *typedef struct _LIST
+ *{
+ *    NODE *cur;
+ *    NODE *head;
+ *    NODE *tail;
+ *} LIST;
+ */
 
 typedef struct _STACK
 {
@@ -39,12 +60,14 @@ typedef struct _COMMAND
 	PAIR macro[MAX_MACRO];
 } COMMAND;
 
-LIST *makeList();
-void addNode(LIST *list, char *input);
-void delNode(LIST *list);
-void clearList(LIST *list);
+//LIST *makeList();
+//void addNode(LIST *list, char *input);
+//void delNode(LIST *list);
+//void clearList(LIST *list);
 void init(STACK *stk);
 void push(STACK *stk, char *data);
 char *pop(STACK *stk);
-
+TNODE *newNode(BLOCK blk);
+void addChild(TNODE *root, TNODE *child);
+TREE *newTree();
 #endif
