@@ -5,69 +5,70 @@
 #define MAX_TARGET 5
 #define MAX_MACRO 5
 
-typedef struct _NODE
+typedef struct _Node
 {
 	char *str;
-	struct _NODE *next;
-} NODE;
+	struct _Node *next;
+} Node;
 
-typedef struct _BLOCK
+typedef struct _Block
 {
 	char *key;
 	char **val;
 	int val_cnt;
 	char **cmd;
 	int cmd_cnt;
-} BLOCK;
+} Block;
 
-typedef struct _TREE_NODE
+typedef struct _TreeNode
 {
-	BLOCK blk;
+	Block blk;
 	int child_cnt;
-	struct _TREE_NODE **child;
-} TNODE;
+	struct _TreeNode **child;
+} TNode;
 
-typedef struct _TREE
+typedef struct _Tree
 {
-	TNODE *root;
-} TREE;
+	TNode *root;
+} Tree;
 
 /*
- *typedef struct _LIST
+ *typedef struct _List
  *{
- *    NODE *cur;
- *    NODE *head;
- *    NODE *tail;
- *} LIST;
+ *    Node *cur;
+ *    Node *head;
+ *    Node *tail;
+ *} List;
  */
 
-typedef struct _STACK
+typedef struct _Stack
 {
-	NODE *top;
+	Node *top;
 	int size;
-} STACK;
+} Stack;
 
-typedef struct _PAIR
+typedef struct _Pair
 {
 	char *key;
 	char *value;
-} PAIR;
+} Pair;
 
-typedef struct _COMMAND
+typedef struct _Command
 {
-	PAIR opt[MAX_OPTION];
+	Pair opt[MAX_OPTION];
 	char* target[MAX_TARGET];
-	PAIR macro[MAX_MACRO];
-} COMMAND;
+	Pair macro[MAX_MACRO];
+} Command;
 
-//LIST *makeList();
-//void addNode(LIST *list, char *input);
-//void delNode(LIST *list);
-//void clearList(LIST *list);
-void init(STACK *stk);
-void push(STACK *stk, char *data);
-char *pop(STACK *stk);
-TNODE *newNode(BLOCK blk);
-void addChild(TNODE *root, TNODE *child);
-TREE *newTree();
+//List *makeList();
+//void addNode(List *List, char *input);
+//void delNode(List *List);
+//void clearList(List *List);
+void init(Stack *stk);
+void push(Stack *stk, char *data);
+char *pop(Stack *stk);
+TNode *newNode(Block blk);
+void addChild(TNode *root, TNode *child);
+Tree *newTree();
+
 #endif

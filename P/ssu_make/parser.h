@@ -3,7 +3,8 @@
 #include <stdlib.h>
 #include "struct.h"
 
-COMMAND *parse_cmd(int argc, char *argv[]);
-BLOCK *parse_block(const char *fname);
-TREE *dependTree(BLOCK *blks, size_t amount);
+Command *parse_cmd(int argc, char *argv[]);
+Block *parse_Block(const char *fname);
+Tree *parse_tree(Block *blks, size_t amount);
+
 #endif
