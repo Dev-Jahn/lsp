@@ -1,0 +1,63 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	2	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+addNode	struct.c	/^void addNode(LIST *list, char *input)$/;"	f
+child	struct.h	/^	struct _TREE_NODE **child;$/;"	m	struct:_TREE_NODE	typeref:struct:_TREE_NODE::_TREE_NODE
+clearList	struct.c	/^void clearList(LIST *list)$/;"	f
+COMMAND	struct.h	/^} COMMAND;$/;"	t	typeref:struct:_COMMAND
+compare	parser.c	/^int compare(const char *pattern, const char *string)$/;"	f
+compilation_database_folder	.ycm_extra_conf.py	/^compilation_database_folder = ''$/;"	v
+database	.ycm_extra_conf.py	/^  database = None$/;"	v
+database	.ycm_extra_conf.py	/^  database = ycm_core.CompilationDatabase( compilation_database_folder )$/;"	v
+delNode	struct.c	/^void delNode(LIST *list)$/;"	f
+DirectoryOfThisScript	.ycm_extra_conf.py	/^def DirectoryOfThisScript():$/;"	f
+flags	.ycm_extra_conf.py	/^flags = [$/;"	v
+FlagsForFile	.ycm_extra_conf.py	/^def FlagsForFile( filename, **kwargs ):$/;"	f
+GetCompilationInfoForFile	.ycm_extra_conf.py	/^def GetCompilationInfoForFile( filename ):$/;"	f
+init	struct.c	/^void init(STACK *stk)$/;"	f
+IsHeaderFile	.ycm_extra_conf.py	/^def IsHeaderFile( filename ):$/;"	f
+key	struct.h	/^	char *key;$/;"	m	struct:_PAIR
+macro	struct.h	/^	PAIR macro[MAX_MACRO];$/;"	m	struct:_COMMAND
+main	main.c	/^int main(int argc, char *argv[])$/;"	f
+main	test.c	/^int main(void)$/;"	f
+makeList	struct.c	/^LIST *makeList()$/;"	f
+MakeRelativePathsInFlagsAbsolute	.ycm_extra_conf.py	/^def MakeRelativePathsInFlagsAbsolute( flags, working_directory ):$/;"	f
+MAX_MACRO	struct.h	6;"	d
+MAX_OPTION	struct.h	4;"	d
+MAX_TARGET	struct.h	5;"	d
+next	struct.h	/^	struct _NODE *next;$/;"	m	struct:_NODE	typeref:struct:_NODE::_NODE
+NODE	struct.h	/^} NODE;$/;"	t	typeref:struct:_NODE
+opt	struct.h	/^	PAIR opt[MAX_OPTION];$/;"	m	struct:_COMMAND
+opt_c	main.c	/^int opt_m, opt_h, opt_s, opt_t, opt_f, opt_c;$/;"	v
+opt_f	main.c	/^int opt_m, opt_h, opt_s, opt_t, opt_f, opt_c;$/;"	v
+opt_h	main.c	/^int opt_m, opt_h, opt_s, opt_t, opt_f, opt_c;$/;"	v
+opt_m	main.c	/^int opt_m, opt_h, opt_s, opt_t, opt_f, opt_c;$/;"	v
+opt_s	main.c	/^int opt_m, opt_h, opt_s, opt_t, opt_f, opt_c;$/;"	v
+opt_t	main.c	/^int opt_m, opt_h, opt_s, opt_t, opt_f, opt_c;$/;"	v
+PAIR	struct.h	/^} PAIR;$/;"	t	typeref:struct:_PAIR
+parse_cmd	parser.c	/^COMMAND *parse_cmd(int argc, char *argv[])$/;"	f
+pop	struct.c	/^char *pop(STACK *stk)$/;"	f
+push	struct.c	/^void push(STACK *stk, char *data)$/;"	f
+root	struct.h	/^	TNODE *root;$/;"	m	struct:_TREE
+size	struct.h	/^	int size;$/;"	m	struct:_STACK
+SOURCE_EXTENSIONS	.ycm_extra_conf.py	/^SOURCE_EXTENSIONS = [ '.C', '.cpp', '.cxx', '.cc', '.c', '.m', '.mm' ]$/;"	v
+STACK	struct.h	/^} STACK;$/;"	t	typeref:struct:_STACK
+str	struct.h	/^	char *str;$/;"	m	struct:_NODE
+str	struct.h	/^	char *str;$/;"	m	struct:_TREE_NODE
+target	struct.h	/^	char* target[MAX_TARGET];$/;"	m	struct:_COMMAND
+TNODE	struct.h	/^} TNODE;$/;"	t	typeref:struct:_TREE_NODE
+top	struct.h	/^	NODE *top;$/;"	m	struct:_STACK
+TREE	struct.h	/^} TREE;$/;"	t	typeref:struct:_TREE
+trim	parser.c	/^char *trim(const char *pattern, const char *string)$/;"	f
+value	struct.h	/^	char *value;$/;"	m	struct:_PAIR
+_COMMAND	struct.h	/^typedef struct _COMMAND$/;"	s
+_NODE	struct.h	/^typedef struct _NODE$/;"	s
+_PAIR	struct.h	/^typedef struct _PAIR$/;"	s
+_PARSER_H_	parser.h	2;"	d
+_STACK	struct.h	/^typedef struct _STACK$/;"	s
+_STRUCT_H_	struct.h	2;"	d
+_TREE	struct.h	/^typedef struct _TREE$/;"	s
+_TREE_NODE	struct.h	/^typedef struct _TREE_NODE$/;"	s

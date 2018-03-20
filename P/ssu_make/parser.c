@@ -1,48 +1,49 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <fcntl.h>
 #include <regex.h>
 #include <string.h>
 #include "parser.h"
+#include "util.h"
 
-COMMAND *parse_cmd(int argc, char *argv[])
+Command *parse_cmd(int argc, char *argv[])
 {
-	COMMAND *cmd = (COMMAND*)malloc(sizeof(COMMAND));
-	STACK tokenstk;
+	Command *cmd = (Command*)malloc(sizeof(Command));
+	Stack tokenstk;
 	tokenstk.size = 0;
 	for (int i=1;i<argc;i++)
 	{
 		push(&tokenstk, argv[i]);
 	}
 
-	regex_t regex_opt, regex_mac;
 	int cnt_opt=0, cnt_tar=0, cnt_mac=0;
 
-	//옵션지정토큰 1차 필터링 패턴
+	//옵션지정자 패턴
 	char *pat_opt1 = "-\\w+";
-	//적합한 단일옵션토큰패턴
-	char *pat_opt2 = "-[mfchst]";
-	//적합한 다중옵션토큰패턴
-	char *pat_opt3 = "-[mhst]{2,4}";
-	//적합한 매크로토큰패턴
+	//인자필요 패턴
+	char *pat_opt2 = "-[mhst]*[fc]";
+	//인자불필요 옵션패턴 
+	char *pat_opt3 = "-[mhst]+";
+	//적합한 매크로패턴
 	char *pat_mac = "\\w+=\\w+|\\w+=\"\\w+\"";
 	char *pat_mac_l = "\\w+=";
 	char *pat_mac_r = "=\\w+";
 	//타겟 패턴
 	char *pat_tar = "\\w+";
 	//토큰 스택이 차있는 동안
+	char *token;
 	while (tokenstk.size != 0)
 	{
-		char *token = pop( 
+		token = pop(&tokenstk);
 		//매크로토큰 검출
 		if (compare(pat_mac,token))
 		{
 			if (cnt_mac >= 5)
 			{
-				/*
-				 * 매크로갯수 초과시 예외처리
-				 */
+				// 매크로갯수 초과시 예외처리
 				break;
 			}
+			//메모리관련 수정필요
 			char *k = trim(pat_mac_l, token);
 			k = trim("\\w+", k);
 			char *v = trim(pat_mac_r, token);
@@ -52,75 +53,46 @@ COMMAND *parse_cmd(int argc, char *argv[])
 			cmd->macro[cnt_mac].value = v;
 			cnt_mac++;
 		}
-		else if (compare(pat_
-
+		//단어형태 && 현재토큰 앞에 인자가 있을 때
+		else if ((compare(pat_tar, token) == 0) && (tokenstk.top != NULL))
+		{
+			//앞의 인자가 인자필요패턴이면 토큰>옵션파라미터
+			if (compare(pat_opt2, tokenstk.top->str) == 0)
+			{
+				char *prev = tokenstk.top->str;
+				//끝옵션값
+				for (int i = 1; i < strlen(prev); i++)
+				{
+					char *opt = (char *)malloc(sizeof(char));
+					memcpy(opt, prev + i, 1);
+					cmd->opt[cnt_opt++].key = opt;
+				}
+				cmd->opt[cnt_opt-1].value = token;
+			}
+			//아니면 토큰>TARGET
+			else
+			{
+				if (cnt_tar>=5)
+				{
+					//타겟개수 초과
+				}
+				memcpy(&(cmd->target[cnt_tar]), token, strlen(token));
+				cnt_tar++;
+			}
+		}
 	}
-	
 	return cmd;
 }
-/*
- * 패턴컴파일 오류, 매칭 실패 시 -1
- * 매칭성공, 패턴 전체와 불일치시 1
- * 패턴과 완전 일치시 0
- */
-int compare(const char *pattern, const char *string)
-{
-	regex_t regex;
-	int err;
-	char errbuf[100];
-	regmatch_t pmatch[1];
 
-	if ((err = regcomp(&regex, pattern, REG_EXTENDED)) != 0)
-	{
-		regerror(err, &regex, errbuf, sizeof(errbuf));
-		fprintf(stderr,"Could not compile regex\n");
-		regfree(&regex);
-		return -1
-	}
-	if ((err = regexec(&regex, string, 1, pmatch, 0)) != 0)
-	{
-		regerror(err, &regex, errbuf, sizeof(errbuf));
-		fprintf(stderr, "Match failed: %s\n",errbuf);
-		regfree(&regex);
-		return -1;
-	}
-	else if ((int)strlen(string) == pmatch[0].rm_eo - pmatch[0].rm_so)
-	{
-		regfree(&regex);
-		return 0;
-	}
-	else
-		return 1;
+Block *parse_Block(const char *fname)
+{
+	int fd;
+	if ((fd = open(fname,O_RDONLY)) < 0)
+	
+	
 }
 
-char *trim(const char *pattern, const char *string)
+Tree *parse_Tree(Block *blks, size_t amount)
 {
-	char *substring = (char*)malloc(sizeof(char));
-	int err = 0;
-	char errbuf[100];
-	regex_t regex;
-	regmatch_t pmatch[1];
-
-	if ((err = regcomp(&regex, pattern, REG_EXTENDED)) != 0)
-	{
-		regerror(err, &regex, errbuf, sizeof(errbuf));
-		fprintf(stderr,"Could not compile regex\n");
-		regfree(&regex);
-		return 0;
-	}
-	if ((err = regexec(&regex, string, 1, pmatch, 0)) != 0)
-	{
-		regerror(err, &regex, errbuf, sizeof(errbuf));
-		fprintf(stderr, "Match failed: %s\n",errbuf);
-		regfree(&regex);
-		return 0;
-	}
-	else
-	{
-		int nbytes = pmatch[0].rm_eo - pmatch[0].rm_so;
-		memcpy(substring, string, nbytes);
-		substring[nbytes] = 0;
-	}
-	return substring;	
 	
 }

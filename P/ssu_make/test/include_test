@@ -1,0 +1,5 @@
+A=include path1
+include path1 path2 path3 path4
+include
+	include
+  include path1

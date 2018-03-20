@@ -1,77 +1,107 @@
+#include <stdlib.h>
+#include <string.h>
 #include "struct.h"
 
-LIST *makeList()
+/*
+List *makeList()
 {
-	LIST* newlist = (LIST*)malloc(sizeof(LIST));
-	newlist->cur = NULL;
-	newlist->head = NULL;
-	newlist->tail = NULL;
-	return newlist;
+	List* newList = (List*)malloc(sizeof(List));
+	newList->cur = NULL;
+	newList->head = NULL;
+	newList->tail = NULL;
+	return newList;
 }
 
-void addNode(LIST *list, char *input)
+void addNode(List *List, char *input)
 {
-	NODE* nd = (NODE*)malloc(sizeof(NODE));
+	Node* nd = (Node*)malloc(sizeof(Node));
 	nd->str = input;
 	nd->next = NULL;
-	if ((list->head==NULL)&&(list->tail==NULL))
-		list->head = list->tail = nd;
+	if ((List->head==NULL)&&(List->tail==NULL))
+		List->head = List->tail = nd;
 	else
 	{
-		list->tail->next = nd;
-		list->tail = nd;
+		List->tail->next = nd;
+		List->tail = nd;
 	}
-	list->cur = nd;
+	List->cur = nd;
 }
 
-void delNode(LIST *list)
+void delNode(List *List)
 {
-	NODE* nd = list->head;
-	if (nd==list->tail)
+	Node* nd = List->head;
+	if (nd==List->tail)
 	{
 		free(nd);
-		list->head = list->tail = list->cur = NULL;
+		List->head = List->tail = List->cur = NULL;
 		return;
 	}
 	while(nd->next->next != NULL)
 		nd = nd->next;
 	free(nd->next);
 	nd->next = NULL;
-	list->tail = nd;
+	List->tail = nd;
 }
 
-void clearList(LIST *list)
+void clearList(List *List)
 {
-	while (list->head!=NULL)
-		delNode(list);
+	while (List->head!=NULL)
+		delNode(List);
 }
-
-void init(STACK *stk)
+*/
+void init(Stack *stk)
 {
 	stk->top = NULL;
 	stk->size = 0;
 }
 
-void push(STACK *stk, char *data)
+void push(Stack *stk, char *data)
 {
-	NODE *nd = (NODE*)malloc(sizeof(NODE));
+	Node *nd = (Node*)malloc(sizeof(Node));
 	nd->str = data;
 	nd->next = stk->top;
 	stk->top = nd;
 	(stk->size)++;
 }
 
-char *pop(STACK *stk)
+char *pop(Stack *stk)
 {
 	if ((stk->size)==0)
 		return NULL;
 	else
 	{
-		char *data = (char*)malloc(sizeof(char));
-		NODE *old = stk->top;
-		data = old->str;
+		(stk->size)--;
+		Node *old = stk->top;
+		int len = strlen(old->str);
+		char *data = (char*)malloc(sizeof(char)*len);
+		memcpy(data, old->str, len);
 		stk->top = old->next;
 		free(old);
 		return data;
 	}
 }
+
+TNode *newNode(Block blk)
+{
+	TNode *ret = (TNode *)malloc(sizeof(TNode));
+	ret->blk = blk;
+	ret->child_cnt = 0;
+	ret->child = NULL;
+	return ret;
+}
+
+void addChild(TNode *root, TNode *child)
+{
+	TNode **p = (TNode**)malloc(sizeof(TNode*)*(root->child_cnt+1));
+	memcpy(p, root->child, sizeof(TNode*)*(root->child_cnt));
+	p[root->child_cnt] = child;
+	root->child = p;
+}
+
+Tree *newTree()
+{
+	Tree *ret = (Tree*)malloc(sizeof(Tree));
+	ret->root = NULL;
+	return ret;
+}
+
