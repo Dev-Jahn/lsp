@@ -7,6 +7,7 @@
 #include <string.h>
 #include <regex.h>
 #include "struct.h"
+#include "util.h"
 
 #define S_MODE 0644
 #define BUFFER_SIZE 1024
@@ -45,5 +46,35 @@ void preprocess(const char *pathname, Pair macro[MAX_MACRO])
 	/*
 	 * include
 	 */
-	regex_t
+	int fd_incl;
+	char *line = (char*)malloc(sizeof(char)*CHAR_PER_LINE);
+	char *delimiter = " ";
+	Off_Pair off_p;
+	do
+	{
+		off_p = regfind(fd2, "include");	
+		if (off_p.found)
+		{
+			//한줄을 읽어오기위해 버퍼로 read
+			int cnt = read(fd2, buf, CHAR_PER_LINE);
+			buf[cnt] = 0;
+			int i=0;
+			char *tok;
+			while(buf[i])
+			{
+				if (buf[i] == '\n')
+				{
+					memcpy(line, buf, i+1);
+					break;
+				}
+				i++;
+			}
+			while((tok = strtok(line," "))!=0)
+			{
+				//
+			}
+
+		}
+		lseek(fd2, off_p.eo, SEEK_SET);		
+	} while(off_p.found);
 }

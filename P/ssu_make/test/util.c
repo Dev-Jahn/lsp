@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <fcntl.h>
 #include <string.h>
 #include <regex.h>
 #include "util.h"
@@ -137,20 +136,4 @@ Off_Pair regfind(int fd, const char *pattern)
 	}
 	lseek(fd, off_p.eo, SEEK_SET);
 	return off_p;
-}
-/*
- * filedes 현재 오프셋 뒤에 pathname 파일 전체 붙여넣기
- * 오프셋은 붙여넣은 내용 뒤
- * 성공시 쓴내용 길이
- * 실패시 -1 리턴
- */
-ssize_t fconcat(int filedes, const char *pathname)
-{
-	int fd_wr;
-	if ((fd_wr = open(pathname, O_RDONLY))<0)
-	{
-		fprintf(stderr, "open error for %s in fconcat\n", pathname);
-		exit(1);
-	}
-
 }

@@ -61,7 +61,7 @@ Command *parse_cmd(int argc, char *argv[])
 			{
 				char *prev = tokenstk.top->str;
 				//끝옵션값
-				for (int i = 1; i < strlen(prev); i++)
+				for (int i = 1; i < (int)strlen(prev); i++)
 				{
 					char *opt = (char *)malloc(sizeof(char));
 					memcpy(opt, prev + i, 1);
@@ -88,7 +88,7 @@ Block *parse_Block(const char *fname)
 {
 	int fd;
 	if ((fd = open(fname,O_RDONLY)) < 0)
-	
+		
 	
 }
 
