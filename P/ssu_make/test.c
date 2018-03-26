@@ -1,8 +1,19 @@
 #include <stdio.h>
-#include <string.h>
-
-int main(void)
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include "util.h"
+#include "io.h"
+int main()
 {
-	char *str = "-mhstf";
-	printf("length:%d\n",strlen(str));
+	int fd = open("txt", O_RDWR);
+	char buf[100];
+	int num[10];
+	Off_Pair o;
+
+
+	freplace(fd, "\\$\\(CC\\)", "gcc");
+	close(fd);
 }

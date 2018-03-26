@@ -2,69 +2,81 @@
 #include <string.h>
 #include "struct.h"
 
-/*
-List *makeList()
+void initList(List *list)
 {
-	List* newList = (List*)malloc(sizeof(List));
-	newList->cur = NULL;
-	newList->head = NULL;
-	newList->tail = NULL;
-	return newList;
+	list->cur = NULL;
+	list->head = NULL;
+	list->tail = NULL;
+	list->size = 0;
 }
 
-void addNode(List *List, char *input)
+void addNode(List *list, void *item)
 {
 	Node* nd = (Node*)malloc(sizeof(Node));
-	nd->str = input;
+	nd->item = item;
 	nd->next = NULL;
-	if ((List->head==NULL)&&(List->tail==NULL))
-		List->head = List->tail = nd;
+	if ((list->head==NULL)&&(list->tail==NULL))
+	{
+		list->head = list->tail = nd;
+		list->cur = list->head;
+	}
 	else
 	{
-		List->tail->next = nd;
-		List->tail = nd;
+		list->tail->next = nd;
+		list->tail = nd;
 	}
-	List->cur = nd;
+	list->size++;
 }
 
-void delNode(List *List)
+void delNode(List *list)
 {
-	Node* nd = List->head;
-	if (nd==List->tail)
+	Node* nd = list->head;
+	if (nd==list->tail)
 	{
 		free(nd);
-		List->head = List->tail = List->cur = NULL;
+		list->head = list->tail = list->cur = NULL;
 		return;
 	}
 	while(nd->next->next != NULL)
 		nd = nd->next;
+	free(nd->next->item);
 	free(nd->next);
 	nd->next = NULL;
-	List->tail = nd;
+	list->tail = nd;
+	list->size--;
 }
 
-void clearList(List *List)
+void clearList(List *list)
 {
-	while (List->head!=NULL)
-		delNode(List);
+	while (list->head!=NULL)
+		delNode(list);
 }
-*/
-void init(Stack *stk)
+
+void initStack(Stack *stk)
 {
 	stk->top = NULL;
 	stk->size = 0;
 }
 
-void push(Stack *stk, char *data)
+void push(Stack *stk, void *data)
 {
 	Node *nd = (Node*)malloc(sizeof(Node));
-	nd->str = data;
+	nd->item = data;
 	nd->next = stk->top;
 	stk->top = nd;
 	(stk->size)++;
 }
 
-char *pop(Stack *stk)
+/* ---------------------------------*/
+/**
+ * @brief 스택에서 top노드를 꺼내는 함수
+ *
+ * @param stk 스택을 가리키는 포인터
+ *
+ * @return top노드안에 들어있던 문자열.해제필요
+ */
+/* ---------------------------------*/
+void *pop(Stack *stk)
 {
 	if ((stk->size)==0)
 		return NULL;
@@ -72,36 +84,43 @@ char *pop(Stack *stk)
 	{
 		(stk->size)--;
 		Node *old = stk->top;
-		int len = strlen(old->str);
-		char *data = (char*)malloc(sizeof(char)*len);
-		memcpy(data, old->str, len);
+		void *item = old->item;
 		stk->top = old->next;
 		free(old);
-		return data;
+		return item;
 	}
 }
 
-TNode *newNode(Block blk)
+void initTree(Tree *tree, void *rootItem)
+{
+	tree->root = (TNode*)malloc(sizeof(TNode));
+	tree->root->child = NULL;
+	tree->root->child_cnt = 0;
+	tree->root->item = rootItem;
+}
+
+TNode *newNode(void *item)
 {
 	TNode *ret = (TNode *)malloc(sizeof(TNode));
-	ret->blk = blk;
+	ret->item = item;
 	ret->child_cnt = 0;
 	ret->child = NULL;
 	return ret;
 }
 
-void addChild(TNode *root, TNode *child)
+void addChild(TNode *root, void *item)
 {
 	TNode **p = (TNode**)malloc(sizeof(TNode*)*(root->child_cnt+1));
-	memcpy(p, root->child, sizeof(TNode*)*(root->child_cnt));
+	TNode *child = (TNode*)malloc(sizeof(TNode));
+	child->item = item;
+	child->child_cnt = 0;
+	child->child = NULL;
+	if (root->child != NULL)
+	{
+		memcpy(p, root->child, sizeof(TNode*)*(root->child_cnt));
+		free(root->child);
+	}
 	p[root->child_cnt] = child;
 	root->child = p;
+	root->child_cnt++;
 }
-
-Tree *newTree()
-{
-	Tree *ret = (Tree*)malloc(sizeof(Tree));
-	ret->root = NULL;
-	return ret;
-}
-

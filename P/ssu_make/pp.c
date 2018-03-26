@@ -8,25 +8,32 @@
 #include <regex.h>
 #include "struct.h"
 #include "util.h"
+#include "io.h"
+#include "constants.h"
+#include "pp.h"
 
-#define S_MODE 0644
-#define BUFFER_SIZE 1024
-/*
- * 전처리기
- * 1.include 위치에 파일내용 삽입
+/* ---------------------------------*/
+/**
+ * @brief 전처리기 
+ * 1.include 위치에 파일 삽입
  * 2.주석제거
- * 3.파일내의 매크로 처리
- * - 인자로 입력받은 매크로 덮어쓰기
+ * 3.파일내 매크로처리
+ * 4.명령행 매크로처리
+ * 5.줄바꿈 처리
+ * 6.내부 매크로처리
+ *
+ * @param pathname 처리할 Makefile의 경로
+ * @param macro[MAX_MACRO] Makefile에 정의할 명령행 매크로
  */
+/* ---------------------------------*/
 void preprocess(const char *pathname, Pair macro[MAX_MACRO])
 {
 	//처리가 완료된 파일이 저장될 path : pathname.tmp
-	char *output = (char*)malloc(sizeof(char)*(strlen(pathname)+strlen(".tmp")+1));
+	char output[WORD_SIZE];
 	strcat(strcpy(output, pathname), ".tmp");
-
-	int fd1, fd2;
+	int fd1, fd2, length;
 	char buf[BUFFER_SIZE];
-	int length;
+	Off_Pair offsets;
 
 	//전처리후 상태를 저장할 임시파일 생성, 원본 복사
 	if ((fd1 = open(pathname, O_RDONLY))<0)
@@ -42,39 +49,96 @@ void preprocess(const char *pathname, Pair macro[MAX_MACRO])
 	while ((length = read(fd1, buf, BUFFER_SIZE))>0)
 		write(fd2, buf, length);
 	close(fd1);
+	//include 처리
+	incl(fd2);
+	//주석처리
+	do {
+		offsets = regfind(fd2, "^#.*");
+		delLine(fd2);
+	} while (offsets.found);
+	lseek(fd2,0,SEEK_SET);	
+	//매크로
+	char *essential =	"^\\w+\\s*=\\s*\"?\\w+\"?";
+	char *optional =	"^\\w+\\s*\\?=\\s*\"?\\w+\"?";
+	char *var =			"\\$[\\(\\{]\\w+[\\)\\}]";
+	char *inner1 =		"\\$\\*";
+	char *inner2 =		"\\$@";
+	char *target =		"\\w+\\s*+:(\\s*[\\w\\.]+)+";
+	char *cmd =			"^\\t[^\\s]+.*";
+	char line[LINE_SIZE], *key, *value, *saveptr, *delim = " \t";
+	List macroList;
+	initList(&macroList);
+	do {
+		offsets = regfind(fd2,essential);
+		readLine(fd2,line);
+		key = strtok_r(line, delim, &saveptr);
+		strtok_r(NULL, delim, &saveptr);
+		value = strtok_r(NULL, delim, &saveptr);
+		Pair *m = (Pair*)malloc(sizeof(Pair)); 
+		m->key = key;
+		m->value = value;
+		addNode(&macroList, m);
+	} while(offsets.found);
+	lseek(fd2, 0,SEEK_SET);
+	do {
+		char symbol[WORD_SIZE] = "$(";
+		strcat(symbol, ((Pair*)macroList.cur->item)->key);
+		strcat(symbol, ")");
 
-	/*
-	 * include
-	 */
-	int fd_incl;
-	char *line = (char*)malloc(sizeof(char)*CHAR_PER_LINE);
-	char *delimiter = " ";
-	Off_Pair off_p;
+
+
+
+		
+
+	close(fd2);
+}
+
+/* ---------------------------------*/
+/**
+ * @brief 파일에서 include문을 찾아 파일을 삽입하고 include문 삭제
+ * 수행후 오프셋 SEEK_SET으로
+ *
+ * @param fd O_RDWR로 열린 파일디스크립터
+ *
+ * @return include로 삽입된 파일의 총 갯수
+ */
+/* ---------------------------------*/
+int incl(int fd)
+{
+	char *saveptr, *tmp, *delim = " \t";
+	int included = 0;
+	char line[LINE_SIZE];
+	Stack tokstk;
+	initStack(&tokstk);
+
+	Off_Pair offsets;
+	lseek(fd, 0, SEEK_SET);
 	do
 	{
-		off_p = regfind(fd2, "include");	
-		if (off_p.found)
+		offsets = regfind(fd, "include");	
+		if (offsets.found)
 		{
-			//한줄을 읽어오기위해 버퍼로 read
-			int cnt = read(fd2, buf, CHAR_PER_LINE);
-			buf[cnt] = 0;
-			int i=0;
-			char *tok;
-			while(buf[i])
+			//한줄 읽어온후 파일에서 해당줄 삭제
+			readLine(fd, line);
+			//include 키워드 삭제
+			strncpy(line, "       ", 7);
+			lseek(fd, offsets.so, SEEK_SET);
+			delLine(fd);
+			//읽은 줄 토큰으로 분할해 스택에 push
+			char *tok = strtok_r(line, delim, &saveptr);
+			if (tok != NULL)
+				push(&tokstk, tok);
+			while((tok = strtok_r(NULL, delim, &saveptr)) != NULL)
+				push(&tokstk, tok);
+			while(tokstk.size)
 			{
-				if (buf[i] == '\n')
-				{
-					memcpy(line, buf, i+1);
-					break;
-				}
-				i++;
+				tmp = (char*)pop(&tokstk);
+				ssize_t length = fconcat(fd, tmp);
+				lseek(fd, (off_t)(-length), SEEK_CUR);
+				included++;
 			}
-			while((tok = strtok(line," "))!=0)
-			{
-				//
-			}
-
 		}
-		lseek(fd2, off_p.eo, SEEK_SET);		
-	} while(off_p.found);
+	} while(offsets.found);
+	lseek(fd, 0, SEEK_SET);
+	return included;
 }

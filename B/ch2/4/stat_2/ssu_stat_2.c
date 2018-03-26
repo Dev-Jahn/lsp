@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 
-	intertime = statbuff.st_mtime;
+	intertime = statbuf.st_mtime;
 	while(1)
 	{
 		ssu_checkfile(argv[1], &intertime);

@@ -34,7 +34,7 @@ Command *parse_cmd(int argc, char *argv[])
 	char *token;
 	while (tokenstk.size != 0)
 	{
-		token = pop(&tokenstk);
+		token = (char*)pop(&tokenstk);
 		//매크로토큰 검출
 		if (compare(pat_mac,token))
 		{
@@ -57,9 +57,9 @@ Command *parse_cmd(int argc, char *argv[])
 		else if ((compare(pat_tar, token) == 0) && (tokenstk.top != NULL))
 		{
 			//앞의 인자가 인자필요패턴이면 토큰>옵션파라미터
-			if (compare(pat_opt2, tokenstk.top->str) == 0)
+			if (compare(pat_opt2, (char*)tokenstk.top->item) == 0)
 			{
-				char *prev = tokenstk.top->str;
+				char *prev = (char*)tokenstk.top->item;
 				//끝옵션값
 				for (int i = 1; i < (int)strlen(prev); i++)
 				{
@@ -84,12 +84,15 @@ Command *parse_cmd(int argc, char *argv[])
 	return cmd;
 }
 
-Block *parse_Block(const char *fname)
+Block parse_Block(const char *fname)
 {
+	Block blk;
 	int fd;
-	if ((fd = open(fname,O_RDONLY)) < 0)
+	/*
+	 *if ((fd = open(fname,O_RDONLY)) < 0)
+	 */
 		
-	
+	return blk;	
 }
 
 Tree *parse_Tree(Block *blks, size_t amount)

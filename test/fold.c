@@ -5,7 +5,7 @@ void func()
 	int a = 2;
 	int c = 55;
 }
-
+asdfasdf
 int main()
 {
 	int a = 1;
