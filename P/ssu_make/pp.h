@@ -4,6 +4,7 @@
 #include "struct.h"
 #include "constants.h"
 
-void preprocess(const char *pathname, Pair macro[MAX_MACRO]);
+void preprocess(const char *pathname, Pair *cmd_macro[MAX_MACRO]);
 int incl(int fd);
+
 #endif

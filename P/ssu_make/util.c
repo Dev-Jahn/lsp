@@ -1,3 +1,5 @@
+#define DEBUGX
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
@@ -25,7 +27,7 @@ int compare(const char *pattern, const char *string)
 	char errbuf[100];
 	regmatch_t pmatch[1];
 
-	if ((err = regcomp(&regex, pattern, REG_EXTENDED)) != 0)
+	if ((err = regcomp(&regex, pattern, REG_EXTENDED|REG_NEWLINE)) != 0)
 	{
 		regerror(err, &regex, errbuf, sizeof(errbuf));
 		fprintf(stderr,"Could not compile regex\n");
@@ -34,8 +36,11 @@ int compare(const char *pattern, const char *string)
 	}
 	if ((err = regexec(&regex, string, 1, pmatch, 0)) != 0)
 	{
-		regerror(err, &regex, errbuf, sizeof(errbuf));
-		fprintf(stderr, "Match failed: %s\n",errbuf);
+		if (err != REG_NOMATCH)
+		{
+			regerror(err, &regex, errbuf, sizeof(errbuf));
+			fprintf(stderr, "Match failed: %s\t(in compare)\n",errbuf);
+		}
 		regfree(&regex);
 		return -1;
 	}
@@ -65,7 +70,7 @@ char *trim(const char *pattern, const char *string)
 	regex_t regex;
 	regmatch_t pmatch[1];
 
-	if ((err = regcomp(&regex, pattern, REG_EXTENDED)) != 0)
+	if ((err = regcomp(&regex, pattern, REG_EXTENDED|REG_NEWLINE)) != 0)
 	{
 		regerror(err, &regex, errbuf, sizeof(errbuf));
 		fprintf(stderr,"Could not compile regex\n");
@@ -114,8 +119,8 @@ Off_Pair regfind(int fd, const char *pattern)
 	ssize_t cnt, sum = 0;
 	off_t cur = lseek(fd,0,SEEK_CUR);
 	char errbuf[100];
-	char buf[CHAR_PER_LINE];
-	if ((err = regcomp(&regex, pattern, REG_EXTENDED)) != 0)
+	char buf[BUFFER_SIZE];
+	if ((err = regcomp(&regex, pattern, REG_EXTENDED|REG_NEWLINE)) != 0)
 	{
 		regerror(err, &regex, errbuf, sizeof(errbuf));
 		fprintf(stderr,"Could not compile regex\n");
@@ -123,16 +128,12 @@ Off_Pair regfind(int fd, const char *pattern)
 		exit(1);
 	}
 	//매칭문자열을 찾을때까지 반복
-	while ((cnt = readLine(fd, buf))!=EOF)
+	while ((cnt = read(fd, buf, BUFFER_SIZE))!=0)
 	{
-		cnt++;//읽은 바이트수에 개행문자 추가
-		//패턴으로 개행문자 인식하려면 별도 스트링 할당해
-		//strcat으로 개행 붙이고 처리
-		
+		buf[cnt] = '\0';
 		//라인에서 일치항을 찾았을때
 		if ((err = regexec(&regex, buf, 1, pmatch, 0)) == 0)
 		{
-			//
 			off_p.so = cur + sum + (off_t)pmatch[0].rm_so;
 			off_p.eo = cur + sum + (off_t)pmatch[0].rm_eo;
 			off_p.found = 1;
@@ -185,7 +186,6 @@ ssize_t fconcat(int fd_dst, const char *pathname)
 	}
 	while ((length = read(fd_src, buf, BUFFER_SIZE))>0)
 		total+=length;
-//	printf("DEBUG==org:%ld\tend:%ld\nresidue:%ld\n",seek_org,seek_end,residue);
 
 	//붙여넣어질 영역의 원본 파일 밀어내기
 	for(int i = 0;i<((int)residue)/BUFFER_SIZE;i++)
@@ -215,13 +215,13 @@ ssize_t fconcat(int fd_dst, const char *pathname)
  * @brief 현재 오프셋 이후의 모든 dst문자열을 src로 대체
  *
  * @param fd O_RDWR로 오픈된 파일디스크립터
- * @param dst 치환될 대상 문자열
+ * @param pattern 치환될 대상 문자열의 정규표현식 패턴
  * @param src 삽입할 문자열
  *
  * @return 함수실행전후 파일크기 차(byte)를 리턴
  */
 /* ---------------------------------*/
-ssize_t freplace(int fd, const char *dst, const char *src)
+ssize_t freplace(int fd, const char *pattern, const char *src)
 {
 	Off_Pair offsets;
 	off_t seek_org = lseek(fd, 0, SEEK_CUR);
@@ -231,14 +231,19 @@ ssize_t freplace(int fd, const char *dst, const char *src)
 	char buf[BUFFER_SIZE];
 	lseek(fd, 0, seek_org);
 	do {
-		offsets = regfind(fd, dst);
-		printf("so:%ld\teo:%ld\t\n",offsets.so,offsets.eo);
+		offsets = regfind(fd, pattern);
+#ifdef DEBUG
+		printf("so:%ld\teo:%ld\n",offsets.so,offsets.eo);
+#endif
 		if (offsets.so||offsets.eo)
 		{
 			lseek(fd, offsets.eo, SEEK_SET);
 			residue = seek_end - offsets.eo;	//이동할 블록크기
-			diff = strlen(src) - strlen(dst);	//이동할 거리
+			diff = strlen(src) + offsets.so - offsets.eo;	//이동할 거리
 			diffsum += diff;
+#ifdef DEBUG
+			printf("diff:%ld\ndiffsum:%ld\n",diff,diffsum);
+#endif
 
 			if (diff != 0)
 			{
@@ -249,13 +254,15 @@ ssize_t freplace(int fd, const char *dst, const char *src)
 					length = read(fd, buf, BUFFER_SIZE);
 					lseek(fd, cursor + (off_t)diff, SEEK_SET);
 					write(fd, buf, length);
+
 				}
 				lseek(fd, offsets.eo, SEEK_SET);
 				length = read(fd, buf, (int)residue%BUFFER_SIZE);
 				lseek(fd, offsets.eo + (off_t)diff, SEEK_SET);
 				write(fd, buf, length);
+				if (diff<0)
+					ftruncate(fd, seek_end+diffsum);
 			}
-
 			lseek(fd, offsets.so, SEEK_SET);
 			write(fd, src, strlen(src));
 		}

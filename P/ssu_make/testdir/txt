@@ -1,0 +1,22 @@
+CC = gcc
+USER = OSLAB
+OS=WINDOW
+WELCOME = "WELCOME MESSAGE"
+OS ?= LINUX
+
+test_make1 : test_code1.o
+	$(CC) -o test_make1 test_code1.o
+
+test_code1.o : test_code1.c
+	$(CC) -c test_code1.c
+
+this : 		this.c test.c \
+			sucks.c
+	$(CC) -o fuck fuck.c
+#this is comm\ent
+#two line\
+		comments
+My os is $(OS)
+	asdfsdf
+	sdfsdf
+	sdfff

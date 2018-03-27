@@ -3,8 +3,10 @@
 #include <fcntl.h>
 #include <regex.h>
 #include <string.h>
-#include "parser.h"
+#include "io.h"
 #include "util.h"
+#include "parser.h"
+#include "patterns.h"
 
 Command *parse_cmd(int argc, char *argv[])
 {
@@ -83,19 +85,36 @@ Command *parse_cmd(int argc, char *argv[])
 	}
 	return cmd;
 }
-
-Block parse_Block(const char *fname)
+void parse_body()
 {
-	Block blk;
-	int fd;
-	/*
-	 *if ((fd = open(fname,O_RDONLY)) < 0)
-	 */
+}
+
+Block *parse_block(const char *pathname)
+{
+	Block *blk;
+	int fd, cnt;
+	char line[LINE_SIZE], *tok;
+	if ((fd = open(pathname, O_RDONLY)) < 0)
+	{
+		fprintf(stderr, "open error for %s\n", pathname);
+		exit(1);
+	}
+	while ((cnt = readLine(fd, line)) != EOF)
+	{
+		tok = strtok(line, " \t:");
+		blk = newBlock(tok);
+		while ((tok = strtok(NULL, " \t:")) != NULL)
+			addDepend(blk, tok);
+
+				
+	}
+
+			
 		
 	return blk;	
 }
 
-Tree *parse_Tree(Block *blks, size_t amount)
+Tree *parse_Tree(Block *blks[], size_t amount)
 {
 	
 }

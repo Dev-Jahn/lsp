@@ -11,4 +11,5 @@ char *trim(const char *pattern, const char *string);
 Off_Pair regfind(int fd, const char *pattern);
 ssize_t fconcat(int fd_dst, const char *pathname);
 ssize_t freplace(int fd, const char *dst, const char *src);
+
 #endif

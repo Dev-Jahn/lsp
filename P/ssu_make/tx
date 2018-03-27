@@ -1,5 +1,0 @@
-$(CC) path1 path2
-
-include $(CC)
-
-$(CC)$(CC)

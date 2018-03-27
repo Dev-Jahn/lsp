@@ -32,10 +32,10 @@ typedef struct _Pair
 
 typedef struct _Block
 {
-	char *key;
-	char **val;
-	size_t val_cnt;
-	char **cmd;
+	char *target;
+	char **depends;
+	size_t dep_cnt;
+	char **cmds;
 	size_t cmd_cnt;
 } Block;
 
@@ -69,10 +69,19 @@ void initList(List *list);
 void addNode(List *list, void *item);
 void delNode(List *list);
 void clearList(List *list);
+Node *searchList(List *list, void *item, int (*cmp)(const void*, const void*));
 void initStack(Stack *stk);
 void push(Stack *stk, void *data);
 void *pop(Stack *stk);
+Block *newBlock(char *target);
+void addDepend(Block *blk, char *depend);
+void addCmd(Block *blk, char *cmd);
+void freeBlock(Block *blk);
 void initTree(Tree *tree, void *rootItem);
 void addChild(TNode *root, void *item);
+Pair *newPair(char *k, char *v);
+void freePair(Pair *p);
+int compKey(const void *a, const void *b);
+int compVal(const void *a, const void *b);
 
 #endif

@@ -11,6 +11,7 @@
 #include "io.h"
 #include "constants.h"
 #include "pp.h"
+#include "patterns.h"
 
 /* ---------------------------------*/
 /**
@@ -26,7 +27,7 @@
  * @param macro[MAX_MACRO] Makefile에 정의할 명령행 매크로
  */
 /* ---------------------------------*/
-void preprocess(const char *pathname, Pair macro[MAX_MACRO])
+void preprocess(const char *pathname, Pair *cmd_macro[MAX_MACRO])
 {
 	//처리가 완료된 파일이 저장될 path : pathname.tmp
 	char output[WORD_SIZE];
@@ -49,47 +50,86 @@ void preprocess(const char *pathname, Pair macro[MAX_MACRO])
 	while ((length = read(fd1, buf, BUFFER_SIZE))>0)
 		write(fd2, buf, length);
 	close(fd1);
+	lseek(fd2, 0, SEEK_SET);
+	//줄바꿈 처리
+	freplace(fd2, "\\\\\n", "");
 	//include 처리
 	incl(fd2);
+/*
+ *	ERROR
+ *	행단위 문법검사
+ *
+ */
 	//주석처리
-	do {
-		offsets = regfind(fd2, "^#.*");
-		delLine(fd2);
-	} while (offsets.found);
+	freplace(fd2, "^#.*\n", "");
+
 	lseek(fd2,0,SEEK_SET);	
 	//매크로
-	char *essential =	"^\\w+\\s*=\\s*\"?\\w+\"?";
-	char *optional =	"^\\w+\\s*\\?=\\s*\"?\\w+\"?";
-	char *var =			"\\$[\\(\\{]\\w+[\\)\\}]";
-	char *inner1 =		"\\$\\*";
-	char *inner2 =		"\\$@";
-	char *target =		"\\w+\\s*+:(\\s*[\\w\\.]+)+";
-	char *cmd =			"^\\t[^\\s]+.*";
-	char line[LINE_SIZE], *key, *value, *saveptr, *delim = " \t";
+	char line[LINE_SIZE], *key, *value, *saveptr, *delim = " \t?=";
+	char save[LINE_SIZE];
 	List macroList;
 	initList(&macroList);
 	do {
-		offsets = regfind(fd2,essential);
+		offsets = regfind(fd2, pat_macro);
+		if (offsets.found == 0)
+			break;
 		readLine(fd2,line);
+		memcpy(save,line,LINE_SIZE);
 		key = strtok_r(line, delim, &saveptr);
-		strtok_r(NULL, delim, &saveptr);
-		value = strtok_r(NULL, delim, &saveptr);
-		Pair *m = (Pair*)malloc(sizeof(Pair)); 
-		m->key = key;
-		m->value = value;
-		addNode(&macroList, m);
+		if (compare(pat_quot, save) == 0)
+		{
+			delim = "?=";
+			value = strtok_r(NULL, delim, &saveptr);
+			delim = " \t?=";
+		}
+		else
+			value = strtok_r(NULL, delim, &saveptr);
+		Pair *m = newPair(key, value);
+		//매크로 키가 이미 추가되어 있는지  리스트검사
+		Node *exist = searchList(&macroList, m, compKey);
+		if (exist!=NULL) //존재
+		{
+			printf("%s:%s exists\n",m->key,m->value);
+			//옵셔널 매크로이면 생략
+			if (compare(pat_optional, save) == 0)
+				continue;
+			//일반 매크로이면 재정의
+			else
+				exist->item = m;
+		}
+		//리스트에 없으면 새로 추가
+		else
+			addNode(&macroList, m);
 	} while(offsets.found);
+	//명령행입력 매크로 리스트에 추가	
+	for (int i=0; cmd_macro!=NULL && cmd_macro[i]!=NULL; i++)
+	{
+		Node *exist = searchList(&macroList, cmd_macro[i], compKey);
+		if (exist!=NULL)
+			exist->item = cmd_macro[i];
+		else
+			addNode(&macroList, cmd_macro[i]);
+	}
+
 	lseek(fd2, 0,SEEK_SET);
+	//매크로 키로 매크로심볼을 만들어 검색
+	//일치하는 모든 심볼을 치환
+	macroList.cur = macroList.head;
 	do {
-		char symbol[WORD_SIZE] = "$(";
+		char symbol[WORD_SIZE]; 
+		strcpy(symbol, pat_var_l);
 		strcat(symbol, ((Pair*)macroList.cur->item)->key);
-		strcat(symbol, ")");
-
-
-
-
-		
-
+		strcat(symbol, pat_var_r);
+		printf("%s\n",symbol);
+		freplace(fd2, symbol, ((Pair*)macroList.cur->item)->value);
+		macroList.cur = macroList.cur->next;
+	} while (macroList.cur != NULL);
+/*
+ * ERROR
+ * 치환 후 남은 심볼이 있을때 에러처리
+ */
+	freplace(fd2, pat_macro, "");
+	freplace(fd2, pat_blank, "");
 	close(fd2);
 }
 
