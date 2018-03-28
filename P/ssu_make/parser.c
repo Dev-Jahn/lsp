@@ -8,7 +8,7 @@
 #include "parser.h"
 #include "patterns.h"
 
-Command *parse_cmd(int argc, char *argv[])
+Command *parse_Cmd(int argc, char *argv[])
 {
 	Command *cmd = (Command*)malloc(sizeof(Command));
 	Stack tokenstk;
@@ -89,22 +89,22 @@ void parse_body()
 {
 }
 
-Block *parse_block(const char *pathname)
+Block *parse_Block(int filedes, const char *target)
 {
 	Block *blk;
-	int fd, cnt;
+	int fd = filedes, cnt;
 	char line[LINE_SIZE], *tok;
-	if ((fd = open(pathname, O_RDONLY)) < 0)
-	{
-		fprintf(stderr, "open error for %s\n", pathname);
-		exit(1);
-	}
+
 	while ((cnt = readLine(fd, line)) != EOF)
 	{
 		tok = strtok(line, " \t:");
 		blk = newBlock(tok);
 		while ((tok = strtok(NULL, " \t:")) != NULL)
+		{
 			addDepend(blk, tok);
+			parse_Block(fd, tok);
+		}
+
 
 				
 	}

@@ -1,5 +1,6 @@
 test_make1 : test_code1.o
 	gcc -o test_make1 test_code1.o
+	gcc -o test_make1 test_code1.o
 test_code1.o : test_code1.c
 	gcc -c test_code1.c
 this : 		this.c test.c 			sucks.c

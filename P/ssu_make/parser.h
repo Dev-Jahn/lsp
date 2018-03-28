@@ -4,8 +4,8 @@
 #include <stdlib.h>
 #include "struct.h"
 
-Command *parse_cmd(int argc, char *argv[]);
-Block *parse_block(const char *fname);
-Tree *parse_tree(Block *blks[], size_t amount);
+Command *parse_Cmd(int argc, char *argv[]);
+Block *parse_Block(int filedes, const char *target);
+Tree *parse_Tree(Block *blks[], size_t amount);
 
 #endif
