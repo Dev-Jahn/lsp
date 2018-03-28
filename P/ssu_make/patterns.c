@@ -11,4 +11,5 @@ char *pat_blank 	= "^\\s*\n";
 char *pat_inner1 	= "\\$\\*";
 char *pat_inner2 	= "\\$@";
 char *pat_target 	= "^\\w+\\s*:(\\s*[[:graph:]]\\s*)+$";
+char *pat_subtarget = "\\s*:(\\s*[[:graph:]]\\s*)+$";
 char *pat_cmd 		= "[	]([[:graph:]]+\\s*)+";

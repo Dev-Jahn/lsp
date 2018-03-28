@@ -89,32 +89,41 @@ void parse_body()
 {
 }
 
-Block *parse_Block(int filedes, const char *target)
+Block *parse_Tree(int filedes, const char *target, TNode *tn)
 {
 	Block *blk;
 	int fd = filedes, cnt;
-	char line[LINE_SIZE], *tok;
-
+	char line[LINE_SIZE], pat[LINE_SIZE] = "^", *tok;
+	Off_Pair offsets;
+	strcat(pat, target);
+	strcat(pat, pat_subtarget);
+	offsets = regfind(fd, pat_subtarget);
 	while ((cnt = readLine(fd, line)) != EOF)
 	{
-		tok = strtok(line, " \t:");
-		blk = newBlock(tok);
-		while ((tok = strtok(NULL, " \t:")) != NULL)
+		if (compare(pat_target, line) == 0)
 		{
-			addDepend(blk, tok);
-			parse_Block(fd, tok);
+			tok = strtok(line, " \t:");
+			blk = newBlock(tok);
+			TNode *self = addChild(tn, blk);
+			while ((tok = strtok(NULL, " \t:")) != NULL)
+			{
+				addDepend(blk, tok);
+				if (/*tok가 .c로 끝나지 않을때*/1);
+					Block *childblk = parse_Tree(fd, tok, self);
+				addChild(tn, childblk);
+			}
 		}
-
-
-				
+		else if (compare(pat_cmd, line) == 0)
+		{
+			tok = trim("([[:graph:]]+\\s*)+", line);
+			addCmd(blk, tok);
+		}
+		else
+			print_err();
 	}
+	addChild(tn, blk);
 
 			
 		
 	return blk;	
-}
-
-Tree *parse_Tree(Block *blks[], size_t amount)
-{
-	
 }

@@ -5,7 +5,6 @@
 #include "struct.h"
 
 Command *parse_Cmd(int argc, char *argv[]);
-Block *parse_Block(int filedes, const char *target);
-Tree *parse_Tree(Block *blks[], size_t amount);
+Block *parse_Tree(int filedes, const char *target, TNode *tn);
 
 #endif

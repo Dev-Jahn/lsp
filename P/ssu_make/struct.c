@@ -174,7 +174,7 @@ TNode *newNode(void *item)
 	return ret;
 }
 
-void addChild(TNode *root, void *item)
+TNode *addChild(TNode *root, void *item)
 {
 	TNode **p = (TNode**)malloc(sizeof(TNode*)*(root->child_cnt+1));
 	TNode *child = (TNode*)malloc(sizeof(TNode));
@@ -189,6 +189,7 @@ void addChild(TNode *root, void *item)
 	p[root->child_cnt] = child;
 	root->child = p;
 	root->child_cnt++;
+	return child;
 }
 
 Pair *newPair(char *k, char *v)

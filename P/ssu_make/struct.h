@@ -78,7 +78,7 @@ void addDepend(Block *blk, char *depend);
 void addCmd(Block *blk, char *cmd);
 void freeBlock(Block *blk);
 void initTree(Tree *tree, void *rootItem);
-void addChild(TNode *root, void *item);
+TNode *addChild(TNode *root, void *item);
 Pair *newPair(char *k, char *v);
 void freePair(Pair *p);
 int compKey(const void *a, const void *b);

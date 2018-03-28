@@ -10,6 +10,7 @@ extern char *pat_blank;
 extern char *pat_inner1;
 extern char *pat_inner2;
 extern char *pat_target;
+extern char *pat_subtarget;
 extern char *pat_cmd;
 
 #endif
