@@ -1,5 +1,6 @@
 CC		= gcc
 CFLAGS	= -W -Wall -g
+OS		= Windows
 #simple comment
 all : ssu_make done
 
@@ -38,3 +39,12 @@ done :
 	rm -rf *.o
 clean : 
 	rm -rf *.o ssu_make
+
+t1 : t2 t3
+	echo t1
+
+t2 :
+	echo "My os is $(OS)" 
+
+t3 :
+	echo t3

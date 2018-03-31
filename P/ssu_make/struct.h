@@ -104,5 +104,6 @@ TNode *bfstarget(TNode *tn, char *target);
 
 Pair *newPair(char *k, char *v);
 void freePair(Pair *p);
+extern Queue q;
 
 #endif

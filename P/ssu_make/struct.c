@@ -3,6 +3,8 @@
 #include <string.h>
 #include "struct.h"
 
+Queue q;
+
 void initList(List *list)
 {
 	list->cur = NULL;
@@ -300,13 +302,11 @@ TNode *bfstarget(TNode *tn, char *target)
 	if (tn == NULL)
 		return NULL;
 	TNode *found = NULL;
-	Queue q;
-	initQueue(&q);
 	for (int i=0;i<(int)tn->child_cnt;++i)
 	{
+		if (strcmp(((Block*)tn->child[i]->item)->target, target) == 0)
+			return tn->child[i];
 		enqueue(&q,tn->child[i]);
-		if (strcmp(((Block*)tn->item)->target, target) == 0)
-			return tn;
 	}
 	found = bfstarget(dequeue(&q),target);
 	return found;

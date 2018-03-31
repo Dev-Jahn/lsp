@@ -1,10 +1,6 @@
-CC		= gcc
-CFLAGS	= -W -Wall -g
-
-all : test done
-
-test : main.o data.o
-	$(CC) $(CFLAGS) -o test main.o data.o
+test : main da.ot
+	asdf
+	
 
 main.o : main.c
 	$(CC) $(CFLAGS) -c -o main.o main.c

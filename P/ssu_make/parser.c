@@ -40,6 +40,7 @@ Block *parse_Tree(int filedes, const char *target, TNode *parent)
 			readLine(fd, line);				//한줄읽기
 			char *tok = trim("^(\\w|\\.)+",line);
 			lseek(fd, off.so, SEEK_SET);
+			addNode(&entered, tok);
 			parse_Tree(fd, tok, parent);
 			lseek(fd, off.eo, SEEK_SET);
 			free(tok);
@@ -63,9 +64,21 @@ Block *parse_Tree(int filedes, const char *target, TNode *parent)
 			if  (compare("",deplist) ==0)
 				break;
 			tok = trim("(\\w|\\.)+",deplist);
+			deplist = sreplace(deplist,"(\\w|\\.)+\\s*","");
 			if (tok == NULL)
 				break;
-			deplist = sreplace(deplist,"(\\w|\\.)+\\s*","");
+			//이미 방문한 타겟인지 확인
+			Node *c = searchList(&entered,tok, compstr);
+			if (c == NULL)
+				addNode(&entered, tok);
+			else
+			{
+				TNode *circ = NULL;
+				initQueue(&q);
+				circ = bfstarget(root, tok);
+				linkChild(self, circ);
+				continue;
+			}
 			//블록에 dependency 추가
 			addDepend(blk, tok);
 			//dependency에 대한 검색패턴 구성
@@ -77,19 +90,6 @@ Block *parse_Tree(int filedes, const char *target, TNode *parent)
 			
 			Block *childblk;
 			off_t backup = lseek(fd, 0, SEEK_CUR);
-			//이미 방문한 타겟인지 확인
-			Node *c = searchList(&entered,tok, compstr);
-			if (c == NULL)
-			{
-				addNode(&entered, tok);
-			}
-			else
-			{
-				TNode *circ = NULL;
-				circ = dfstarget(root, tok);
-				linkChild(self, circ);
-				break;
-			}
 			//말단이 아니면 재귀호출
 			if (regfind(fd, pat).found)
 				childblk = parse_Tree(fd, tok, self);
