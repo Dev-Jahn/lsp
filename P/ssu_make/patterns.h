@@ -1,16 +1,21 @@
-#ifndef _PATTERNS_H_
-#define _PATTERNS_H_
+#ifndef _PATTERNS_H
+#define _PATTERNS_H 1
 
-extern char *pat_macro;
-extern char *pat_optional;
-extern char *pat_quot;
-extern char *pat_var_l;
-extern char *pat_var_r;
-extern char *pat_blank;
-extern char *pat_inner1;
-extern char *pat_inner2;
-extern char *pat_target;
-extern char *pat_subtarget;
-extern char *pat_cmd;
+extern const char *pat_macro;
+extern const char *pat_essential;
+extern const char *pat_optional;
+extern const char *pat_var_l;
+extern const char *pat_var_r;
+extern const char *pat_blank;
+extern const char *pat_blank_lf;
+extern const char *pat_inner; 
+extern const char *pat_inner_noex;
+extern const char *pat_inner_dep;
+extern const char *pat_target;
+extern const char *pat_dep;
+extern const char *pat_subtarget;
+extern const char *pat_cmd;
+extern const char *pat_terminal;
+extern const char *pat_ext;
 
 #endif

@@ -1,5 +1,5 @@
-#ifndef _STRUCT_H_
-#define _STRUCT_H_
+#ifndef _STRUCT_H
+#define _STRUCT_H 1
 
 #include <unistd.h>
 #include "constants.h"
@@ -23,6 +23,13 @@ typedef struct _Stack
 	Node *top;
 	int size;
 } Stack;
+
+typedef struct _Queue
+{
+	Node *head;
+	Node *tail;
+	size_t size;
+} Queue;
 
 typedef struct _Pair
 {
@@ -70,18 +77,32 @@ void addNode(List *list, void *item);
 void delNode(List *list);
 void clearList(List *list);
 Node *searchList(List *list, void *item, int (*cmp)(const void*, const void*));
+int compstr(const void *a, const void *b);
+int compKey(const void *a, const void *b);
+int compVal(const void *a, const void *b);
+int compChar(const void *a, const void *b);
+
 void initStack(Stack *stk);
 void push(Stack *stk, void *data);
 void *pop(Stack *stk);
-Block *newBlock(char *target);
+
+void initQueue(Queue *q);
+void enqueue(Queue *q, void *data);
+void *dequeue(Queue *q);
+
+Block *newBlock(const char *target);
 void addDepend(Block *blk, char *depend);
 void addCmd(Block *blk, char *cmd);
 void freeBlock(Block *blk);
+
 void initTree(Tree *tree, void *rootItem);
 TNode *addChild(TNode *root, void *item);
+TNode *linkChild(TNode *root, TNode *child);
+int countleaf(TNode *root);
+TNode *dfstarget(TNode *tn, char *target);
+TNode *bfstarget(TNode *tn, char *target);
+
 Pair *newPair(char *k, char *v);
 void freePair(Pair *p);
-int compKey(const void *a, const void *b);
-int compVal(const void *a, const void *b);
 
 #endif

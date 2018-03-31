@@ -1,5 +1,5 @@
-#ifndef _UTIL_H_
-#define _UTIL_H_
+#ifndef _UTIL_H
+#define _UTIL_H 1
 
 #include "struct.h"
 
@@ -9,7 +9,7 @@
 int compare(const char *pattern, const char *string);
 char *trim(const char *pattern, const char *string);
 Off_Pair regfind(int fd, const char *pattern);
-ssize_t fconcat(int fd_dst, const char *pathname);
-ssize_t freplace(int fd, const char *dst, const char *src);
+char *sreplace(const char *src, const char *pat, const char *rep);
+char *tospace(const char *str);
 
 #endif

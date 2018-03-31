@@ -1,28 +1,40 @@
-CC = gcc
-OS ?= LINUX
+CC		= gcc
+CFLAGS	= -W -Wall -g
+#simple comment
+all : ssu_make done
 
-all : ssu_make
-
-ssu_make : io.o util.o pp.o struct.o parser.o main.o
-	$(CC) -W -Wall -o ssu_make io.o util.o pp.o struct.o parser.o main.o
+ssu_make : io.o util.o patterns.o pp.o struct.o\
+	parser.o ui.o core.o main.o
+	$(CC) $(CFLAGS) -o $@ $^ 
 
 io.o : io.c
-	$(CC) -W -Wall -c -o io.o io.c
+	$(CC) $(CFLAGS) -c -o $@ $^
 	
 util.o : util.c
-	$(CC) -W -Wall -c -o util.o util.c
-	
-	pp.o : pp.c
-	$(CC) -W -Wall -c -o pp.o pp.c
+	$(CC) $(CFLAGS) -c -o $@ $^
+
+patterns.o : patterns.c
+	$(CC) $(CFLAGS) -c -o $@ $^
+
+pp.o : pp.c
+	$(CC) $(CFLAGS) -c -o $@ $^
 
 struct.o : struct.c
-	$(CC) -W -Wall -c -o struct.o struct.c
+	$(CC) $(CFLAGS) -c -o $@ $^
 
 parser.o : parser.c
-	$(CC) -W -Wall -c -o parser.o parser.c
+	$(CC) $(CFLAGS) -c -o $@ $^
+
+ui.o : ui.c
+	$(CC) $(CFLAGS) -c -o $@ $^
+
+core.o : core.c
+	$(CC) $(CFLAGS) -c -o $@ $^
 
 main.o : main.c
-	$(CC) -W -Wall -c -o main.o main.c
+	$(CC) $(CFLAGS) -c -o $@ $^
 
+done :
+	rm -rf *.o
 clean : 
 	rm -rf *.o ssu_make
