@@ -30,7 +30,7 @@ int compare(const char *pattern, const char *string)
 	if ((err = regcomp(&regex, pattern, REG_EXTENDED|REG_NEWLINE)) != 0)
 	{
 		regerror(err, &regex, errbuf, sizeof(errbuf));
-		fprintf(stderr,"Could not compile regex\n");
+		fprintf(stderr,"ssu_make: Could not compile regex\n");
 		regfree(&regex);
 		return -1;
 	}
@@ -39,7 +39,7 @@ int compare(const char *pattern, const char *string)
 		if (err != REG_NOMATCH)
 		{
 			regerror(err, &regex, errbuf, sizeof(errbuf));
-			fprintf(stderr, "Match failed: %s\t(in compare)\n",errbuf);
+			fprintf(stderr, "ssu_make: Match failed: %s\t(in compare)\n",errbuf);
 		}
 		regfree(&regex);
 		return -1;
@@ -73,14 +73,14 @@ char *trim(const char *pattern, const char *string)
 	if ((err = regcomp(&regex, pattern, REG_EXTENDED|REG_NEWLINE)) != 0)
 	{
 		regerror(err, &regex, errbuf, sizeof(errbuf));
-		fprintf(stderr,"Could not compile regex\n");
+		fprintf(stderr,"ssu_make: Could not compile regex\n");
 		regfree(&regex);
 		exit(1);
 	}
 	if ((err = regexec(&regex, string, 1, pmatch, 0)) != 0)
 	{
 		regerror(err, &regex, errbuf, sizeof(errbuf));
-		fprintf(stderr, "Match failed: %s\n",errbuf);
+		fprintf(stderr, "ssu_make: Match failed: %s\n",errbuf);
 		regfree(&regex);
 		if (err == REG_NOMATCH)
 			return NULL;
@@ -123,7 +123,7 @@ Off_Pair regfind(int fd, const char *pattern)
 	if ((err = regcomp(&regex, pattern, REG_EXTENDED|REG_NEWLINE)) != 0)
 	{
 		regerror(err, &regex, errbuf, sizeof(errbuf));
-		fprintf(stderr,"Could not compile regex\n");
+		fprintf(stderr,"ssu_make: Could not compile regex\n");
 		regfree(&regex);
 		exit(1);
 	}
@@ -148,7 +148,7 @@ Off_Pair regfind(int fd, const char *pattern)
 			if (err != REG_NOMATCH)
 			{
 				regerror(err, &regex, errbuf, sizeof(errbuf));
-				fprintf(stderr, "Match failed: %s\n",errbuf);
+				fprintf(stderr, "ssu_make: Match failed: %s\n",errbuf);
 				regfree(&regex);
 				exit(1);
 			}
@@ -159,6 +159,17 @@ Off_Pair regfind(int fd, const char *pattern)
 	return off_p;
 }
 
+/* ---------------------------------*/
+/**
+ * @brief src내에 pat과 일치하는 첫번째 문자열을 rep으로 치환
+ *
+ * @param src 원본문자열
+ * @param pat 치환할 정규표현식
+ * @param rep 삽입할 문자열
+ *
+ * @return 치환된 이후의 문자열(해제필요)
+ */
+/* ---------------------------------*/
 char *sreplace(const char *src, const char *pat, const char *rep)
 {
 	int err, diff, so = 0, eo = 0, srclen = 0;
@@ -171,7 +182,7 @@ char *sreplace(const char *src, const char *pat, const char *rep)
 	if ((err = regcomp(&regex, pat, REG_EXTENDED|REG_NEWLINE)) != 0)
 	{
 		regerror(err, &regex, errbuf, sizeof(errbuf));
-		fprintf(stderr,"Could not compile regex\n");
+		fprintf(stderr,"ssu_make: Could not compile regex\n");
 		regfree(&regex);
 		exit(1);
 	}

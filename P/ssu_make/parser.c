@@ -40,10 +40,16 @@ Block *parse_Tree(int filedes, const char *target, TNode *parent)
 			readLine(fd, line);				//한줄읽기
 			char *tok = trim("^(\\w|\\.)+",line);
 			lseek(fd, off.so, SEEK_SET);
-			addNode(&entered, tok);
+			Node *n = searchList(&entered, tok, compstr);
+			if (n == NULL)
+				addNode(&entered, tok);
+			else
+			{
+				fprintf(stderr, "ssu_make: There can't be multiple target with same name.\n");
+				exit(1);
+			}
 			parse_Tree(fd, tok, parent);
 			lseek(fd, off.eo, SEEK_SET);
-			free(tok);
 		} while (off.found == 1);
 	}
 	else
@@ -93,16 +99,25 @@ Block *parse_Tree(int filedes, const char *target, TNode *parent)
 			//말단이 아니면 재귀호출
 			if (regfind(fd, pat).found)
 				childblk = parse_Tree(fd, tok, self);
-			//말단이면 빈블록 추가
+			//말단이면 파일인지 확인
 			else
 			{
-				childblk = newBlock(tok);
-				addChild(self, childblk);
+				//파일이면 빈 블록 추가
+				if (access(tok, F_OK) == 0)
+				{
+					childblk = newBlock(tok);
+					addChild(self, childblk);
+				}
+				else
+				{
+					fprintf(stderr, "ssu_make: No rule to make target \"%s\", needed by \"%s\".\n",tok, target);
+					exit(1);
+				}
+				//파일이 아니면 디펜던시 missing 에러
+				
 			}
 			lseek(fd, backup, SEEK_SET);
 		} while (tok != NULL);
-		if (tok != NULL)
-			free(tok);
 
 		while ((cnt=readLine(fd, line)) != EOF)
 		{

@@ -94,37 +94,39 @@ void print_tree(TNode *tn)
 	addNode(&indent, tospace(((Block*)tn->item)->target));
 	Node *circ = searchList(&printed,((Block*)tn->item)->target,compstr);
 	if (circ == NULL)
-		addNode(&printed, ((Block*)tn->item)->target);
-	for (int i=0;circ==NULL&&i<child;++i)
 	{
-		//세로줄 또는 공백
-		if (i==child-1)
-			addNode(&indent, " ");
-		else
-			addNode(&indent, ud);
-
-		if (i<=child-2)
+		addNode(&printed, ((Block*)tn->item)->target);
+		for (int i=0;i<child;++i)
 		{
-			if (i==0)
-				printf("%s",lrd);
-			else if (i>=1)
-				printf("%s",rud);
+			//세로줄 또는 공백
+			if (i==child-1)
+				addNode(&indent, " ");
+			else
+				addNode(&indent, ud);
+
+			if (i<=child-2)
+			{
+				if (i==0)
+					printf("%s",lrd);
+				else if (i>=1)
+					printf("%s",rud);
+			}
+			else if (child==1)
+				printf("%s",lr);
+			else if (i==child-1)
+				printf("%s",ru);
+			print_tree(tn->child[i]);
+			//인덴트리스트 출력
+			if (i<child-1)
+				for (indent.cur=indent.head;
+						indent.cur!=NULL;
+						indent.cur=indent.cur->next)
+					printf("%s",(char*)indent.cur->item);
 		}
-		else if (child==1)
-			printf("%s",lr);
-		else if (i==child-1)
-			printf("%s",ru);
-		print_tree(tn->child[i]);
-		//인덴트리스트 출력
-		if (i<child-1)
-			for (indent.cur=indent.head;
-					indent.cur!=NULL;
-					indent.cur=indent.cur->next)
-				printf("%s",(char*)indent.cur->item);
 	}
 	delNode(&indent);
 	delNode(&indent);
-	if (circ == NULL && child == 0)
+	if (circ != NULL || child == 0)
 		printf("\n");
 }
 

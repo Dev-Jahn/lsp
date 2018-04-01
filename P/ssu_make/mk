@@ -1,0 +1,4 @@
+test1 : test1.o
+	echo this is test1
+test1.o : test1.c
+	echo this is test1.o

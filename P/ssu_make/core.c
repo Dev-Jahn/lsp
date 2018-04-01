@@ -30,7 +30,13 @@ void execute(TNode *tn)
 			if (newest(tn->child[i], 0) == 1)
 				continue;
 			else
-				execute(tn->child[i]);
+			{
+				Node *n = searchList(&execed, tn->child[i],compPtr);
+				if (n == NULL)
+					execute(tn->child[i]);
+				else
+					printf("ssu_make: Circular dependency from \'%s\' to \'%s\'.\n",((Block*)tn->item)->target,((Block*)tn->child[i]->item)->target);
+			}
 		}
 
 		for (int i=0;i<(int)((Block*)tn->item)->cmd_cnt;++i)
@@ -56,30 +62,31 @@ void execute(TNode *tn)
 int newest(TNode *tn, time_t mtime)
 {
 	time_t comp;
-	struct stat buf1, buf2;
+	struct stat buf1;
 	char *pathname = ((Block*)tn->item)->target;
-	//현재노드가 없는 파일일때
-	if (stat(pathname, &buf1) < 0)
+	//초기호출시
+	if (stat(pathname, &buf1) < 0)	//파일 없을때
 	{
+		if (mtime == 0)
+			return -1;
+		//현재노드가 파일이 아닌 말단 디펜던시일때
 		if (((Block*)tn->item)->dep_cnt == 0)
 			return -1;
 		comp = mtime;
 	}
-	else
+	else							//파일 있을때
+	{
+		if (mtime == 0 )
+			mtime = buf1.st_mtime;
 		comp = buf1.st_mtime;
+		if (mtime<comp)
+			return -1;
+	}
 	for (int i=0;i<(int)((Block*)tn->item)->dep_cnt;++i)
 	{
-		//dependency 파일 존재
-		if (stat(((Block*)tn->item)->depends[i], &buf2) == 0)
-		{	//최신이 아니면	
-			if (comp < buf2.st_mtime)
-				return -1;
-			else
-				continue;
-		}
-		//파일없음.하위노드 탐색
-		else if (newest(tn->child[i], mtime) < 0)
-			return -1;
+		int ret;
+		if ((ret = newest(tn->child[i], comp)) < 0)
+			return ret;
 	}
 	return 1;
 }

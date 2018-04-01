@@ -35,8 +35,15 @@ int main(int argc, char *argv[])
 {
 	filename = "Makefile";
 	directory = ".";
+
+
+	
 	int argoff = setopt(argc, argv);
-	chdir(directory);	//접근 불가시 에러처리
+	if (chdir(directory)<0)
+	{
+		fprintf(stderr, "ssu_make: There's no such directory.\n");
+		exit(1);
+	}
 
 	List targets, macros;
 	initList(&targets);
@@ -57,30 +64,24 @@ int main(int argc, char *argv[])
 		else
 			print_err();
 	}
-
 	char tmpfile[WORD_SIZE];
+	strcpy(tmpfile,filename);
+	strcat(tmpfile,".tmp");
 	int fd;
 	initTree(&parsetree, NULL);
-	preprocess(filename, &macros);
-	strcat(strcpy(tmpfile, filename), ".tmp");
-	fd = open(tmpfile, O_RDWR);
-	inner(fd);
+	fd = preprocess(filename, &macros);
+	if (ON_P(flag))
+	{
+		printf("ssu_make: Preprocessed file \"%s\" generated.\n",tmpfile);
+		exit(0);
+	}
 	initList(&entered);
 	parse_Tree(fd, NULL, parsetree.root);
-	
-	/*
-	 *treetest(parsetree.root);
-	 *exit(0);
-	 */
-
-	
 	close(fd);
-	/*
-	 *if (remove(tmpfile)<0)
-	 *    fprintf(stderr, "Can't remove %s\n",tmpfile);
-	 */
+	if (remove(tmpfile)<0)
+		fprintf(stderr, "ssu_make: Can't remove %s\n",tmpfile);
 	checkopt();
-
+	//명령행에서 입력한 타겟 존재
 	if (targets.size != 0 )
 	{
 		for (targets.cur = targets.head;
@@ -100,11 +101,23 @@ int main(int argc, char *argv[])
 			if (tn != NULL)
 				break;
 			tn = dfstarget(parsetree.root,(char*)targets.cur->item);
+			if (tn == NULL)
+			{
+				fprintf(stderr,"ssu_make: Can't find target \"%s\".\n",(char*)targets.cur->item);
+				exit(1);
+			}
+
 			if (newest(tn, 0) == 1)
 				print_new((char*)targets.cur->item);
 			else
 				execute(tn);
 		}
+	}
+	//기본값. 가장 위 타겟
+	if (parsetree.root->child_cnt == 0)
+	{
+		fprintf(stderr,"ssu_make: There is no target in the file.\n");
+		exit(1);
 	}
 	else if(newest(parsetree.root->child[0],0) == 1)
 		print_new(((Block*)parsetree.root->child[0]->item)->target);
@@ -126,7 +139,7 @@ int main(int argc, char *argv[])
 int setopt(int argc, char * const argv[])
 {
 	int c;
-	while ((c=getopt(argc, argv, "mhstf:c:")) != -1)
+	while ((c=getopt(argc, argv, "mhstpDf:c:")) != -1)
 	{
 		switch(c)
 		{
@@ -149,6 +162,12 @@ int setopt(int argc, char * const argv[])
 			case 'c':
 				flag = flag|OPT_C;
 				directory = optarg;
+				break;
+			case 'p':
+				flag = flag|OPT_P;
+				break;
+			case 'D':
+				flag = flag|OPT_D;
 				break;
 		}
 	}

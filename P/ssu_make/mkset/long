@@ -1,6 +1,12 @@
 a : b
+  echo a
 b : c
+	echo b
 c : d
+	echo c
 d : e
+	echo d
 e : f g h i
+	echo e
 f : z
+	echo f

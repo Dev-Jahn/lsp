@@ -81,6 +81,7 @@ int compstr(const void *a, const void *b);
 int compKey(const void *a, const void *b);
 int compVal(const void *a, const void *b);
 int compChar(const void *a, const void *b);
+int compPtr(const void *a, const void *b);
 
 void initStack(Stack *stk);
 void push(Stack *stk, void *data);

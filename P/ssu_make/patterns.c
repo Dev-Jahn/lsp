@@ -8,8 +8,9 @@ const char *pat_essential	= "^\\w+\\s*=\\s*((\\w|\"|-)+\\s*)+$";
 const char *pat_optional	= "^\\w+\\s*(\\?)=\\s*((\\w|\"|-)+\\s*)+$";
 const char *pat_var_l 		= "\\$[\\(\\{]";
 const char *pat_var_r		= "[\\)\\}]";
-const char *pat_blank 		= "^\\s*";
+const char *pat_blank 		= "^[ 	]*$";
 const char *pat_blank_lf	= "^\\s*\n";
+const char *pat_comment		= "^#.*";
 const char *pat_inner 		= "\\$@";
 const char *pat_inner_noex	= "\\$\\*";
 const char *pat_inner_dep	= "\\$\\^";
@@ -19,4 +20,5 @@ const char *pat_subtarget	= "\\s*:(\\s*(\\w|\\.)+\\s*)*$";
 const char *pat_cmd 		= "[	]([[:graph:]]+\\s*)+";
 const char *pat_terminal	= "\\w+\\.(c|h)";
 const char *pat_ext			= "\\.\\w";
-
+const char *pat_include		= "^include[ 	]*((\\w|\\.)+[ 	]*)*$";
+const char *pat_newline		= "\\\\\n";

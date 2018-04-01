@@ -13,23 +13,29 @@
 #include "pp.h"
 #include "patterns.h"
 #include "errno.h"
+#include "main.h"
 
 List macroList;		//전역매크로리스트
 /* ---------------------------------*/
 /**
  * @brief 전처리기 
- * 1.include 위치에 파일 삽입
- * 2.주석제거
- * 3.파일내 매크로처리
- * 4.명령행 매크로처리
- * 5.줄바꿈 처리
- * 6.내부 매크로처리
+ * 1.행단위 문법검사
+ * 2.줄바꿈 처리
+ * 3.include 위치에 파일 삽입
+ * 4.주석제거
+ * 5.파일내 매크로 리스트에 추가
+ * 6.명령행 매크로 리스트에 추가
+ * 7.리스트내의 매크로에 대응하는 모든 매크로심볼 치환
+ * 8.내부 매크로처리
+ * 9.매크로선언, 빈줄 삭제
  *
  * @param pathname 처리할 Makefile의 경로
- * @param macro[MAX_MACRO] Makefile에 정의할 명령행 매크로
+ * @param from_cmd 명령행에서 입력받은 매크로 목록
+ * 
+ * @return 전처리완료후 열린상태의 파일디스크립터(O_RDWR)
  */
 /* ---------------------------------*/
-void preprocess(const char *pathname, List *from_cmd)
+int preprocess(const char *pathname, List *from_cmd)
 {
 	//처리가 완료된 파일이 저장될 path : pathname.tmp
 	char output[WORD_SIZE];
@@ -37,35 +43,36 @@ void preprocess(const char *pathname, List *from_cmd)
 	int fd1, fd2, length;
 	char buf[BUFFER_SIZE];
 	Off_Pair offsets;
-
+	struct stat statbuf;
+	stat(pathname,&statbuf);
 	//전처리후 상태를 저장할 임시파일 생성, 원본 복사
 	if ((fd1 = open(pathname, O_RDONLY))<0)
 	{
-		system("pwd");
-		fprintf(stderr, "Can't open %s\n", pathname);
+		fprintf(stderr, "ssu_make: There's no file \"%s\".\n",pathname);
+		exit(1);
+	}
+	if (!S_ISREG(statbuf.st_mode))
+	{
+		fprintf(stderr, "ssu_make: \"%s\" is not a regular file.\n",pathname);
 		exit(1);
 	}
 	if ((fd2 = open(output, O_RDWR|O_CREAT|O_TRUNC, S_MODE))<0)
 	{	
-		fprintf(stderr, "open error for %s\n", pathname);
+		fprintf(stderr, "ssu_make: open error for %s\n", pathname);
 		exit(1);
 	}
 	while ((length = read(fd1, buf, BUFFER_SIZE))>0)
 		write(fd2, buf, length);
 	close(fd1);
 	lseek(fd2, 0, SEEK_SET);
+	//행단위 문법검사
+	syntax(pathname);
 	//줄바꿈 처리
-	freplace(fd2, "\\\\\n", "");
+	freplace(fd2, pat_newline, "");
 	//include 처리
 	incl(fd2);
-/*
- *	ERROR
- *	행단위 문법검사
- *
- */
 	//주석처리
-	freplace(fd2, "^#.*\n", "");
-
+	freplace(fd2, pat_comment, "");
 	lseek(fd2,0,SEEK_SET);	
 	//매크로
 	char line[LINE_SIZE], *key, *value;
@@ -127,7 +134,8 @@ void preprocess(const char *pathname, List *from_cmd)
  */
 	freplace(fd2, pat_macro, "");
 	freplace(fd2, pat_blank_lf, "");
-	close(fd2);
+	inner(fd2);
+	return fd2;
 }
 
 /* ---------------------------------*/
@@ -180,9 +188,83 @@ int incl(int fd)
 	return included;
 }
 
-void syntax(int filedes)
+/* ---------------------------------*/
+/**
+ * @brief 행단위로 파일을 읽어 Makefile의 문법에 적합한지 검사
+ * 허용되는 형태
+ * 매크로선언		(A=B 또는 A?=B)
+ * include 문		(include path1 path2 path3 ...)
+ * target 선언		(target : dep1 dep2 dep3 ...)
+ * 커맨드			(	Any command here) 
+ * 빈줄				(				)
+ * 주석				(#This is comment)
+ *
+ * 줄바꿈시 줄바꾼 행을 전부 병합후 재검사
+ *
+ * @param pathname 처리할 파일의 경로명
+ */
+/* ---------------------------------*/
+void syntax(const char *pathname)
 {
-
+	char tmp[WORD_SIZE];
+	char line[LINE_SIZE];
+	char buf[BUFFER_SIZE];
+	int linecnt = 1, checksum, bytes, len;
+	strcat(strcpy(tmp, pathname), ".syntax");
+	int fd,src;
+	if ((src = open(pathname, O_RDONLY))<0)
+	{
+		fprintf(stderr, "ssu_make: Can't open %s\n", pathname);
+		exit(1);
+	}
+	if ((fd = open(tmp, O_RDWR|O_CREAT|O_TRUNC, S_MODE))<0)
+	{	
+		fprintf(stderr, "ssu_make: open error for %s\n", pathname);
+		exit(1);
+	}
+	while ((len = read(src, buf, BUFFER_SIZE))>0)
+		write(fd, buf, len);
+	close(src);
+	lseek(fd, 0, SEEK_SET);
+	while ((bytes = readLine(fd, line)) != EOF)
+	{
+		checksum = 1;
+		if (compare("^.*\\\\[ 	]*$",line) == 0)
+		{
+			lseek(fd,-bytes-1, SEEK_CUR);
+			char *new = sreplace(line, "\\\\"," ");
+			write(fd, new, bytes);
+			write(fd, " ",1);
+			lseek(fd,-bytes-1, SEEK_CUR);
+			continue;
+		}
+		checksum *= compare(pat_macro, line);
+		checksum *= compare(pat_include, line);
+		checksum *= compare(pat_target, line);
+		checksum *= compare(pat_cmd, line);
+		checksum *= compare("", line);
+		checksum *= compare(pat_blank, line);
+		checksum *= compare(pat_comment, line);
+		if (checksum != 0)
+		{
+			printf("ssu_make: Unknown syntax at line <%d> of <%s>.\n",linecnt, pathname);
+			printf(">%s\n",line);
+			break;
+		}
+		linecnt++;
+	}
+	close(fd);
+	if (remove(tmp)!=0)
+		fprintf(stderr, "ssu_make: Can't remove %s in syntax()\n",tmp);
+	if (checksum == 0)
+	{
+		if (ON_D(flag))
+			printf("ssu_make: Checked %d lines with no syntax error.\n",--linecnt);
+	}
+	else
+	{
+		exit(1);
+	}
 }
 
 void inner(int fd)

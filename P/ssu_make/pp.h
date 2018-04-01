@@ -5,8 +5,9 @@
 #include "constants.h"
 
 extern List macroList;
-void preprocess(const char *pathname, List *from_cmd);
+int preprocess(const char *pathname, List *from_cmd);
 int incl(int fd);
+void syntax(const char *pathname);
 void inner(int fd);
 
 #endif

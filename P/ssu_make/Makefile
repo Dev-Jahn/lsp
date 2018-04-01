@@ -1,8 +1,7 @@
 CC		= gcc
 CFLAGS	= -W -Wall -g
-OS		= Windows
+OS		= LINUX 
 #simple comment
-all : ssu_make done
 
 ssu_make : io.o util.o patterns.o pp.o struct.o\
 	parser.o ui.o core.o main.o

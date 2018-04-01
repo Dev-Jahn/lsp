@@ -260,6 +260,7 @@ TNode *linkChild(TNode *root, TNode *child)
 	arr[root->child_cnt] = child;
 	root->child = arr;
 	root->child_cnt++;
+	addDepend(root->item,((Block*)child->item)->target);
 	return child;
 }
 
@@ -337,4 +338,12 @@ int compKey(const void *a, const void *b)
 int compVal(const void *a, const void *b)
 {
 	return strcmp(((Pair*)a)->value,((Pair*)b)->value);
+}
+
+int compPtr(const void *a, const void *b)
+{
+	if (a==b)
+		return 0;
+	else
+		return -1;
 }

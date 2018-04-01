@@ -34,7 +34,7 @@ ssize_t readLine(int filedes, void *buf_)
 			lseek(filedes, (off_t)(-cnt+i+1), SEEK_CUR);
 			return i;
 		}
-	fprintf(stderr,"no eol at the end of the file\n");
+	fprintf(stderr,"ssu_make: no eol at the end of the file\n");
 	exit(1);
 }
 
@@ -90,7 +90,7 @@ ssize_t fconcat(int fd_dst, const char *pathname)
 	ssize_t length, total = 0;
 	if ((fd_src = open(pathname, O_RDONLY))<0)
 	{
-		fprintf(stderr, "open error %d for %s in fconcat\n", fd_src, pathname);
+		fprintf(stderr, "ssu_make: open error %d for %s in fconcat\n", fd_src, pathname);
 		exit(1);
 	}
 	while ((length = read(fd_src, buf, BUFFER_SIZE))>0)
