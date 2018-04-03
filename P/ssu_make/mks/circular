@@ -1,0 +1,13 @@
+a : b c d e f
+	echo "a"
+b : c
+	echo "b"
+c : a b c
+	echo "c"
+d : e f a
+	echo "d"
+e :
+	echo "e"
+f : f f f
+	echo "f"
+

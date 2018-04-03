@@ -23,5 +23,6 @@ extern int flag;
 extern List execed;
 int setopt(int argc, char * const argv[]);
 void checkopt();
+void removetmp();
 
 #endif

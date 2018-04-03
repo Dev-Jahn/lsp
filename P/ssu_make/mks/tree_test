@@ -1,0 +1,7 @@
+ssu_make : main.o data_structure
+data_structure : graph.o list.o
+main.o : main.c main.h
+graph.o : graph.c graph.h
+list.o : list.c list.h
+a : b
+b : a

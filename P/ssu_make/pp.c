@@ -37,9 +37,9 @@ List macroList;		//전역매크로리스트
 /* ---------------------------------*/
 int preprocess(const char *pathname, List *from_cmd)
 {
-	//처리가 완료된 파일이 저장될 path : pathname.tmp
+	//처리가 완료된 파일이 저장될 path : pathname.pp
 	char output[WORD_SIZE];
-	strcat(strcpy(output, pathname), ".tmp");
+	strcat(strcpy(output, pathname), ".pp");
 	int fd1, fd2, length;
 	char buf[BUFFER_SIZE];
 	Off_Pair offsets;

@@ -1,0 +1,4 @@
+b : c
+	echo "b"
+
+include t3

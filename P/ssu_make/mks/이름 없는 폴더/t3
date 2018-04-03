@@ -1,0 +1,4 @@
+c :
+	echo "c"
+
+include t1

@@ -1,0 +1,10 @@
+a : b
+	echo "aa"
+
+b : c
+	echo "bb"
+
+c : 
+	echo hello
+
+a := A

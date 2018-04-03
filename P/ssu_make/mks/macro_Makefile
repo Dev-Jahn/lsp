@@ -1,0 +1,11 @@
+$(Target) : $(FirstDep) \
+	$(SecondDep) \
+	$(ThirdDep)
+	$(CC) $@ ssu_process.c ssu_string.c ssu_table.c\
+		ssu_stack.c ssu_message.c ssu_list.c -o $* -W -Wall
+
+Target = ssu_make.c
+FirstDep = ssu_process.c
+SecondDep= ssu_table.c
+ThirdDep = ssu_message.c
+CC = gcc

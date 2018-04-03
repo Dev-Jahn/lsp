@@ -8,6 +8,7 @@
 #include "parser.h"
 #include "patterns.h"
 #include "ui.h"
+#include "main.h"
 
 TNode *root;
 List entered;
@@ -45,6 +46,8 @@ Block *parse_Tree(int filedes, const char *target, TNode *parent)
 				addNode(&entered, tok);
 			else
 			{
+				close(fd);
+				removetmp();
 				fprintf(stderr, "ssu_make: There can't be multiple target with same name.\n");
 				exit(1);
 			}

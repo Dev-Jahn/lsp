@@ -151,11 +151,13 @@ void *dequeue(Queue *q)
 		return NULL;
 	else
 	{
-		void *item = q->head->item;
+		void *item = (TNode*)(q->head->item);
 		Node *old = q->head;
 		q->head = old->next;
+		if (q->head == NULL)
+			q->tail = NULL;
 		free(old);
-	(q->size)--;
+		(q->size)--;
 		return item;
 	}
 }
@@ -303,13 +305,15 @@ TNode *bfstarget(TNode *tn, char *target)
 	if (tn == NULL)
 		return NULL;
 	TNode *found = NULL;
+	if (strcmp(((Block*)tn->item)->target, target) == 0)
+		return tn;
 	for (int i=0;i<(int)tn->child_cnt;++i)
 	{
 		if (strcmp(((Block*)tn->child[i]->item)->target, target) == 0)
 			return tn->child[i];
 		enqueue(&q,tn->child[i]);
 	}
-	found = bfstarget(dequeue(&q),target);
+	found = bfstarget((TNode*)(dequeue(&q)),target);
 	return found;
 }
 

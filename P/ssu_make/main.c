@@ -30,7 +30,7 @@ void treetest(TNode *tn)
 	}
 	printf("out\n");
 }
-
+char pp[WORD_SIZE];
 int main(int argc, char *argv[])
 {
 	filename = "Makefile";
@@ -64,22 +64,20 @@ int main(int argc, char *argv[])
 		else
 			print_err();
 	}
-	char tmpfile[WORD_SIZE];
-	strcpy(tmpfile,filename);
-	strcat(tmpfile,".tmp");
+	strcpy(pp,filename);
+	strcat(pp,".pp");
 	int fd;
 	initTree(&parsetree, NULL);
 	fd = preprocess(filename, &macros);
 	if (ON_P(flag))
 	{
-		printf("ssu_make: Preprocessed file \"%s\" generated.\n",tmpfile);
+		printf("ssu_make: Preprocessed file \"%s\" generated.\n",pp);
 		exit(0);
 	}
 	initList(&entered);
 	parse_Tree(fd, NULL, parsetree.root);
 	close(fd);
-	if (remove(tmpfile)<0)
-		fprintf(stderr, "ssu_make: Can't remove %s\n",tmpfile);
+	removetmp();
 	checkopt();
 	//명령행에서 입력한 타겟 존재
 	if (targets.size != 0 )
@@ -94,13 +92,13 @@ int main(int argc, char *argv[])
 					execed.cur!=NULL;
 					execed.cur=execed.cur->next)
 			{
-				tn = dfstarget((TNode*)execed.cur->item,(char*)targets.cur->item);
+				tn = bfstarget((TNode*)execed.cur->item,(char*)targets.cur->item);
 				if (tn != NULL)
 					break;
 			}
 			if (tn != NULL)
 				break;
-			tn = dfstarget(parsetree.root,(char*)targets.cur->item);
+			tn = bfstarget(parsetree.root,(char*)targets.cur->item);
 			if (tn == NULL)
 			{
 				fprintf(stderr,"ssu_make: Can't find target \"%s\".\n",(char*)targets.cur->item);
@@ -119,7 +117,7 @@ int main(int argc, char *argv[])
 		fprintf(stderr,"ssu_make: There is no target in the file.\n");
 		exit(1);
 	}
-	else if(newest(parsetree.root->child[0],0) == 1)
+	if((targets.size==0)&&newest(parsetree.root->child[0],0) == 1)
 		print_new(((Block*)parsetree.root->child[0]->item)->target);
 	else
 		execute(parsetree.root->child[0]);
@@ -192,3 +190,10 @@ void checkopt()
 	if (ON_M(flag))
 		exit(0);
 }
+
+void removetmp()
+{
+	if (remove(pp)<0)
+		fprintf(stderr, "ssu_make: Can't remove %s\n",pp);
+}
+	

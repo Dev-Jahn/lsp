@@ -1,0 +1,4 @@
+a : b
+	echo "aa"
+
+include t2
