@@ -16,6 +16,6 @@ int main(void)
 		fprintf(stderr, "chmod error %s\n", fname1);
 
 	if (chmod(fname2, S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH|S_IXOTH)<0)
-		fprintf(stderr, "chmod error %s\n" fname2);
+		fprintf(stderr, "chmod error %s\n", fname2);
 	exit(0);
 }
