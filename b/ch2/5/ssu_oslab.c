@@ -3,6 +3,6 @@
 
 int main(void)
 {
-	printf("This is loslab file\n");
+	printf("This is oslab file\n");
 	exit(0);
 }
