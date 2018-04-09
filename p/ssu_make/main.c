@@ -20,16 +20,6 @@ char *directory;
 List execed;
 Tree parsetree;
 
-void treetest(TNode *tn)
-{
-	printf("%s",((Block*)tn->item)->target);
-	/*printf("child:%ld\n",tn->child_cnt);*/
-	for (int i=0;i<(int)(tn->child_cnt);i++)
-	{
-		treetest(tn->child[i]);
-	}
-	printf("out\n");
-}
 char pp[WORD_SIZE];
 int main(int argc, char *argv[])
 {
