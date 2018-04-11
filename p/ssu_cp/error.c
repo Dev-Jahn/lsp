@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 #include "error.h"
 
 void error(enum ErrCode err, const char *arg)
@@ -13,7 +14,10 @@ void error(enum ErrCode err, const char *arg)
 			fprintf(stderr, "Colliding option <-%s> detected.\n", arg);
 			break;
 		case LIMIT:
-			fprintf(stderr, "Length of the name exceeded limit.\n");
+			fprintf(stderr, "Length of the path exceeded limit.\nPath should be less than %d Bytes.\n", PATH_MAX);
+			break;
+		case USAGE:
+			fprintf(stderr, "Usage: ssu_cp [OPTION] [SOURCE] [TARGET]\n");
 			break;
 		case MISSING:
 			fprintf(stderr, "Source file <%s> does not exist.\n", arg);
@@ -41,6 +45,12 @@ void error(enum ErrCode err, const char *arg)
 			break;
 		case SYM:
 			fprintf(stderr, "symlink error: <%s>.\n", arg);
+			break;
+		case SCAN:
+			fprintf(stderr, "scandir error: <%s>.\n", arg);
+			break;
+		case MKDIR:
+			fprintf(stderr, "mkdir error: <%s>.\n", arg);
 			break;
 		default:
 			fprintf(stderr, "Unknown error.\n");

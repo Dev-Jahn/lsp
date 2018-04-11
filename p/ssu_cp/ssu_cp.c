@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <limits.h>
 #include <fcntl.h>
+#include <string.h>
 #include "ssu_cp.h"
 #include "error.h"
 
@@ -10,8 +11,14 @@ int flag = 000;
 int proc_num = 0;
 int main(int argc, char *argv[])
 {
-	setopt(argc, argv);
-	open("",O_RDONLY);
+	char src[PATH_MAX];
+	char tgt[PATH_MAX];
+	int argi = setopt(argc, argv);
+	strcpy(src, argv[argi]);
+	strcpy(tgt, argv[argi+1]);
+	if (argv[argi+2] != NULL)
+		error(USAGE,NULL);
+
 	exit(0);
 }
 

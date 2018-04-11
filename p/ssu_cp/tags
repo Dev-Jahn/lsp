@@ -1,0 +1,61 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	2	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+BUFSIZE	copy.c	21;"	d	file:
+CC	Makefile	/^CC		= gcc$/;"	m
+CFLAGS	Makefile	/^CFLAGS	= -W -Wall -ggdb$/;"	m
+CHMOD	error.h	/^enum ErrCode { REOPT, COLOPT, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR };$/;"	e	enum:ErrCode
+CHOWN	error.h	/^enum ErrCode { REOPT, COLOPT, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR };$/;"	e	enum:ErrCode
+COLOPT	error.h	/^enum ErrCode { REOPT, COLOPT, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR };$/;"	e	enum:ErrCode
+copy	copy.c	/^void copy(const char *src, const char *tgt)$/;"	f
+copy_dir	copy.c	/^void copy_dir(const char *src, const char *tgt)$/;"	f
+copy_file	copy.c	/^void copy_file(const char *src, const char *tgt)$/;"	f
+copy_stat	copy.c	/^void copy_stat(const char *src, const char *tgt)$/;"	f
+ErrCode	error.h	/^enum ErrCode { REOPT, COLOPT, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR };$/;"	g
+error	error.c	/^void error(enum ErrCode err, const char *arg)$/;"	f
+filter	copy.c	/^int filter(const struct dirent *dir)$/;"	f
+flag	ssu_cp.c	/^int flag = 000;$/;"	v
+ISDIR	error.h	/^enum ErrCode { REOPT, COLOPT, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR };$/;"	e	enum:ErrCode
+LIMIT	error.h	/^enum ErrCode { REOPT, COLOPT, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR };$/;"	e	enum:ErrCode
+main	ssu_cp.c	/^int main(int argc, char *argv[])$/;"	f
+MISSING	error.h	/^enum ErrCode { REOPT, COLOPT, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR };$/;"	e	enum:ErrCode
+MKDIR	error.h	/^enum ErrCode { REOPT, COLOPT, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR };$/;"	e	enum:ErrCode
+ON_B	ssu_cp.h	19;"	d
+ON_D	ssu_cp.h	18;"	d
+ON_I	ssu_cp.h	13;"	d
+ON_L	ssu_cp.h	14;"	d
+ON_N	ssu_cp.h	15;"	d
+ON_P	ssu_cp.h	16;"	d
+ON_R	ssu_cp.h	17;"	d
+ON_S	ssu_cp.h	12;"	d
+OPEN	error.h	/^enum ErrCode { REOPT, COLOPT, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR };$/;"	e	enum:ErrCode
+OPT_B	ssu_cp.h	11;"	d
+OPT_D	ssu_cp.h	10;"	d
+OPT_I	ssu_cp.h	5;"	d
+OPT_L	ssu_cp.h	6;"	d
+OPT_N	ssu_cp.h	7;"	d
+OPT_P	ssu_cp.h	8;"	d
+OPT_R	ssu_cp.h	9;"	d
+OPT_S	ssu_cp.h	4;"	d
+O_NOVERW	copy.c	18;"	d	file:
+O_OVERWR	copy.c	17;"	d	file:
+print_stat	copy.c	/^void print_stat(const char *src)$/;"	f
+proc	copy.c	/^void proc(const char *src, const char *tgt)$/;"	f
+proc_num	ssu_cp.c	/^int proc_num = 0;$/;"	v
+recur	copy.c	/^void recur(const char *src, const char *tgt)$/;"	f
+REOPT	error.h	/^enum ErrCode { REOPT, COLOPT, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR };$/;"	e	enum:ErrCode
+SAME	error.h	/^enum ErrCode { REOPT, COLOPT, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR };$/;"	e	enum:ErrCode
+SCAN	error.h	/^enum ErrCode { REOPT, COLOPT, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR };$/;"	e	enum:ErrCode
+setopt	ssu_cp.c	/^int setopt(int argc, char *argv[])$/;"	f
+STAT	error.h	/^enum ErrCode { REOPT, COLOPT, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR };$/;"	e	enum:ErrCode
+SYM	error.h	/^enum ErrCode { REOPT, COLOPT, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR };$/;"	e	enum:ErrCode
+S_DIR	copy.c	20;"	d	file:
+S_FILE	copy.c	19;"	d	file:
+USAGE	error.h	/^enum ErrCode { REOPT, COLOPT, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR };$/;"	e	enum:ErrCode
+UTIME	error.h	/^enum ErrCode { REOPT, COLOPT, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR };$/;"	e	enum:ErrCode
+_COPY_H	copy.h	2;"	d
+_ERROR_H	error.h	2;"	d
+_SSU_CP_H	ssu_cp.h	2;"	d

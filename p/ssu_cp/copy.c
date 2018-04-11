@@ -8,17 +8,28 @@
 #include <time.h>
 #include <pwd.h>
 #include <grp.h>
+#include <dirent.h>
+#include <string.h>
 #include "copy.h"
 #include "ssu_cp.h"
 #include "error.h"
 
 #define O_OVERWR O_RDWR|O_CREAT|O_TRUNC
 #define O_NOVERW O_RDWR|O_CREAT|O_EXCL
-#define S_MODE 0644
+#define S_FILE 0644
+#define S_DIR 0755
 #define BUFSIZE 1024
+
+char path[PATH_MAX];
 
 void copy(const char *src, const char *tgt)
 {
+	//상대, 절대경로 혼용할때도 예외처리 가능하도록 수정할것
+	if (strcmp(src, tgt) == 0)
+		error(SAME,src);
+	struct stat statbuf;
+	if (stat(src, &statbuf)<0)
+		error(STAT, src);
 	if (ON_S(flag))
 	{
 		if (symlink(src, tgt)<0)
@@ -27,19 +38,23 @@ void copy(const char *src, const char *tgt)
 	}
 	if (ON_P(flag))
 		print_stat(src);
-	if (ON_R(flag))
-		;
-	else if (ON_D(flag))
-		;
-	else
+
+	if (S_ISDIR(statbuf.st_mode))
+	{
+		if (ON_R(flag))
+			recur(src, tgt);
+		else if (ON_D(flag))
+			proc(src, tgt);
+		else
+			error(ISDIR, src);
+	}
 	
 
 
 
 
 	if (ON_L(flag))
-		;
-	
+		copy_stat(src, tgt);
 }
 
 void copy_file(const char *src, const char *tgt)
@@ -61,11 +76,68 @@ void copy_file(const char *src, const char *tgt)
 	while((len = read(fd1, buf, BUFSIZE))>0)
 		write(fd2, buf, len);
 }
-
 void copy_dir(const char *src, const char *tgt)
 {
-	
-	
+	if (mkdir(tgt, S_DIR)<0)
+		error(MKDIR, tgt);
+
+
+}
+int filter(const struct dirent *dir)
+{
+	if (strcmp(dir->d_name, ".") == 0 || strcmp(dir->d_name, "..") == 0)
+		return 0;
+	else
+		return 1;
+}
+
+/* ---------------------------------*/
+/**
+ * @brief Use only for directory
+ *
+ * @param src
+ * @param tgt
+ */
+/* ---------------------------------*/
+void recur(const char *src, const char *tgt)
+{
+	struct dirent **namelist;
+	int entry;
+	if (mkdir(tgt, S_DIR)<0)
+		error(MKDIR, tgt);
+	if ((entry = scandir(src, &namelist, filter, alphasort))<0)
+		error(SCAN, src);
+	else
+	{
+		for (int i=0;i<entry;i++)
+		{
+			if (namelist[i]->d_type == DT_DIR)
+			{
+				recur(namelist[i]->d_name,
+			}
+			else
+			{
+				copy_file(namelist[i]->d_name,
+			}
+		}
+	}
+
+
+
+
+
+	//메모리 할당 해제
+	for (int i=0;i<entry;i++)
+		free(namelist[i]);
+	free(namelist);
+}
+
+void proc(const char *src, const char *tgt)
+{
+	struct dirent **namelist;
+	int entry;
+	if ((entry = scandir(src, &namelist, filter, alphasort))<0)
+		error(SCAN, src);
 }
 
 void copy_stat(const char *src, const char *tgt)
