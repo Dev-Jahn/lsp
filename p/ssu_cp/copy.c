@@ -11,78 +11,133 @@
 #include <dirent.h>
 #include <string.h>
 #include "copy.h"
-#include "ssu_cp.h"
+#include "main.h"
 #include "error.h"
 
 #define O_OVERWR O_RDWR|O_CREAT|O_TRUNC
 #define O_NOVERW O_RDWR|O_CREAT|O_EXCL
-#define S_FILE 0644
-#define S_DIR 0755
 #define BUFSIZE 1024
-
-char path[PATH_MAX];
-
+/* ---------------------------------*/
+/**
+ * @brief 원본의 타입과 옵션에 따라 복사를 수행 
+ *
+ * @param src 복사할 원본 파일 또는 디렉토리
+ * @param tgt 복사후 생성할 파일 또는 디렉토리
+ */
+/* ---------------------------------*/
 void copy(const char *src, const char *tgt)
 {
+	char source[PATH_MAX];
+	char target[PATH_MAX];
+	strcpy(source, src);
+	strcpy(target, tgt);
 	//상대, 절대경로 혼용할때도 예외처리 가능하도록 수정할것
-	if (strcmp(src, tgt) == 0)
-		error(SAME,src);
-	struct stat statbuf;
-	if (stat(src, &statbuf)<0)
-		error(STAT, src);
+	if (strcmp(source, target) == 0)
+		error(SAME,source);
+	struct stat statsrc, stattgt;
+	if (stat(source, &statsrc)<0)
+		error(STAT, source);
+	//tgt이름의 파일이 이미 존재
+	if (stat(tgt, &stattgt)==0)
+	{
+		//디렉토리이면 해당디렉토리안에 src복사
+		if (S_ISDIR(stattgt.st_mode))
+		{
+			chdir(target);
+			strcpy(target, source);
+			strcpy(source, "../");
+			strcat(source, target);
+		}
+	}
+	//s옵션이 있으면 심볼릭링크 생성하고 종료
 	if (ON_S(flag))
 	{
-		if (symlink(src, tgt)<0)
-			error(SYM,src);
+		if (symlink(source, target)<0)
+			error(SYM,source);
 		return;
 	}
+	//p옵션이 있으면 파일 속성 출력
 	if (ON_P(flag))
-		print_stat(src);
-
-	if (S_ISDIR(statbuf.st_mode))
+		print_stat(source);
+	//src가 디렉토리이면
+	if (S_ISDIR(statsrc.st_mode))
 	{
+		//r옵션이 있으면 재귀복사
 		if (ON_R(flag))
-			recur(src, tgt);
+			copy_dir(source, target);
+		//d옵션이 있으면 프로세스 분할복사
 		else if (ON_D(flag))
-			proc(src, tgt);
+			copy_proc(source, target);
+		//둘다 없으면 에러
 		else
-			error(ISDIR, src);
+			error(ISDIR, source);
 	}
-	
-
-
-
-
+	//디렉토리가 아니면 일반복사
+	else
+		copy_file(source, target);
+	//l옵션이 있으면 속성복사
 	if (ON_L(flag))
-		copy_stat(src, tgt);
+		copy_stat(source, target);
 }
-
+/* ---------------------------------*/
+/**
+ * @brief src가 파일일 경우에만 사용 
+ *
+ * @param src 복사할 원본 파일
+ * @param tgt 복사후 생성할 파일명
+ */
+/* ---------------------------------*/
 void copy_file(const char *src, const char *tgt)
 {
 	int fd1, fd2, len;
 	char buf[BUFSIZE];
+	char answer[BUFSIZE];
 	if ((fd1 = open(src, O_RDONLY))<0)
 		error(OPEN, src);
 	if (ON_N(flag))
 	{
 		if ((fd2 = open(tgt, O_NOVERW))<0)
 		{
-			printf("<%s> already exist.", tgt);
-			exit(1);
+			if (ON_B(flag))
+				printf("'%s' already exist.", tgt);
+			return;
 		}
+	}
+	else if (ON_I(flag))
+	{
+		printf("Do you want to overwrite '%s'?(y/n) ", tgt);
+		scanf("%s",answer);
+		if (strcmp(answer, "y") != 0)
+		{
+			if (ON_B(flag))
+				printf("No overwrite\n");
+			return;
+		}
+		else
+			if (ON_B(flag))
+				printf("Overwrite\n");
+
 	}
 	else if ((fd2 = open(tgt, O_OVERWR))<0)
 		error(OPEN, tgt);
 	while((len = read(fd1, buf, BUFSIZE))>0)
 		write(fd2, buf, len);
+	if (ON_L(flag))
+		copy_stat(src, tgt);
+	else
+		copy_mode(src, tgt);
+	close(fd1);
+	close(fd2);
 }
-void copy_dir(const char *src, const char *tgt)
-{
-	if (mkdir(tgt, S_DIR)<0)
-		error(MKDIR, tgt);
-
-
-}
+/* ---------------------------------*/
+/**
+ * @brief scandir 엔트리에서 부모와 자기자신을 제거
+ *
+ * @param dir 디렉토리의 엔트리
+ *
+ * @return 포함여부 
+ */
+/* ---------------------------------*/
 int filter(const struct dirent *dir)
 {
 	if (strcmp(dir->d_name, ".") == 0 || strcmp(dir->d_name, "..") == 0)
@@ -90,20 +145,75 @@ int filter(const struct dirent *dir)
 	else
 		return 1;
 }
-
 /* ---------------------------------*/
 /**
- * @brief Use only for directory
+ * @brief 디렉토리에만 사용
  *
- * @param src
- * @param tgt
+ * @param src 복사할 원본 디렉토리
+ * @param tgt 복사후 생성할 디렉토리 이름
  */
 /* ---------------------------------*/
-void recur(const char *src, const char *tgt)
+void copy_dir(const char *src, const char *tgt)
 {
 	struct dirent **namelist;
 	int entry;
-	if (mkdir(tgt, S_DIR)<0)
+	//디렉토리가 없으면 생성, 있으면 그냥 사용
+	if (access(tgt, F_OK) < 0)
+	{
+		if (mkdir(tgt, 0777)<0)
+			error(MKDIR, tgt);
+	}
+	//l옵션이 있으면 속성복사
+	if (ON_L(flag))
+		copy_stat(src, tgt);
+	//없으면 권한만 복사
+	else
+		copy_mode(src, tgt);
+	//src 디렉토리 내부엔트리 스캔
+	if ((entry = scandir(src, &namelist, filter, alphasort))<0)
+		error(SCAN, src);
+	else
+	{
+		//엔트리마다 반복
+		for (int i=0;i<entry;i++)
+		{
+			char srcpath[PATH_MAX];
+			char tgtpath[PATH_MAX];
+			strcpy(srcpath, src);
+			strcat(srcpath, "/"); strcat(srcpath, namelist[i]->d_name);
+			strcpy(tgtpath, tgt);
+			strcat(tgtpath, "/");
+			strcat(tgtpath, namelist[i]->d_name);
+			//디렉토리이면
+			if (namelist[i]->d_type == DT_DIR)
+				copy_dir(srcpath, tgtpath);
+			//파일이면
+			else
+				copy_file(srcpath, tgtpath);
+		}
+	}
+	//메모리 할당 해제
+	for (int i=0;i<entry;i++)
+		free(namelist[i]);
+	free(namelist);
+}
+/* ---------------------------------*/
+/**
+ * @brief 프로세스분할복사
+ *
+ * @param src 원본 디렉토리
+ * @param tgt 생성할 디렉토리
+ */
+/* ---------------------------------*/
+void copy_proc(const char *src, const char *tgt)
+{
+	int proc_cnt = 0;
+	struct dirent **namelist;
+	int entry;
+	struct stat statbuf;
+	if (stat(src, &statbuf)<0)
+		error(STAT, src);
+	if (mkdir(tgt, statbuf.st_mode)<0)
 		error(MKDIR, tgt);
 	if ((entry = scandir(src, &namelist, filter, alphasort))<0)
 		error(SCAN, src);
@@ -111,35 +221,42 @@ void recur(const char *src, const char *tgt)
 	{
 		for (int i=0;i<entry;i++)
 		{
+			char srcpath[PATH_MAX];
+			char tgtpath[PATH_MAX];
+			int pid;
+			strcpy(srcpath, src);
+			strcat(srcpath, "/");
+			strcat(srcpath, namelist[i]->d_name);
+			strcpy(tgtpath, tgt);
+			strcat(tgtpath, "/");
+			strcat(tgtpath, namelist[i]->d_name);
 			if (namelist[i]->d_type == DT_DIR)
 			{
-				recur(namelist[i]->d_name,
+				if (proc_cnt < proc_num)
+				{
+					pid = fork();
+					if (pid == 0)
+					{
+						copy_dir(srcpath, tgtpath);
+						exit(0);
+					}
+				}
+				else
+					copy_dir(srcpath, tgtpath);
 			}
 			else
-			{
-				copy_file(namelist[i]->d_name,
-			}
+				copy_file(srcpath, tgtpath);
 		}
 	}
-
-
-
-
-
-	//메모리 할당 해제
-	for (int i=0;i<entry;i++)
-		free(namelist[i]);
-	free(namelist);
 }
-
-void proc(const char *src, const char *tgt)
-{
-	struct dirent **namelist;
-	int entry;
-	if ((entry = scandir(src, &namelist, filter, alphasort))<0)
-		error(SCAN, src);
-}
-
+/* ---------------------------------*/
+/**
+ * @brief 
+ *
+ * @param src
+ * @param tgt
+ */
+/* ---------------------------------*/
 void copy_stat(const char *src, const char *tgt)
 {
 	struct stat statbuf;
@@ -155,7 +272,29 @@ void copy_stat(const char *src, const char *tgt)
 	if (utime(tgt,&timebuf)<0)
 		error(UTIME, tgt);
 }
-
+/* ---------------------------------*/
+/**
+ * @brief 
+ *
+ * @param src
+ * @param tgt
+ */
+/* ---------------------------------*/
+void copy_mode(const char *src, const char *tgt)
+{
+	struct stat statbuf;
+	if (stat(src, &statbuf)<0)
+		error(STAT, src);
+	if (chmod(tgt, statbuf.st_mode)<0)
+		error(CHMOD, tgt);
+}
+/* ---------------------------------*/
+/**
+ * @brief 
+ *
+ * @param src
+ */
+/* ---------------------------------*/
 void print_stat(const char *src)
 {
 	struct stat statbuf;
@@ -170,12 +309,15 @@ void print_stat(const char *src)
 	usr = getpwuid(statbuf.st_uid);
 	grp = getgrgid(statbuf.st_gid);
 
-	printf("Filename : %s\n",src);
-	printf("Last access time : %d.%d.%d %d:%d:%d\n",atime_p->tm_year+1900, atime_p->tm_mon+1, atime_p->tm_mday, atime_p->tm_hour, atime_p->tm_min, atime_p->tm_sec);
-	printf("Last modified time : %d.%d.%d %d:%d:%d\n",mtime_p->tm_year+1900, mtime_p->tm_mon+1, mtime_p->tm_mday, mtime_p->tm_hour, mtime_p->tm_min, mtime_p->tm_sec);
-	printf("Last changed time : %d.%d.%d %d:%d:%d\n",ctime_p->tm_year+1900, ctime_p->tm_mon+1, ctime_p->tm_mday, ctime_p->tm_hour, ctime_p->tm_min, ctime_p->tm_sec);
-	printf("Owner : %s\n", usr->pw_name);
-	printf("Group : %s\n", grp->gr_name);
-	printf("File size : %ld Bytes\n", statbuf.st_size);
+	printf("Filename           : %s\n",src);
+	printf("Last access time   : %d.%d.%d %d:%d:%d\n",
+			atime_p->tm_year+1900, atime_p->tm_mon+1, atime_p->tm_mday, atime_p->tm_hour, atime_p->tm_min, atime_p->tm_sec);
+	printf("Last modified time : %d.%d.%d %d:%d:%d\n",
+			mtime_p->tm_year+1900, mtime_p->tm_mon+1, mtime_p->tm_mday, mtime_p->tm_hour, mtime_p->tm_min, mtime_p->tm_sec);
+	printf("Last changed time  : %d.%d.%d %d:%d:%d\n",
+			ctime_p->tm_year+1900, ctime_p->tm_mon+1, ctime_p->tm_mday, ctime_p->tm_hour, ctime_p->tm_min, ctime_p->tm_sec);
+	printf("Owner              : %s\n", usr->pw_name);
+	printf("Group              : %s\n", grp->gr_name);
+	printf("File size          : %ld Bytes\n", statbuf.st_size);
 
 }
