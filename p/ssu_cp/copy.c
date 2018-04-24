@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/wait.h>
 #include <fcntl.h>
 #include <utime.h>
 #include <time.h>
@@ -36,7 +37,7 @@ void copy(const char *src, const char *tgt)
 		error(SAME,source);
 	struct stat statsrc, stattgt;
 	if (stat(source, &statsrc)<0)
-		error(STAT, source);
+		error(NOFILE, source);
 	//tgt이름의 파일이 이미 존재
 	if (stat(tgt, &stattgt)==0)
 	{
@@ -48,6 +49,9 @@ void copy(const char *src, const char *tgt)
 			strcpy(source, "../");
 			strcat(source, target);
 		}
+		//tgt가 일반파일, src가 디렉토리면 에러
+		else if (S_ISREG(stattgt.st_mode)&&S_ISDIR(statsrc.st_mode))
+			error(ONFILE,tgt);
 	}
 	//s옵션이 있으면 심볼릭링크 생성하고 종료
 	if (ON_S(flag))
@@ -74,7 +78,12 @@ void copy(const char *src, const char *tgt)
 	}
 	//디렉토리가 아니면 일반복사
 	else
-		copy_file(source, target);
+	{
+		if (ON_R(flag)||ON_D(flag))
+			error(NOTDIR, source);
+		else
+			copy_file(source, target);
+	}
 	//l옵션이 있으면 속성복사
 	if (ON_L(flag))
 		copy_stat(source, target);
@@ -96,7 +105,7 @@ void copy_file(const char *src, const char *tgt)
 		error(OPEN, src);
 	if (ON_N(flag))
 	{
-		if ((fd2 = open(tgt, O_NOVERW))<0)
+		if ((fd2 = open(tgt, O_NOVERW, SMODE))<0)
 		{
 			if (ON_B(flag))
 				printf("'%s' already exist.", tgt);
@@ -116,22 +125,21 @@ void copy_file(const char *src, const char *tgt)
 		else
 			if (ON_B(flag))
 				printf("Overwrite\n");
-
 	}
-	else if ((fd2 = open(tgt, O_OVERWR))<0)
+	if ((fd2 = open(tgt, O_OVERWR, SMODE))<0)
 		error(OPEN, tgt);
 	while((len = read(fd1, buf, BUFSIZE))>0)
 		write(fd2, buf, len);
 	if (ON_L(flag))
 		copy_stat(src, tgt);
-	else
-		copy_mode(src, tgt);
+	/*else*/
+		/*copy_mode(src, tgt);*/
 	close(fd1);
 	close(fd2);
 }
 /* ---------------------------------*/
 /**
- * @brief scandir 엔트리에서 부모와 자기자신을 제거
+ * @brief scandir 엔트리에서 부모(..)와 현재디렉토리(.)를 제거
  *
  * @param dir 디렉토리의 엔트리
  *
@@ -212,18 +220,20 @@ void copy_proc(const char *src, const char *tgt)
 	int entry;
 	struct stat statbuf;
 	if (stat(src, &statbuf)<0)
-		error(STAT, src);
+		error(NOFILE, src);
 	if (mkdir(tgt, statbuf.st_mode)<0)
 		error(MKDIR, tgt);
+	printf("pid:%d(parent)\tdir:%s\n",getpid(),tgt);
 	if ((entry = scandir(src, &namelist, filter, alphasort))<0)
 		error(SCAN, src);
 	else
 	{
+		int pid, wpid;
+		int status = 0;
 		for (int i=0;i<entry;i++)
 		{
 			char srcpath[PATH_MAX];
 			char tgtpath[PATH_MAX];
-			int pid;
 			strcpy(srcpath, src);
 			strcat(srcpath, "/");
 			strcat(srcpath, namelist[i]->d_name);
@@ -234,12 +244,13 @@ void copy_proc(const char *src, const char *tgt)
 			{
 				if (proc_cnt < proc_num)
 				{
-					pid = fork();
-					if (pid == 0)
+					if ((pid = fork()) == 0)
 					{
 						copy_dir(srcpath, tgtpath);
+						printf("pid:%d\t\tdir:%s\n",getpid(),tgtpath);
 						exit(0);
 					}
+						proc_cnt++;
 				}
 				else
 					copy_dir(srcpath, tgtpath);
@@ -247,14 +258,17 @@ void copy_proc(const char *src, const char *tgt)
 			else
 				copy_file(srcpath, tgtpath);
 		}
+		//모든 자식프로세스의 종료를 기다림
+		while ((wpid = wait(&status)) > 0);
+		
 	}
 }
 /* ---------------------------------*/
 /**
- * @brief 
+ * @brief 속성복사(권한, 소유자, 액세스, 수정시간)
  *
- * @param src
- * @param tgt
+ * @param src 복사원본
+ * @param tgt 대상
  */
 /* ---------------------------------*/
 void copy_stat(const char *src, const char *tgt)
@@ -262,7 +276,7 @@ void copy_stat(const char *src, const char *tgt)
 	struct stat statbuf;
 	struct utimbuf timebuf;
 	if (stat(src, &statbuf)<0)
-		error(STAT, src);
+		error(NOFILE, src);
 	if (chmod(tgt, statbuf.st_mode)<0)
 		error(CHMOD, tgt);
 	if (chown(tgt, statbuf.st_uid, statbuf.st_gid)<0)
@@ -274,25 +288,25 @@ void copy_stat(const char *src, const char *tgt)
 }
 /* ---------------------------------*/
 /**
- * @brief 
+ * @brief 권한만 복사
  *
- * @param src
- * @param tgt
+ * @param src 복사원본
+ * @param tgt 대상
  */
 /* ---------------------------------*/
 void copy_mode(const char *src, const char *tgt)
 {
 	struct stat statbuf;
 	if (stat(src, &statbuf)<0)
-		error(STAT, src);
+		error(NOFILE, src);
 	if (chmod(tgt, statbuf.st_mode)<0)
 		error(CHMOD, tgt);
 }
 /* ---------------------------------*/
 /**
- * @brief 
+ * @brief 속성출력
  *
- * @param src
+ * @param src 출력할 파일
  */
 /* ---------------------------------*/
 void print_stat(const char *src)
@@ -302,13 +316,14 @@ void print_stat(const char *src)
 	struct passwd *usr;
 	struct group *grp;
 	if (stat(src, &statbuf)<0)
-		error(STAT, src);
+		error(NOFILE, src);
 	atime_p = localtime(&statbuf.st_atime);
 	mtime_p = localtime(&statbuf.st_mtime);
 	ctime_p = localtime(&statbuf.st_ctime);
 	usr = getpwuid(statbuf.st_uid);
 	grp = getgrgid(statbuf.st_gid);
 
+	printf("************** File Info **************\n");
 	printf("Filename           : %s\n",src);
 	printf("Last access time   : %d.%d.%d %d:%d:%d\n",
 			atime_p->tm_year+1900, atime_p->tm_mon+1, atime_p->tm_mday, atime_p->tm_hour, atime_p->tm_min, atime_p->tm_sec);

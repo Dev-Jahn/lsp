@@ -19,9 +19,11 @@
 #define ON_D(flag)	(((flag) & OPT_D) == OPT_D)
 #define ON_B(flag)	(((flag) & OPT_B) == OPT_B)
 #define ON_T(flag)	(((flag) & OPT_T) == OPT_T)
+#define SMODE 0664
 
 extern int flag;
 extern int proc_num;
 int setopt(int argc, char *argv[]);
+void printopt();
 
 #endif

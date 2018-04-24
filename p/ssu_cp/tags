@@ -4,29 +4,31 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ARGD	error.h	/^enum ErrCode { REOPT, COLOPT, SONLY, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR, ARGD };$/;"	e	enum:ErrCode
 BUFSIZE	copy.c	19;"	d	file:
 CC	Makefile	/^CC		= gcc$/;"	m
 CFLAGS	Makefile	/^CFLAGS	= -W -Wall -ggdb$/;"	m
-CHMOD	error.h	/^enum ErrCode { REOPT, COLOPT, SONLY, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR };$/;"	e	enum:ErrCode
-CHOWN	error.h	/^enum ErrCode { REOPT, COLOPT, SONLY, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR };$/;"	e	enum:ErrCode
-COLOPT	error.h	/^enum ErrCode { REOPT, COLOPT, SONLY, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR };$/;"	e	enum:ErrCode
+CHMOD	error.h	/^enum ErrCode { REOPT, COLOPT, SONLY, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR, ARGD };$/;"	e	enum:ErrCode
+CHOWN	error.h	/^enum ErrCode { REOPT, COLOPT, SONLY, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR, ARGD };$/;"	e	enum:ErrCode
+COLOPT	error.h	/^enum ErrCode { REOPT, COLOPT, SONLY, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR, ARGD };$/;"	e	enum:ErrCode
+compare	util.c	/^int compare(const char *pattern, const char *string)$/;"	f
 copy	copy.c	/^void copy(const char *src, const char *tgt)$/;"	f
 copy_dir	copy.c	/^void copy_dir(const char *src, const char *tgt)$/;"	f
 copy_file	copy.c	/^void copy_file(const char *src, const char *tgt)$/;"	f
 copy_mode	copy.c	/^void copy_mode(const char *src, const char *tgt)$/;"	f
 copy_proc	copy.c	/^void copy_proc(const char *src, const char *tgt)$/;"	f
 copy_stat	copy.c	/^void copy_stat(const char *src, const char *tgt)$/;"	f
-ErrCode	error.h	/^enum ErrCode { REOPT, COLOPT, SONLY, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR };$/;"	g
+ErrCode	error.h	/^enum ErrCode { REOPT, COLOPT, SONLY, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR, ARGD };$/;"	g
 error	error.c	/^void error(enum ErrCode err, const char *arg)$/;"	f
 filter	copy.c	/^int filter(const struct dirent *dir)$/;"	f
 flag	main.c	/^int flag = 000;$/;"	v
 flag	test.c	/^int flag = 0000;$/;"	v
-ISDIR	error.h	/^enum ErrCode { REOPT, COLOPT, SONLY, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR };$/;"	e	enum:ErrCode
-LIMIT	error.h	/^enum ErrCode { REOPT, COLOPT, SONLY, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR };$/;"	e	enum:ErrCode
+ISDIR	error.h	/^enum ErrCode { REOPT, COLOPT, SONLY, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR, ARGD };$/;"	e	enum:ErrCode
+LIMIT	error.h	/^enum ErrCode { REOPT, COLOPT, SONLY, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR, ARGD };$/;"	e	enum:ErrCode
 main	main.c	/^int main(int argc, char *argv[])$/;"	f
 main	test.c	/^int main(void)$/;"	f
-MISSING	error.h	/^enum ErrCode { REOPT, COLOPT, SONLY, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR };$/;"	e	enum:ErrCode
-MKDIR	error.h	/^enum ErrCode { REOPT, COLOPT, SONLY, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR };$/;"	e	enum:ErrCode
+MISSING	error.h	/^enum ErrCode { REOPT, COLOPT, SONLY, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR, ARGD };$/;"	e	enum:ErrCode
+MKDIR	error.h	/^enum ErrCode { REOPT, COLOPT, SONLY, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR, ARGD };$/;"	e	enum:ErrCode
 ON_B	main.h	20;"	d
 ON_D	main.h	19;"	d
 ON_I	main.h	14;"	d
@@ -36,7 +38,7 @@ ON_P	main.h	17;"	d
 ON_R	main.h	18;"	d
 ON_S	main.h	13;"	d
 ON_T	main.h	21;"	d
-OPEN	error.h	/^enum ErrCode { REOPT, COLOPT, SONLY, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR };$/;"	e	enum:ErrCode
+OPEN	error.h	/^enum ErrCode { REOPT, COLOPT, SONLY, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR, ARGD };$/;"	e	enum:ErrCode
 OPT_B	main.h	11;"	d
 OPT_D	main.h	10;"	d
 OPT_I	main.h	5;"	d
@@ -51,15 +53,16 @@ O_OVERWR	copy.c	17;"	d	file:
 path	test.c	/^char path[100];$/;"	v
 print_stat	copy.c	/^void print_stat(const char *src)$/;"	f
 proc_num	main.c	/^int proc_num = 0;$/;"	v
-REOPT	error.h	/^enum ErrCode { REOPT, COLOPT, SONLY, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR };$/;"	e	enum:ErrCode
-SAME	error.h	/^enum ErrCode { REOPT, COLOPT, SONLY, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR };$/;"	e	enum:ErrCode
-SCAN	error.h	/^enum ErrCode { REOPT, COLOPT, SONLY, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR };$/;"	e	enum:ErrCode
+REOPT	error.h	/^enum ErrCode { REOPT, COLOPT, SONLY, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR, ARGD };$/;"	e	enum:ErrCode
+SAME	error.h	/^enum ErrCode { REOPT, COLOPT, SONLY, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR, ARGD };$/;"	e	enum:ErrCode
+SCAN	error.h	/^enum ErrCode { REOPT, COLOPT, SONLY, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR, ARGD };$/;"	e	enum:ErrCode
 setopt	main.c	/^int setopt(int argc, char *argv[])$/;"	f
-SONLY	error.h	/^enum ErrCode { REOPT, COLOPT, SONLY, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR };$/;"	e	enum:ErrCode
-STAT	error.h	/^enum ErrCode { REOPT, COLOPT, SONLY, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR };$/;"	e	enum:ErrCode
-SYM	error.h	/^enum ErrCode { REOPT, COLOPT, SONLY, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR };$/;"	e	enum:ErrCode
-USAGE	error.h	/^enum ErrCode { REOPT, COLOPT, SONLY, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR };$/;"	e	enum:ErrCode
-UTIME	error.h	/^enum ErrCode { REOPT, COLOPT, SONLY, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR };$/;"	e	enum:ErrCode
+SONLY	error.h	/^enum ErrCode { REOPT, COLOPT, SONLY, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR, ARGD };$/;"	e	enum:ErrCode
+STAT	error.h	/^enum ErrCode { REOPT, COLOPT, SONLY, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR, ARGD };$/;"	e	enum:ErrCode
+SYM	error.h	/^enum ErrCode { REOPT, COLOPT, SONLY, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR, ARGD };$/;"	e	enum:ErrCode
+USAGE	error.h	/^enum ErrCode { REOPT, COLOPT, SONLY, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR, ARGD };$/;"	e	enum:ErrCode
+UTIME	error.h	/^enum ErrCode { REOPT, COLOPT, SONLY, LIMIT, USAGE, MISSING, SAME, ISDIR, OPEN, STAT, CHMOD, CHOWN, UTIME, SYM, SCAN, MKDIR, ARGD };$/;"	e	enum:ErrCode
 _COPY_H	copy.h	2;"	d
 _ERROR_H	error.h	2;"	d
 _MAIN_H	main.h	2;"	d
+_UTIL_H	util.h	2;"	d
