@@ -83,6 +83,7 @@ void ssu_make_grep(int argc, char *argv[])
 	{
 		strcat(grep_cmd, " ");
 		strcat(grep_cmd, argv[i]);
+		struct stat a;
 	}
 }
 

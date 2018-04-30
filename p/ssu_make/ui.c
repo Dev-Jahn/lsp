@@ -7,11 +7,6 @@
 #include "util.h"
 
 struct winsize window;
-char lrd[] = { 0xe2, 0x95, 0xa6, '\0' };//╦
-char ud[]  = { 0xe2, 0x95, 0x91, '\0' };//║
-char rud[] = { 0xe2, 0x95, 0xa0, '\0' };//╠
-char ru[]  = { 0xe2, 0x95, 0x9a, '\0' };//╚
-char lr[]  = { 0xe2, 0x95, 0x90, '\0' };//═
 int width = 0;
 List indent;
 List printed;
@@ -78,6 +73,11 @@ void print_mac(List *ml)		//m플래그 선언여부에 따라 매크로 출력
 	printf("\n");
 }
 
+char lrd[] = { 0xe2, 0x95, 0xa6, '\0' };//╦
+char ud[]  = { 0xe2, 0x95, 0x91, '\0' };//║
+char rud[] = { 0xe2, 0x95, 0xa0, '\0' };//╠
+char ru[]  = { 0xe2, 0x95, 0x9a, '\0' };//╚
+char lr[]  = { 0xe2, 0x95, 0x90, '\0' };//═
 /* ---------------------------------*/
 /**
  * @brief 의존성그래프 출력
