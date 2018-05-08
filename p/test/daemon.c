@@ -52,6 +52,7 @@ int ssu_daemon_init(void)
 	signal(SIGTTOU, SIG_IGN);
 	//터미널 일시중지 무시
 	signal(SIGTSTP, SIG_IGN);
+	//
 	maxfd = getdtablesize();
 
 	for (fd = 0;fd < maxfd; fd++)
