@@ -23,4 +23,8 @@ int main(void)
 			printf("parent: first child: %d\n", (status >> 8));
 		else if (child2 == pid)
 			printf("parent: second child: %d\n", (status >> 8)); 
+	}
+
+	printf("parent: all children terminated\n");
+	exit(0);
 }
