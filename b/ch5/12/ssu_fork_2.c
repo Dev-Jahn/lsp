@@ -5,7 +5,6 @@
 
 int main(int argc, char *argv[])
 {
-	struct timeval begin, end;
 	pid_t pid;
 	char character, first, last;
 	long i;
@@ -29,15 +28,14 @@ int main(int argc, char *argv[])
 	//first 부터 last까지의 문자를 출력
 	for (character = first; character <= last; character++)
 	{
-	/*gettimeofday(&begin, NULL);*/
-		/*for (i=0;i<=1000000;i++);*/
+		//프로세스 분기 시간확보
+		for (i=0;i<=100000;i++);
+		/*sleep(1);*/
 
-	/*gettimeofday(&end, NULL);*/
 		write(1, &character, 1);
 	}
 	
 	printf("\n");
-	/*printf("Elapsed time:%ldus\n",end.tv_usec-begin.tv_usec); */
 	exit(0);
 }
 

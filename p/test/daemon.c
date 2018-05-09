@@ -6,6 +6,7 @@
 #include <syslog.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <string.h>
 
 int ssu_daemon_init(void);
 
@@ -23,6 +24,21 @@ int main(void)
 		fprintf(stderr, "ssu_daemon_init failed\n");
 		exit(1);
 	}
+
+	int cnt=0;
+	int fd = open("/home/jahn/lsp/p/test/log.txt",O_RDWR|O_CREAT|O_TRUNC, 0644);
+	char buf[10];
+	while (1)
+	{
+		sleep(1);
+		sprintf(buf, "%d",cnt);
+		write(fd,buf,strlen(buf));
+		write(fd, "\n", 1);
+		cnt++;
+		if (cnt>30)
+			break;
+	}
+	close(fd);
 	exit(0);
 }
 

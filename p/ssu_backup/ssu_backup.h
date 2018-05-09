@@ -4,8 +4,8 @@
 #define OPT_D		0001	//디렉토리 전체백업
 #define OPT_R		0002	//복구
 #define OPT_M		0004	//수정시에만 백업
-#define OPT_N		0010	//백업파일 유지 갯수
-#define OPT_C		0020	//백업파일과 비교
+#define OPT_C		0010	//백업파일과 비교
+#define OPT_N		0020	//백업파일 유지 갯수(arg)
 #define OPT_X		0040	//예비
 #define OPT_Y		0100	//예비
 #define OPT_Z		0200	//예비

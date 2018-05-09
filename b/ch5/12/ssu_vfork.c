@@ -21,7 +21,6 @@ void ssu_local_func(void)
 	if ((pid = vfork()) == 0)
 	{
 		printf("I'm child. My PID is %d\n", getpid());
-		/*while(1);*/
 	}
 	//부모는 3초 sleep
 	else if (pid > 0)
