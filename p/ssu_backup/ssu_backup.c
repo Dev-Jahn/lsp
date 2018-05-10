@@ -12,7 +12,6 @@ int flag = 000;
 
 int main(int argc, char *argv[])
 {
-	setopt	
 }
 
 int setopt(int argc, char *argv[])

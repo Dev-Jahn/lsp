@@ -3,6 +3,6 @@
 
 #include <sys/types.h>
 
-ssize_t tohex(const char *str, char *buf);
+ssize_t tohex(const char *str, char *buf, size_t bufsize);
 
 #endif
