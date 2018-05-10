@@ -3,6 +3,8 @@
 
 #include <sys/types.h>
 
-ssize_t tohex(const char *str, char *buf, size_t bufsize);
+ssize_t strtohex(const char *str, char *buf, size_t bufsize);
+ssize_t hextostr(const char *str, char *buf, size_t bufsize);
+ssize_t makename(const char *pathname, char *buf, size_t bufsize);
 
 #endif

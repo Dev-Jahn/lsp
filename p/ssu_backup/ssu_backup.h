@@ -1,5 +1,6 @@
 #ifndef _MAIN_H
 #define _MAIN_H	1
+#include <limits.h>
 
 #define OPT_D		0001	//디렉토리 전체백업
 #define OPT_R		0002	//복구
@@ -22,7 +23,10 @@
 #define SMODE 0664
 
 extern int flag;
+extern char filepath[PATH_MAX];
+extern char bakdirpath[PATH_MAX];
+extern char logdirpath[PATH_MAX];
+extern int period;
 int setopt(int argc, char *argv[]);
-void printopt();
 
 #endif

@@ -11,8 +11,8 @@
 #include <grp.h>
 #include <dirent.h>
 #include <string.h>
-#include "copy.h"
 #include "main.h"
+#include "copy.h"
 #include "error.h"
 
 #define O_OVERWR O_RDWR|O_CREAT|O_TRUNC
@@ -53,16 +53,6 @@ void copy(const char *src, const char *tgt)
 		else if (S_ISREG(stattgt.st_mode)&&S_ISDIR(statsrc.st_mode))
 			error(ONFILE,tgt);
 	}
-	//s옵션이 있으면 심볼릭링크 생성하고 종료
-	if (ON_S(flag))
-	{
-		if (symlink(source, target)<0)
-			error(SYM,source);
-		return;
-	}
-	//p옵션이 있으면 파일 속성 출력
-	if (ON_P(flag))
-		print_stat(source);
 	//src가 디렉토리이면
 	if (S_ISDIR(statsrc.st_mode))
 	{
