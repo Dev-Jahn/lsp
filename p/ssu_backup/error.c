@@ -24,12 +24,5 @@ void error(enum ErrCode err, const char *arg)
 		default:
 			fprintf(stderr, "Unknown error.\n");
 	}
-	fprintf(stderr, "\
-Usage: ssu_cp [OPTION] [SOURCE] [TARGET]\n\
-(file)\n\
-	ssu_cp [-i/n][-l][-p]	[srcfile] [tgtfile]\n\
-	ssu_cp [-s]	[srcfile] [tgtfile]\n\
-(directory)\n\
-	ssu_cp [-i/n][-l][-p][-r][-d][N]	[srcdir] [tgtdir]\n");
 	exit(1);
 }

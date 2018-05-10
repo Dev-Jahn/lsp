@@ -12,6 +12,8 @@ int flag = 000;
 
 int main(int argc, char *argv[])
 {
+	opterr = 0;
+	int argi = setopt(argc, argv);
 }
 
 int setopt(int argc, char *argv[])
@@ -19,28 +21,31 @@ int setopt(int argc, char *argv[])
 	int c;
 	while ((c=getopt(argc, argv, "drmcn:")) != -1)
 	{
-		char option[3] = {'-', c, '\0'};
 		switch(c)
 		{
-			case 'd':
-				flag = flag|OPT_D;
-				break;
-			case 'r':
-				flag = flag|OPT_R;
-				break;
-			case 'm':
-				flag = flag|OPT_M;
-				break;
-			case 'c':
-				flag = flag|OPT_C;
-				break;
-			case 'n':
-				flag = flag|OPT_N;
-				break;
+		case 'd':
+			flag = flag|OPT_D;
+			break;
+		case 'r':
+			flag = flag|OPT_R;
+			break;
+		case 'm':
+			flag = flag|OPT_M;
+			break;
+		case 'c':
+			flag = flag|OPT_C;
+			break;
+		case 'n':
+			flag = flag|OPT_N;
+			break;
+		case '?':
+			char charr[2] = { optopt, 0};
+			break;
+
 	}
 		//S와 다른 플래그가 함께 켜져있으면
-		if ((flag&(~OPT_S))!=0000 && ON_S(flag))
-			error(SONLY, NULL);
+		/*if ((flag&(~OPT_S))!=0000 && ON_S(flag))*/
+			/*error(SONLY, NULL);*/
 	}
 	return optind;
 }
