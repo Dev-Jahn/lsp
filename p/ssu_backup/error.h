@@ -20,6 +20,5 @@ enum ErrCode { 	NAMELIM,	/*Exceeded filename limit*/
 				ONFILE		/*src:dir, dst:reg in copy()*/
 };
 void error(enum ErrCode err, ...);
-void errlog(const char *format, ...);
 
 #endif

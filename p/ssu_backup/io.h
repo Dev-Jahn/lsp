@@ -1,5 +1,5 @@
-#ifndef _COPY_H
-#define _COPY_H
+#ifndef _IO_H
+#define _IO_H
 
 #include <dirent.h>
 
@@ -8,5 +8,8 @@ void copy_file(const char *src, const char *tgt);
 int filter(const struct dirent *dir);
 void copy_dir(const char *src, const char *tgt);
 void copy_mode(const char *src, const char *tgt);
+
+//미구현
+void cat(void);
 
 #endif

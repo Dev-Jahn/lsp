@@ -1,16 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
-#include <syslog.h>
 #include <stdarg.h>
 #include "error.h"
+#include "logger.h"
 
 /* ---------------------------------*/
 /**
  * @brief Comprehensive error processing.
  *
- * @param err Error code. See header file for more info.
- * @param ... Argument for additional information.
+ * @param err Error code. See header file for more info
+ * @param ... Argument for additional information
  */
 /* ---------------------------------*/
 void error(enum ErrCode err, ...)
@@ -71,15 +71,4 @@ void error(enum ErrCode err, ...)
 
 	va_end(ap);
 	exit(1);
-}
-void errlog(const char *format, ...)
-{
-	va_list ap;
-	va_start(ap, format);
-
-	openlog("ssu_backup", LOG_PID|LOG_PERROR, 0);
-	vsyslog(LOG_ERR, format, ap);
-	closelog();
-
-	va_end(ap);
 }

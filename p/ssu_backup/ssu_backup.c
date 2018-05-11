@@ -19,12 +19,10 @@
  *복원시 모드를 읽어와서 복원.
  */
 
-
-/*option flag*/
-int flag = 000;
-char filepath[PATH_MAX];
-char bakdirpath[PATH_MAX] = "backup";
-char logdirpath[PATH_MAX] = "log";
+int flag = 000;							/*option flag*/
+char filepath[PATH_MAX];				/*backup file path*/
+char bakdirpath[PATH_MAX] = "backup";	/*backup directory path*/
+char logdirpath[PATH_MAX] = "log";		/*log directory path*/
 int period;
 
 int main(int argc, char *argv[])
@@ -83,11 +81,30 @@ int main(int argc, char *argv[])
 	else if (!S_ISDIR(dirstat.st_mode))
 		error(MKDIR, logdirpath);
 
+   /* char buf[PATH_MAX];*/
+	/*strtohex(filepath, buf, sizeof(buf));*/
+	/*printf("%s\n", buf);*/
+	/*char buf2[PATH_MAX];*/
+	/*hextostr(buf, buf2, sizeof(buf2));*/
+	/*printf("%s\n", buf2);*/
+
+
+
 
 	/*Run backup daemon*/
-	daemon_init();
+	/*daemon_init();*/
 }
 
+/* ---------------------------------*/
+/**
+ * @brief Set option flag with entered options in command.
+ *
+ * @param argc argument count in main()
+ * @param argv[] argument vector in main()
+ *
+ * @return Index of argument right after option arguments.
+ */
+/* ---------------------------------*/
 int setopt(int argc, char *argv[])
 {
 	int c;
@@ -115,7 +132,6 @@ int setopt(int argc, char *argv[])
 			ch[0] = optopt;
 			error(NAOPT, ch);
 			break;
-
 	}
 		//If '-r' is used with other options.
 		if ((flag&(~OPT_R))!=0000 && ON_R(flag))

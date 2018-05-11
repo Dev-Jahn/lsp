@@ -9,22 +9,22 @@
 #include <string.h>
 #include "ssu_backup.h"
 #include "util.h"
-#include "copy.h"
+#include "io.h"
+#include "logger.h"
 #include "error.h"
+
 #include <errno.h>
+#include <openssl/sha.h>
 
 void todo()
 {
 	int cnt = 0;
+	/*Filename of backup file*/
 	char bakname[NAME_MAX+1] = {0};
+	/*Absolute path of backup file*/
 	char bakpath[PATH_MAX] = {0};
-	char logpath[PATH_MAX] = {0};
-	strcpy(logpath, logdirpath);
-	strcat(logpath, "/");
-	strcat(logpath, "log.txt");
 
-	errlog("%s", logpath);
-	int fd = open(logpath, O_WRONLY|O_CREAT|O_TRUNC, 0666);
+	int fd_log = open(logpath, O_WRONLY|O_CREAT|O_TRUNC, 0640);
 	while (cnt++<3)
 	{
 		makename(filepath, bakname, sizeof(bakname));
@@ -35,7 +35,7 @@ void todo()
 		errlog("bak:%s", bakpath);
 		errlog("err:%s", strerror(errno));
 		copy(filepath, bakpath);
-		write(fd, "fuck\n", 5);
+		write(fd_log, "fuck\n", 5);
 		sleep(period);
 	}
 	exit(0);
@@ -77,3 +77,5 @@ int daemon_init(void)
 	todo();
 	return 0;
 }
+
+

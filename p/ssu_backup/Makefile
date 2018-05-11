@@ -3,8 +3,8 @@ CC		= gcc
 CFLAGS	= -W -Wall -ggdb
 all : $(NAME) done
 
-$(NAME) : ssu_backup.o daemon.o copy.o logger.o util.o error.o
-	$(CC) $(CFLAGS) -o $(NAME) $^ 
+$(NAME) : ssu_backup.o daemon.o io.o logger.o util.o error.o
+	$(CC) $(CFLAGS) -o $(NAME) $^ -lssl -lcrypto
 
 ssu_backup.o : ssu_backup.c
 	$(CC) $(CFLAGS) -c -o $@ $^
@@ -12,7 +12,7 @@ ssu_backup.o : ssu_backup.c
 daemon.o : daemon.c
 	$(CC) $(CFLAGS) -c -o $@ $^
 
-copy.o : copy.c
+io.o : io.c
 	$(CC) $(CFLAGS) -c -o $@ $^
 
 logger.o : logger.c

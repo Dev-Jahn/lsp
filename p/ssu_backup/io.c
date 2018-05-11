@@ -11,7 +11,7 @@
 #include <grp.h>
 #include <dirent.h>
 #include <string.h>
-#include "copy.h"
+#include "io.h"
 #include "ssu_backup.h"
 #include "error.h"
 
