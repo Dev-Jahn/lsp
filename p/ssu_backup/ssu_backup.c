@@ -6,6 +6,7 @@
 #include <fcntl.h>
 #include <string.h>
 #include <limits.h>
+#include <libgen.h>
 #include "ssu_backup.h"
 #include "daemon.h"
 #include "logger.h"
@@ -20,14 +21,14 @@
  */
 
 int flag = 000;							/*option flag*/
-char filepath[PATH_MAX];				/*backup file path*/
+char execname[NAME_MAX];				/*name of executable file*/
+char targetpath[PATH_MAX];				/*backup file path*/
 char bakdirpath[PATH_MAX] = "backup";	/*backup directory path*/
 char logdirpath[PATH_MAX] = "log";		/*log directory path*/
 int period;
 
 int main(int argc, char *argv[])
 {
-	opterr = 0;
 	/*Set options, parameters*/
 	int argi = setopt(argc, argv);
 	int argnum;
@@ -42,6 +43,8 @@ int main(int argc, char *argv[])
 	strcpy(filepath, argv[argi++]);
 	if ((period = atoi(argv[argi])) < 3 || period > 10)
 		error(NAPRD);
+	strcpy(execname, basename(argv[0]));
+
 
 	/*Verify that the file exists*/
 	/*Error for wrong file type*/
@@ -88,11 +91,11 @@ int main(int argc, char *argv[])
 	/*hextostr(buf, buf2, sizeof(buf2));*/
 	/*printf("%s\n", buf2);*/
 
-
-
+	/*Initialize log directory*/
+	log_init();
 
 	/*Run backup daemon*/
-	/*daemon_init();*/
+	daemon_init();
 }
 
 /* ---------------------------------*/

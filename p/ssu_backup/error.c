@@ -5,6 +5,12 @@
 #include "error.h"
 #include "logger.h"
 
+/*
+ *처리안한 에러
+ *SAME
+ *ONFILE
+ */
+
 /* ---------------------------------*/
 /**
  * @brief Comprehensive error processing.
@@ -58,6 +64,9 @@ void error(enum ErrCode err, ...)
 		break;
 	case OPEN:
 		errlog("open error for '%s'.\n", va_arg(ap, char*));
+		break;
+	case STAT:
+		errlog("stat error for '%s'.\n", va_arg(ap, char*));
 		break;
 	case SCAN:
 		errlog("scandir error for '%s'.\n", va_arg(ap, char*));

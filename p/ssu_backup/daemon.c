@@ -7,42 +7,69 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <string.h>
+#include <signal.h>
 #include "ssu_backup.h"
+#include "daemon.h"
 #include "util.h"
 #include "io.h"
 #include "logger.h"
 #include "error.h"
 
-#include <errno.h>
-#include <openssl/sha.h>
+#define MAX_PROC 32768
 
-void todo()
+void daemon_backup(const char *pathname);
+void signal_handler(int signo);
+
+void daemon_main()
 {
 	int cnt = 0;
-	/*Filename of backup file*/
-	char bakname[NAME_MAX+1] = {0};
-	/*Absolute path of backup file*/
-	char bakpath[PATH_MAX] = {0};
 
-	int fd_log = open(logpath, O_WRONLY|O_CREAT|O_TRUNC, 0640);
-	while (cnt++<3)
+	while (cnt++<10)
 	{
-		makename(filepath, bakname, sizeof(bakname));
-		strcpy(bakpath,bakdirpath);
-		strcat(bakpath, "/");
-		strcat(bakpath, bakname);
-		errlog("file:%s", filepath);
-		errlog("bak:%s", bakpath);
-		errlog("err:%s", strerror(errno));
-		copy(filepath, bakpath);
-		write(fd_log, "fuck\n", 5);
+		daemon_backup(filepath);			
 		sleep(period);
 	}
 	exit(0);
 }
 
+void daemon_backup(const char *pathname)
+{
+	/*Filename of backup file*/
+	char bakname[NAME_MAX+1] = {0};
+	/*Absolute path of backup file*/
+	char bakpath[PATH_MAX] = {0};
+
+	if (ON_D(flag))
+	{
+	}
+	else
+	{
+	}
+	/*Make backup file name*/
+	makename(filepath, bakname, sizeof(bakname));
+	/*Make full path*/
+	strcpy(bakpath,bakdirpath);
+	strcat(bakpath, "/");
+	strcat(bakpath, bakname);
+
+	copy(filepath, bakpath);
+
+}
+
 int daemon_init(void)
 {
+	int pids[MAX_PROC];
+	int pidcnt;
+	/*Find all processes with process name*/
+	pidcnt = findpid(execname, pids, sizeof(pids));
+	/*Kill them all except itself*/
+	for (int i=0;i<pidcnt;i++)
+	{
+		if (pids[i] == getpid())
+			continue;
+		kill(pids[i], SIGUSR1);
+	}
+
 	printf("Daemon initializing\n");
 	pid_t pid;
 	int fd, maxfd;
@@ -74,8 +101,18 @@ int daemon_init(void)
 	fd = open("/dev/null", O_RDWR);
 	dup(0);
 	dup(0);
-	todo();
+
+	signal(SIGUSR1, signal_handler);
+
+	daemon_main();
 	return 0;
 }
 
-
+void signal_handler(int signo)
+{
+	if (signo == SIGUSR1)
+	{
+		baklog(EXIT, NULL);
+		exit(0);
+	}
+}

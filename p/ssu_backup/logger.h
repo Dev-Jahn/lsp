@@ -2,11 +2,13 @@
 #define _LOGGER_H
 
 #include <limits.h>
+#include "data.h"
 
 extern char logpath[PATH_MAX];
-enum State { MODIFIED, DELETED, DELOLD, EXIT };
+enum State { BACKUP, MODIFIED, DELETED, DELOLD, EXIT };
 
+void log_init(void);
 void errlog(const char *format, ...);
-void baklog(const char *format, ...);
+void baklog(enum State st, BakEntry *bak);
 
 #endif

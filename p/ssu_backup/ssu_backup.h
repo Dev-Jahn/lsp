@@ -23,6 +23,7 @@
 #define SMODE 0664
 
 extern int flag;
+extern char execname[NAME_MAX];
 extern char filepath[PATH_MAX];
 extern char bakdirpath[PATH_MAX];
 extern char logdirpath[PATH_MAX];

@@ -89,7 +89,7 @@ void copy_file(const char *src, const char *dst)
  * @return 포함여부 
  */
 /* ---------------------------------*/
-int filter(const struct dirent *dir)
+int filter_dir(const struct dirent *dir)
 {
 	if (strcmp(dir->d_name, ".") == 0 || strcmp(dir->d_name, "..") == 0)
 		return 0;
@@ -115,7 +115,7 @@ void copy_dir(const char *src, const char *dst)
 			error(MKDIR, dst);
 	}
 	//src 디렉토리 내부엔트리 스캔
-	if ((entry = scandir(src, &namelist, filter, alphasort))<0)
+	if ((entry = scandir(src, &namelist, filter_dir, alphasort))<0)
 		error(SCAN, src);
 	else
 	{

@@ -3,12 +3,10 @@
 
 int main(void)
 {
-	char buf[100];
-	char buf2[100];
-	sprintf(buf, "/home/");
-	printf("%s\n", buf);
-	tohex(buf, buf2, sizeof(buf2));
-	printf("%s\n", buf2);
-
+	int cnt;
+	int pids[32768];
+	cnt = findpid("tail", pids, 32768);
+	for (int i=0;i<cnt;i++)
+		printf("pid:%d\n", pids[i]);
 
 }

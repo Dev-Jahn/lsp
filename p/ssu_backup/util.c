@@ -3,8 +3,10 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <dirent.h>
 #include <fcntl.h>
 #include <string.h>
+#include <fnmatch.h>
 #include <limits.h>
 #include <time.h>
 #include <openssl/sha.h>
@@ -57,12 +59,11 @@ ssize_t hextostr(const char *str, char *buf, size_t bufsize)
 	}
 	return len/2;
 }
-ssize_t timestamp(char *buf, size_t  bufsize, const char *format)
+ssize_t timestamp(time_t when, char *buf, size_t  bufsize, const char *format)
 {
 	int len;
-	time_t now = time(NULL);
 	struct tm *time_p;
-	time_p = localtime(&now);
+	time_p = localtime(&when);
 	if ((len = strftime(buf, bufsize, format, time_p)) == 0)
 		return -1;
 	else
@@ -81,19 +82,16 @@ ssize_t timestamp(char *buf, size_t  bufsize, const char *format)
 /* ---------------------------------*/
 ssize_t makename(const char *pathname, char *buf, size_t bufsize)
 {
-	char timestamp[16] = {0};
-	time_t now = time(NULL);
-	struct tm *time_p;
+	char stamp[16] = {0};
 	int len;
-	time_p = localtime(&now);
 	
 	if ((len = strtohex(pathname, buf, bufsize)) < 0||len+11 > NAME_MAX)
 		error(NAMELIM);
 	else
 	{
-		strftime(timestamp, sizeof(timestamp), "%m%d%H%M%S", time_p);
+		timestamp(time(NULL), stamp, sizeof(stamp), "%m%d%H%M%S");
 		strcat(buf, "_");
-		strcat(buf, timestamp);
+		strcat(buf, stamp);
 	}
 	return len+11;
 }
@@ -126,4 +124,68 @@ int sha256_file(const char *pathname, char output[SHA256_DIGEST_LENGTH*2+1])
 	output[64] = 0;
 
     return filesize;
+}
+
+/* ---------------------------------*/
+/**
+ * @brief catch pid form only
+ *
+ * @param dir directory entry
+ *
+ * @return if pid 1, else 0
+ */
+/* ---------------------------------*/
+int filter_pid(const struct dirent *dir)
+{
+	return !fnmatch("[0-9]*", dir->d_name, 0);
+}
+
+/* ---------------------------------*/
+/**
+ * @brief Find the all pids with matching name 
+ *
+ * @param procname Name of the process to find
+ * @param procs Buffer array to save pid
+ * @param size size of buffer
+ *
+ * @return number of pids found
+ */
+/* ---------------------------------*/
+int findpid(const char *procname, int *pidbuf, size_t bufsize)
+{
+	struct dirent **entries;
+	char pathname[NAME_MAX];
+	char execname[NAME_MAX];
+	char buf[1024], *ptr;
+	int dircnt, pidcnt=0, fd;
+	pid_t pid;
+	if ((dircnt = scandir("/proc", &entries, filter_pid, alphasort))<0)
+		return -1;
+	else if (dircnt > (int)bufsize)
+		return -1;
+	else
+	{
+		for (int i=0;i<dircnt;i++)
+		{
+			strcpy(pathname, "/proc/");
+			strcat(pathname, entries[i]->d_name);
+			strcat(pathname, "/stat");
+			if ((fd = open(pathname, O_RDONLY))<0)
+				return -1;
+			else
+			{
+				read(fd, buf, 1024);
+				ptr = strtok(buf, " ()");
+				pid = atoi(ptr);
+				ptr = strtok(NULL, " ()");
+				strcpy(execname, ptr);
+				if (strcmp(execname, procname) == 0)
+				{
+					pidbuf[pidcnt] = pid;
+					pidcnt++;
+				}
+			}
+		}
+		return pidcnt;
+	}
 }
