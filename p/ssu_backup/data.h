@@ -4,7 +4,9 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <limits.h>
+#ifdef SHA
 #include <openssl/sha.h>
+#endif
 
 typedef struct _BakEntry
 {
@@ -13,7 +15,9 @@ typedef struct _BakEntry
 	mode_t mode;
 	size_t size;
 	time_t mtime_last;	
+#ifdef SHA
 	char checksum_last[SHA256_DIGEST_LENGTH*2 + 1];
+#endif
 	char oldest[PATH_MAX];
 	size_t filecnt;
 } BakEntry;
@@ -24,7 +28,7 @@ typedef struct _BakTable
 	size_t cnt;
 } BakTable;
 
-int add(BakTable *table, BakEntry entry);
+BakEntry *add(BakTable *table, char *abspath);
 int remove(BakTable *table, const char *abspath);
 BakEntry *search(BakTable *table, const char *abspath);
 int check_modified(const char *abspath);
