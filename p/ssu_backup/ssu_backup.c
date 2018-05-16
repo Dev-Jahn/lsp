@@ -26,6 +26,7 @@ char targetpath[PATH_MAX];				/*backup file path*/
 char bakdirpath[PATH_MAX] = "backup";	/*backup directory path*/
 char logdirpath[PATH_MAX] = "log";		/*log directory path*/
 int period;
+size_t bakmax; 
 
 int main(int argc, char *argv[])
 {
@@ -40,7 +41,7 @@ int main(int argc, char *argv[])
 		error(LESSARG);
 	else if (argc > argnum)
 		error(MOREARG);
-	strcpy(filepath, argv[argi++]);
+	strcpy(targetpath, argv[argi++]);
 	if ((period = atoi(argv[argi])) < 3 || period > 10)
 		error(NAPRD);
 	strcpy(execname, basename(argv[0]));
@@ -49,19 +50,19 @@ int main(int argc, char *argv[])
 	/*Verify that the file exists*/
 	/*Error for wrong file type*/
 	struct stat filestat;
-	if (stat(filepath, &filestat) < 0)
-		error(NOFILE, filepath);
+	if (stat(targetpath, &filestat) < 0)
+		error(NOFILE, targetpath);
 	if (!ON_D(flag) && S_ISDIR(filestat.st_mode))
-		error(NEEDD, filepath);
+		error(NEEDD, targetpath);
 	if (ON_D(flag) && !S_ISDIR(filestat.st_mode))
-		error(NOTDIR, filepath);
+		error(NOTDIR, targetpath);
 	if (!S_ISREG(filestat.st_mode) && !S_ISDIR(filestat.st_mode))
-		error(NOTREG, filepath);
+		error(NOTREG, targetpath);
 
 	/*Convert all pathes to absolute pathes.*/
 	char abspath[PATH_MAX] = {0};
-	realpath(filepath, abspath);
-	strcpy(filepath, abspath);
+	realpath(targetpath, abspath);
+	strcpy(targetpath, abspath);
 	realpath(bakdirpath, abspath);
 	strcpy(bakdirpath, abspath);
 	realpath(logdirpath, abspath);
@@ -85,7 +86,7 @@ int main(int argc, char *argv[])
 		error(MKDIR, logdirpath);
 
    /* char buf[PATH_MAX];*/
-	/*strtohex(filepath, buf, sizeof(buf));*/
+	/*strtohex(targetpath, buf, sizeof(buf));*/
 	/*printf("%s\n", buf);*/
 	/*char buf2[PATH_MAX];*/
 	/*hextostr(buf, buf2, sizeof(buf2));*/
@@ -130,6 +131,7 @@ int setopt(int argc, char *argv[])
 			break;
 		case 'n':
 			flag = flag|OPT_N;
+			bakmax = atoi(optarg);
 			break;
 		case '?':
 			ch[0] = optopt;

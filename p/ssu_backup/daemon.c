@@ -9,6 +9,7 @@
 #include <string.h>
 #include <signal.h>
 #include "ssu_backup.h"
+#include "data.h"
 #include "daemon.h"
 #include "util.h"
 #include "io.h"
@@ -20,40 +21,51 @@
 void daemon_backup(const char *pathname);
 void signal_handler(int signo);
 
+BakTable table;
+
 void daemon_main()
 {
 	int cnt = 0;
 
 	while (cnt++<10)
 	{
-		daemon_backup(filepath);			
+		if (ON_D(flag))
+		{
+		}
+		else
+			daemon_backup(targetpath);			
 		sleep(period);
 	}
 	exit(0);
 }
 
-void daemon_backup(const char *pathname)
+void daemon_backup(const char *abspath)
 {
-	/*Filename of backup file*/
+	/*Filename and absolute path*/
 	char bakname[NAME_MAX+1] = {0};
-	/*Absolute path of backup file*/
 	char bakpath[PATH_MAX] = {0};
-
-	if (ON_D(flag))
-	{
-	}
-	else
-	{
-	}
+	BakEntry *entry;
+	/*Search backup entry in the table*/
+	entry = search_bak(&table, abspath);
+	/*If there's no entry registered*/
+	if (entry == NULL)	
+		entry = add_bak(&table, abspath);
+	/*Delete the oldest backup file, if file count reaches limit*/
+	if (ON_N(flag))
+		if (entry->filecnt == bakmax)
+			if(remove(entry->oldest)<0)
+				error(REMOVE, entry->oldest);
 	/*Make backup file name*/
-	makename(filepath, bakname, sizeof(bakname));
+	makename(abspath, bakname, sizeof(bakname));
 	/*Make full path*/
 	strcpy(bakpath,bakdirpath);
 	strcat(bakpath, "/");
 	strcat(bakpath, bakname);
 
-	copy(filepath, bakpath);
+	strcpy(entry->oldest, bakpath);
 
+
+	copy(targetpath, bakpath);
 }
 
 int daemon_init(void)
@@ -67,6 +79,7 @@ int daemon_init(void)
 	{
 		if (pids[i] == getpid())
 			continue;
+		printf("pid:%d\n", pids[i]);
 		kill(pids[i], SIGUSR1);
 	}
 
@@ -104,7 +117,9 @@ int daemon_init(void)
 
 	signal(SIGUSR1, signal_handler);
 
-	daemon_main();
+	sleep(100);
+
+	/*daemon_main();*/
 	return 0;
 }
 

@@ -4,7 +4,7 @@ CFLAGS	= -W -Wall -ggdb
 LIBS	= -lssl -lcrypto -lpthread
 all : $(NAME) done
 
-$(NAME) : ssu_backup.o daemon.o io.o logger.o util.o error.o
+$(NAME) : ssu_backup.o daemon.o io.o data.o logger.o util.o error.o
 	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
 
 ssu_backup.o : ssu_backup.c
@@ -14,6 +14,9 @@ daemon.o : daemon.c
 	$(CC) $(CFLAGS) -c -o $@ $^
 
 io.o : io.c
+	$(CC) $(CFLAGS) -c -o $@ $^
+
+data.o : data.c
 	$(CC) $(CFLAGS) -c -o $@ $^
 
 logger.o : logger.c

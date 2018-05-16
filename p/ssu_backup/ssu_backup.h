@@ -1,5 +1,7 @@
 #ifndef _MAIN_H
 #define _MAIN_H	1
+
+#include <stdlib.h>
 #include <limits.h>
 
 #define OPT_D		0001	/*Directory backup*/
@@ -24,10 +26,11 @@
 
 extern int flag;
 extern char execname[NAME_MAX];
-extern char filepath[PATH_MAX];
+extern char targetpath[PATH_MAX];
 extern char bakdirpath[PATH_MAX];
 extern char logdirpath[PATH_MAX];
 extern int period;
+extern size_t bakmax;
 int setopt(int argc, char *argv[]);
 
 #endif

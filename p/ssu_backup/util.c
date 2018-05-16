@@ -9,7 +9,9 @@
 #include <fnmatch.h>
 #include <limits.h>
 #include <time.h>
+#ifdef SHA
 #include <openssl/sha.h>
+#endif
 #include "util.h"
 #include "error.h"
 
@@ -77,7 +79,7 @@ ssize_t timestamp(time_t when, char *buf, size_t  bufsize, const char *format)
  * @param buf Buffer to save the converted string
  * @param bufsize size of buf
  *
- * @return Length of the converted string
+ * @return length of the string
  */
 /* ---------------------------------*/
 ssize_t makename(const char *pathname, char *buf, size_t bufsize)
@@ -95,7 +97,22 @@ ssize_t makename(const char *pathname, char *buf, size_t bufsize)
 	}
 	return len+11;
 }
-
+ssize_t getbtime(const char *bakname, char *buf, size_t bufsize)
+{
+	size_t len = strlen(bakname);
+	for (int i=0;i<(int)len;i++)
+	{
+		if (bakname[i] == '_')
+		{
+			if (strlen(bakname+i+1)>=bufsize)
+				return -1;
+			strcpy(buf,bakname+i+1);
+			return strlen(bakname+i+1);
+		}
+	}
+	return -1;
+}
+#ifdef SHA
 int sha256_file(const char *pathname, char output[SHA256_DIGEST_LENGTH*2+1])
 {
 	int fd, nbytes = 0, filesize = 0;
@@ -125,7 +142,7 @@ int sha256_file(const char *pathname, char output[SHA256_DIGEST_LENGTH*2+1])
 
     return filesize;
 }
-
+#endif
 /* ---------------------------------*/
 /**
  * @brief catch pid form only

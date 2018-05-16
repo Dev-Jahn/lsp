@@ -15,6 +15,7 @@ enum ErrCode { 	NAMELIM,	/*Exceeded filename limit*/
 				MKDIR,		/*Error during mkdir()*/
 				OPEN,		/*Error during open()*/
 				STAT,		/*Error during stat()*/
+				REMOVE,
 				SCAN,		/*Error during scandir()*/
 				CHMOD,		/*Error during chmod()*/
 				SAME,		/*src==dst in copy()*/

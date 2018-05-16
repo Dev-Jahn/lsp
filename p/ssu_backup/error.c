@@ -68,6 +68,9 @@ void error(enum ErrCode err, ...)
 	case STAT:
 		errlog("stat error for '%s'.\n", va_arg(ap, char*));
 		break;
+	case REMOVE:
+		errlog("remove error for '%s'.\n", va_arg(ap, char*));
+		break;
 	case SCAN:
 		errlog("scandir error for '%s'.\n", va_arg(ap, char*));
 		break;

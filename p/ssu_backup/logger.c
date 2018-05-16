@@ -46,7 +46,7 @@ void baklog(enum State st, BakEntry *bak)
 {
 	FILE *fp_log;
 	char stamp[16] = {0};
-	if ((fp_log = fopen(logpath, "w"))<0)
+	if ((fp_log = fopen(logpath, "a"))<0)
 		error(OPEN, logpath);
 	else
 	{
@@ -71,7 +71,6 @@ void baklog(enum State st, BakEntry *bak)
 			fprintf(fp_log, "ssu_backup <pid:%d> exit\n", getpid());
 			break;
 		}
-
 	}
 	
 	fclose(fp_log);
