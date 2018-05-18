@@ -8,6 +8,19 @@
 #include <openssl/sha.h>
 #endif
 
+typedef struct _Node
+{
+	void *item;
+	struct _Node *next;
+} Node;
+
+typedef struct _Queue
+{
+	Node *head;
+	Node *tail;
+	size_t size;
+} Queue;
+
 typedef struct _BakEntry
 {
 	char filename[NAME_MAX];
@@ -18,8 +31,7 @@ typedef struct _BakEntry
 #ifdef SHA
 	char checksum_last[SHA256_DIGEST_LENGTH*2 + 1];
 #endif
-	char oldest[PATH_MAX];
-	size_t filecnt;
+	Queue fileQue;
 } BakEntry;
 
 typedef struct _BakTable
@@ -27,13 +39,20 @@ typedef struct _BakTable
 	BakEntry *be;
 	size_t cnt;
 } BakTable;
+
+
 void init_table(BakTable *table);
 BakEntry *add_bak(BakTable *table, const char *abspath);
 BakEntry *renew_bak(BakTable *table, const char *abspath);
 int remove_bak(BakTable *table, const char *abspath);
 BakEntry *search_bak(BakTable *table, const char *abspath);
-int check_modified(const char *abspath);
-int delete_old(const char *abspath);
+
+void initQueue(Queue *q);
+void enqueue(Queue *q, void *data);
+void *dequeue(Queue *q);
+void *peek(Queue *q);
+
+int check_modified(const char *abspath, BakEntry *e);
 void compare_bak(void);
 void restore_bak(void);
 

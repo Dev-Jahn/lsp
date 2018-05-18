@@ -79,23 +79,24 @@ ssize_t timestamp(time_t when, char *buf, size_t  bufsize, const char *format)
  * @param buf Buffer to save the converted string
  * @param bufsize size of buf
  *
- * @return length of the string
+ * @return backup time
  */
 /* ---------------------------------*/
-ssize_t makename(const char *pathname, char *buf, size_t bufsize)
+time_t makename(const char *pathname, char *buf, size_t bufsize)
 {
 	char stamp[16] = {0};
 	int len;
+	time_t btime = time(NULL);
 	
 	if ((len = strtohex(pathname, buf, bufsize)) < 0||len+11 > NAME_MAX)
 		error(NAMELIM);
 	else
 	{
-		timestamp(time(NULL), stamp, sizeof(stamp), "%m%d%H%M%S");
+		timestamp(btime, stamp, sizeof(stamp), "%m%d%H%M%S");
 		strcat(buf, "_");
 		strcat(buf, stamp);
 	}
-	return len+11;
+	return btime;
 }
 ssize_t getbtime(const char *bakname, char *buf, size_t bufsize)
 {
@@ -143,6 +144,24 @@ int sha256_file(const char *pathname, char output[SHA256_DIGEST_LENGTH*2+1])
     return filesize;
 }
 #endif
+
+/* ---------------------------------*/
+/**
+ * @brief scandir 엔트리에서 부모(..)와 현재디렉토리(.)를 제거
+ *
+ * @param dir 디렉토리의 엔트리
+ *
+ * @return 포함여부 
+ */
+/* ---------------------------------*/
+int filter_default(const struct dirent *dir)
+{
+	if (strcmp(dir->d_name, ".") == 0 || strcmp(dir->d_name, "..") == 0)
+		return 0;
+	else
+		return 1;
+}
+
 /* ---------------------------------*/
 /**
  * @brief catch pid form only

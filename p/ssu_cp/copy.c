@@ -178,7 +178,8 @@ void copy_dir(const char *src, const char *tgt)
 			char srcpath[PATH_MAX];
 			char tgtpath[PATH_MAX];
 			strcpy(srcpath, src);
-			strcat(srcpath, "/"); strcat(srcpath, namelist[i]->d_name);
+			strcat(srcpath, "/");
+			strcat(srcpath, namelist[i]->d_name);
 			strcpy(tgtpath, tgt);
 			strcat(tgtpath, "/");
 			strcat(tgtpath, namelist[i]->d_name);

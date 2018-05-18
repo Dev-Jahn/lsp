@@ -24,7 +24,7 @@
 #define ON_W(flag)	(((flag) & OPT_W) == OPT_W)
 #define SMODE 0664
 
-extern int flag;
+extern unsigned int flag;
 extern char execname[NAME_MAX];
 extern char targetpath[PATH_MAX];
 extern char bakdirpath[PATH_MAX];

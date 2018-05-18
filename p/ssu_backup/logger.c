@@ -46,14 +46,20 @@ void baklog(enum State st, BakEntry *bak)
 {
 	FILE *fp_log;
 	char stamp[16] = {0};
-	if ((fp_log = fopen(logpath, "a"))<0)
+	struct stat bakstat;
+	if ((fp_log = fopen(logpath, "a")) == NULL)
 		error(OPEN, logpath);
 	else
 	{
+		/*Timestamp of logging time*/
 		timestamp(time(NULL), stamp, sizeof(stamp), "%m%d %H:%M:%S");
 		fprintf(fp_log, "[%s] ", stamp);
+
 		switch (st)
 		{
+		case INIT:
+			fprintf(fp_log, "Backup daemon initialized.\n");
+			break;
 		case BACKUP:
 			timestamp(bak->mtime_last, stamp, sizeof(stamp), "%m%d %H:%M:%S");
 			fprintf(fp_log, "%s [size:%ld/mtime:%s]\n",bak->filename, bak->size, stamp);
@@ -66,9 +72,14 @@ void baklog(enum State st, BakEntry *bak)
 			fprintf(fp_log, "%s is deleted.\n",bak->filename);
 			break;
 		case DELOLD:
+			if (stat((char*)peek(&bak->fileQue),&bakstat)<0)
+				error(STAT, &bak->fileQue);
+			timestamp(bakstat.st_mtime, stamp, sizeof(stamp), "%m%d %H:%M:%S");
+			fprintf(fp_log, "Delete oldest [%s, size:%ld, btime:%s]\n",bak->filename, bakstat.st_size, stamp);
 			break;
 		case EXIT:
-			fprintf(fp_log, "ssu_backup <pid:%d> exit\n", getpid());
+			fprintf(fp_log, "ssu_backup <pid:%d> Exit\n", getpid());
+			fprintf(fp_log, "=================================================================\n");
 			break;
 		}
 	}

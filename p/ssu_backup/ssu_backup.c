@@ -13,14 +13,13 @@
 #include "util.h"
 #include "error.h"
 
-
 /*
  *현재는 백업시 모드도 동일하게 백업하도록 구현.
  *별도의 세이브파일에 모드 저장, 정해진 모드로만 백업하도록 수정.
  *복원시 모드를 읽어와서 복원.
  */
 
-int flag = 000;							/*option flag*/
+unsigned int flag = 000;							/*option flag*/
 char execname[NAME_MAX];				/*name of executable file*/
 char targetpath[PATH_MAX];				/*backup file path*/
 char bakdirpath[PATH_MAX] = "backup";	/*backup directory path*/
@@ -45,7 +44,6 @@ int main(int argc, char *argv[])
 	if ((period = atoi(argv[argi])) < 3 || period > 10)
 		error(NAPRD);
 	strcpy(execname, basename(argv[0]));
-
 
 	/*Verify that the file exists*/
 	/*Error for wrong file type*/

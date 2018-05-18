@@ -1,0 +1,135 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	2	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+abspath	data.h	/^	char abspath[PATH_MAX];$/;"	m	struct:_BakEntry
+add_bak	data.c	/^BakEntry *add_bak(BakTable *table, const char *abspath)$/;"	f
+BACKUP	logger.h	/^enum State { INIT, BACKUP, MODIFIED, DELETED, DELOLD, EXIT };$/;"	e	enum:State
+bakdirpath	ssu_backup.c	/^char bakdirpath[PATH_MAX] = "backup";	\/*backup directory path*\/$/;"	v
+BakEntry	data.h	/^} BakEntry;$/;"	t	typeref:struct:_BakEntry
+baklog	logger.c	/^void baklog(enum State st, BakEntry *bak)$/;"	f
+bakmax	ssu_backup.c	/^size_t bakmax; $/;"	v
+BakTable	data.h	/^} BakTable;$/;"	t	typeref:struct:_BakTable
+be	data.h	/^	BakEntry *be;$/;"	m	struct:_BakTable
+BUFSIZE	io.c	20;"	d	file:
+CC	Makefile	/^CC		= gcc$/;"	m
+CFLAGS	Makefile	/^CFLAGS	= -W -Wall -ggdb$/;"	m
+checksum_last	data.h	/^	char checksum_last[SHA256_DIGEST_LENGTH*2 + 1];$/;"	m	struct:_BakEntry
+check_modified	data.c	/^int check_modified(const char *abspath, BakEntry *e)$/;"	f
+CHMOD	error.h	/^				CHMOD,		\/*Error during chmod()*\/$/;"	e	enum:ErrCode
+cnt	data.h	/^	size_t cnt;$/;"	m	struct:_BakTable
+copy	io.c	/^void copy(const char *src, const char *dst)$/;"	f
+copy_dir	io.c	/^void copy_dir(const char *src, const char *dst)$/;"	f
+copy_file	io.c	/^void copy_file(const char *src, const char *dst)$/;"	f
+copy_mode	io.c	/^void copy_mode(const char *src, const char *dst)$/;"	f
+daemon_backup	daemon.c	/^void daemon_backup(const char *abspath)$/;"	f
+daemon_backup_dir	daemon.c	/^void daemon_backup_dir(const char *srcdir, const char *bakdir)$/;"	f
+daemon_init	daemon.c	/^int daemon_init(void)$/;"	f
+daemon_main	daemon.c	/^void daemon_main()$/;"	f
+DELETED	logger.h	/^enum State { INIT, BACKUP, MODIFIED, DELETED, DELOLD, EXIT };$/;"	e	enum:State
+DELOLD	logger.h	/^enum State { INIT, BACKUP, MODIFIED, DELETED, DELOLD, EXIT };$/;"	e	enum:State
+dequeue	data.c	/^void *dequeue(Queue *q)$/;"	f
+enqueue	data.c	/^void enqueue(Queue *q, void *item)$/;"	f
+ErrCode	error.h	/^enum ErrCode { 	NAMELIM,	\/*Exceeded filename limit*\/$/;"	g
+errlog	logger.c	/^void errlog(const char *format, ...)$/;"	f
+error	error.c	/^void error(enum ErrCode err, ...)$/;"	f
+execname	ssu_backup.c	/^char execname[NAME_MAX];				\/*name of executable file*\/$/;"	v
+EXIT	logger.h	/^enum State { INIT, BACKUP, MODIFIED, DELETED, DELOLD, EXIT };$/;"	e	enum:State
+filename	data.h	/^	char filename[NAME_MAX];$/;"	m	struct:_BakEntry
+fileQue	data.h	/^	Queue fileQue;$/;"	m	struct:_BakEntry
+filter_default	util.c	/^int filter_default(const struct dirent *dir)$/;"	f
+filter_dir	io.c	/^int filter_dir(const struct dirent *dir)$/;"	f
+filter_pid	util.c	/^int filter_pid(const struct dirent *dir)$/;"	f
+findpid	util.c	/^int findpid(const char *procname, int *pidbuf, size_t bufsize)$/;"	f
+flag	ssu_backup.c	/^unsigned int flag = 000;							\/*option flag*\/$/;"	v
+getbtime	util.c	/^ssize_t getbtime(const char *bakname, char *buf, size_t bufsize)$/;"	f
+head	data.h	/^	Node *head;$/;"	m	struct:_Queue
+hextostr	util.c	/^ssize_t hextostr(const char *str, char *buf, size_t bufsize)$/;"	f
+INIT	logger.h	/^enum State { INIT, BACKUP, MODIFIED, DELETED, DELOLD, EXIT };$/;"	e	enum:State
+initQueue	data.c	/^void initQueue(Queue *q)$/;"	f
+init_table	data.c	/^void init_table(BakTable *table)$/;"	f
+item	data.h	/^	void *item;$/;"	m	struct:_Node
+LESSARG	error.h	/^				LESSARG,	\/*Not enough arguments in command*\/$/;"	e	enum:ErrCode
+LIBS	Makefile	/^LIBS	= -lpthread$/;"	m
+LIBS2	Makefile	/^LIBS2	= -lssl -lcrypto -lpthread$/;"	m
+logdirpath	ssu_backup.c	/^char logdirpath[PATH_MAX] = "log";		\/*log directory path*\/$/;"	v
+logpath	logger.c	/^char logpath[PATH_MAX];$/;"	v
+log_init	logger.c	/^void log_init(void)$/;"	f
+main	ssu_backup.c	/^int main(int argc, char *argv[])$/;"	f
+main	test.c	/^int main(void)$/;"	f
+makename	util.c	/^time_t makename(const char *pathname, char *buf, size_t bufsize)$/;"	f
+MAX_PROC	daemon.c	22;"	d	file:
+MKDIR	error.h	/^				MKDIR,		\/*Error during mkdir()*\/$/;"	e	enum:ErrCode
+mode	data.h	/^	mode_t mode;$/;"	m	struct:_BakEntry
+MODIFIED	logger.h	/^enum State { INIT, BACKUP, MODIFIED, DELETED, DELOLD, EXIT };$/;"	e	enum:State
+MOREARG	error.h	/^				MOREARG,	\/*Too many arguments in command*\/$/;"	e	enum:ErrCode
+mtime_last	data.h	/^	time_t mtime_last;$/;"	m	struct:_BakEntry
+NAME	Makefile	/^NAME	= ssu_backup$/;"	m
+NAMELIM	error.h	/^enum ErrCode { 	NAMELIM,	\/*Exceeded filename limit*\/$/;"	e	enum:ErrCode
+NAOPT	error.h	/^				NAOPT,		\/*Undefined option*\/$/;"	e	enum:ErrCode
+NAPRD	error.h	/^				NAPRD,		\/*Period value is out of range*\/$/;"	e	enum:ErrCode
+NEEDD	error.h	/^				NEEDD,		\/*Path is directory, but no '-d'*\/$/;"	e	enum:ErrCode
+next	data.h	/^	struct _Node *next;$/;"	m	struct:_Node	typeref:struct:_Node::_Node
+Node	data.h	/^} Node;$/;"	t	typeref:struct:_Node
+NOFILE	error.h	/^				NOFILE,		\/*Can't find the file with given path*\/$/;"	e	enum:ErrCode
+NOTDIR	error.h	/^				NOTDIR,		\/*'-d' on, but not a directory*\/$/;"	e	enum:ErrCode
+NOTREG	error.h	/^				NOTREG,		\/*Path is not a regular file*\/$/;"	e	enum:ErrCode
+ONFILE	error.h	/^				ONFILE		\/*src:dir, dst:reg in copy()*\/$/;"	e	enum:ErrCode
+ON_C	ssu_backup.h	20;"	d
+ON_D	ssu_backup.h	16;"	d
+ON_M	ssu_backup.h	18;"	d
+ON_N	ssu_backup.h	19;"	d
+ON_R	ssu_backup.h	17;"	d
+ON_S	ssu_backup.h	21;"	d
+ON_W	ssu_backup.h	24;"	d
+ON_Y	ssu_backup.h	22;"	d
+ON_Z	ssu_backup.h	23;"	d
+OPEN	error.h	/^				OPEN,		\/*Error during open()*\/$/;"	e	enum:ErrCode
+OPT_C	ssu_backup.h	10;"	d
+OPT_D	ssu_backup.h	7;"	d
+OPT_M	ssu_backup.h	9;"	d
+OPT_N	ssu_backup.h	11;"	d
+OPT_R	ssu_backup.h	8;"	d
+OPT_S	ssu_backup.h	12;"	d
+OPT_W	ssu_backup.h	15;"	d
+OPT_Y	ssu_backup.h	13;"	d
+OPT_Z	ssu_backup.h	14;"	d
+O_NOVERW	io.c	19;"	d	file:
+O_OVERWR	io.c	18;"	d	file:
+PATHLIM	error.h	/^				PATHLIM,	\/*Exceeded pathname limit*\/$/;"	e	enum:ErrCode
+peek	data.c	/^void *peek(Queue *q)$/;"	f
+period	ssu_backup.c	/^int period;$/;"	v
+Queue	data.h	/^} Queue;$/;"	t	typeref:struct:_Queue
+REMOVE	error.h	/^				REMOVE,$/;"	e	enum:ErrCode
+remove_bak	data.c	/^int remove_bak(BakTable *table, const char *abspath)$/;"	f
+renew_bak	data.c	/^BakEntry *renew_bak(BakTable *table, const char *abspath)$/;"	f
+RONLY	error.h	/^				RONLY,		\/*Used another option with '-r'*\/$/;"	e	enum:ErrCode
+SAME	error.h	/^				SAME,		\/*src==dst in copy()*\/$/;"	e	enum:ErrCode
+SCAN	error.h	/^				SCAN,		\/*Error during scandir()*\/$/;"	e	enum:ErrCode
+search_bak	data.c	/^BakEntry *search_bak(BakTable *table, const char *abspath)$/;"	f
+setopt	ssu_backup.c	/^int setopt(int argc, char *argv[])$/;"	f
+sha256_file	util.c	/^int sha256_file(const char *pathname, char output[SHA256_DIGEST_LENGTH*2+1])$/;"	f
+signal_handler	daemon.c	/^void signal_handler(int signo)$/;"	f
+size	data.h	/^	size_t size;$/;"	m	struct:_BakEntry
+size	data.h	/^	size_t size;$/;"	m	struct:_Queue
+SMODE	ssu_backup.h	25;"	d
+STAT	error.h	/^				STAT,		\/*Error during stat()*\/$/;"	e	enum:ErrCode
+State	logger.h	/^enum State { INIT, BACKUP, MODIFIED, DELETED, DELOLD, EXIT };$/;"	g
+strtohex	util.c	/^ssize_t strtohex(const char *str, char *buf, size_t bufsize)$/;"	f
+table	daemon.c	/^BakTable table;$/;"	v
+tail	data.h	/^	Node *tail;$/;"	m	struct:_Queue
+targetpath	ssu_backup.c	/^char targetpath[PATH_MAX];				\/*backup file path*\/$/;"	v
+timestamp	util.c	/^ssize_t timestamp(time_t when, char *buf, size_t  bufsize, const char *format)$/;"	f
+_BakEntry	data.h	/^typedef struct _BakEntry$/;"	s
+_BakTable	data.h	/^typedef struct _BakTable$/;"	s
+_DAEMON_H	daemon.h	2;"	d
+_DATA_H	data.h	2;"	d
+_ERROR_H	error.h	2;"	d
+_IO_H	io.h	2;"	d
+_LOGGER_H	logger.h	2;"	d
+_MAIN_H	ssu_backup.h	2;"	d
+_Node	data.h	/^typedef struct _Node$/;"	s
+_Queue	data.h	/^typedef struct _Queue$/;"	s
+_UTIL_H	util.h	2;"	d
