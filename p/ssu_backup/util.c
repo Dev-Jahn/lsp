@@ -98,20 +98,44 @@ time_t makename(const char *pathname, char *buf, size_t bufsize)
 	}
 	return btime;
 }
-ssize_t getbtime(const char *bakname, char *buf, size_t bufsize)
+/* ---------------------------------*/
+/**
+ * @brief Get pointer of timestamp part from backup filename.
+ *
+ * @param bakname Filename excluding path
+ *
+ * @return position of timestamp starting
+ */
+/* ---------------------------------*/
+char *getbtime(const char *bakname)
 {
 	size_t len = strlen(bakname);
+	for (int i=len-1;i>=0;i--)
+		if (bakname[i] == '_')
+			return (char*)(bakname+i+1);
+	return NULL;
+}
+/* ---------------------------------*/
+/**
+ * @brief Get hexadecimal part from backup filename.
+ *
+ * @param bakname Filename excluding path
+ *
+ * @return Heap allocated string(Need to be freed)
+ */
+/* ---------------------------------*/
+char *gethexname(const char *bakname)
+{
+	char *name = (char*)malloc(NAME_MAX);
+	size_t len = strlen(bakname);
 	for (int i=0;i<(int)len;i++)
-	{
 		if (bakname[i] == '_')
 		{
-			if (strlen(bakname+i+1)>=bufsize)
-				return -1;
-			strcpy(buf,bakname+i+1);
-			return strlen(bakname+i+1);
+			strncpy(name, bakname, i);
+			name[i] = 0;
+			return name;
 		}
-	}
-	return -1;
+	return NULL;
 }
 #ifdef SHA
 int sha256_file(const char *pathname, char output[SHA256_DIGEST_LENGTH*2+1])
@@ -224,4 +248,15 @@ int findpid(const char *procname, int *pidbuf, size_t bufsize)
 		}
 		return pidcnt;
 	}
+}
+
+ssize_t cat(const char *abspath)
+{
+	FILE *fp;
+	char buf[1024];
+	if ((fp = fopen(abspath, "r")) == NULL)
+		return -1;
+	while (fgets(buf, sizeof(buf), fp) != NULL)
+		fputs(buf,stdout);
+	return 0;
 }

@@ -4,5 +4,6 @@
 
 int main(void)
 {
-	char str[65];
+	int ret = cat("fuck.txt");
+	printf("%d\n", ret);
 }

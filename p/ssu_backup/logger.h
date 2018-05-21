@@ -5,7 +5,7 @@
 #include "data.h"
 
 extern char logpath[PATH_MAX];
-enum State { INIT, BACKUP, MODIFIED, DELETED, DELOLD, EXIT };
+enum State { START, INIT, BACKUP, MODIFIED, DELETED, DELOLD, DIFF, RESTORE, EXIT };
 
 void log_init(void);
 void errlog(const char *format, ...);

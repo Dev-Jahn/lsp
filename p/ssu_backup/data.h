@@ -53,7 +53,8 @@ void *dequeue(Queue *q);
 void *peek(Queue *q);
 
 int check_modified(const char *abspath, BakEntry *e);
-void compare_bak(void);
-void restore_bak(void);
+void compare_bak(const char *abspath);
+void restore_bak(const char *abspath);
+void find_bak(const char *findpath, const char *hexname, Queue *q);
 
 #endif

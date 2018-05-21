@@ -12,9 +12,11 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "usage: %s <file>\n", argv[0]);
 		exit(1);
 	}
-
+	/*Get process id*/
 	pid = getpid();
+	/*Get process group id*/
 	pgid = getpgid(atoi(argv[1]));
+	/*Print*/
 	printf("pid: %d, pgid: %d\n", pid, pgid);
 	exit(0);
 }

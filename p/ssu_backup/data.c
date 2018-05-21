@@ -1,11 +1,20 @@
+#include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <sys/wait.h>
 #include <string.h>
 #include <libgen.h>
 #include <time.h>
+#include "ssu_backup.h"
+#include "logger.h"
 #include "data.h"
+#include "io.h"
+#include "util.h"
 #include "error.h"
+
+#include <errno.h>
 
 void init_table(BakTable *table)
 {
@@ -49,6 +58,7 @@ BakEntry *renew_bak(BakTable *table, const char *abspath)
 #endif
 	return e;
 }
+
 /* ---------------------------------*/
 /**
  * @brief Find the matching entry in the table.
@@ -136,13 +146,22 @@ void *dequeue(Queue *q)
 	}
 }
 
+/* ---------------------------------*/
+/**
+ * @brief Peek head of the queue.
+ *
+ * @param q Queue
+ *
+ * @return Item of the head node
+ */
+/* ---------------------------------*/
 void *peek(Queue *q)
 {
-	if ((q->size) == 0)
-		return NULL;
+	if ((q->size) == 0) return NULL;
 	else
 		return q->head->item;
 }
+
 /* ---------------------------------*/
 /**
  * @brief Check if the file has been modified.
@@ -168,5 +187,172 @@ int check_modified(const char *abspath, BakEntry *e)
 	else
 		return 1;
 }
-void compare_bak(void);
-void restore_bak(void);
+
+/* ---------------------------------*/
+/**
+ * @brief Compare file with latest backup
+ *
+ * @param abspath
+ */
+/* ---------------------------------*/
+void compare_bak(const char *abspath)
+{
+	char hexname[NAME_MAX+1];
+	char *filename = basename((char*)abspath);
+	Queue q;
+	initQueue(&q);
+	strtohex(abspath, hexname, sizeof(hexname));
+
+	/*Find the matching file and put it in the queue*/
+	find_bak(bakdirpath, hexname, &q);
+
+	/*If found*/
+	if (q.size > 0)
+	{
+		printf("[Compare with backup '%s_%s']\n",
+				filename, getbtime((char*)q.tail->item));
+		pid_t pid;
+		if ((pid = fork()) == 0)
+		{
+			char *argv[] = {
+				"diff",
+				(char*)abspath,
+				(char*)q.tail->item,
+				NULL };
+			char *env[] = {
+				"HOME=/home/jahn",
+				NULL };
+
+			/*execlp("diff", "diff", abspath, (char*)q.tail->item, NULL);*/
+			execve("/usr/bin/diff", argv, env);
+
+		}
+		else
+			wait(NULL);
+
+		/*Free*/
+		for (int i=0;i<(int)q.size;i++)
+			free(dequeue(&q));
+	}
+	/*Not found*/
+	else
+		printf("There's no backup file of %s\n.", filename); 
+	baklog(DIFF, NULL);
+	baklog(EXIT, NULL);
+	exit(0);
+}
+/* ---------------------------------*/
+/**
+ * @brief Restore file from backup
+ *
+ * @param abspath File to restore
+ */
+/* ---------------------------------*/
+void restore_bak(const char *abspath)
+{
+	char hexname[NAME_MAX+1];
+	char *filename = basename((char*)abspath);
+	Queue q;
+	initQueue(&q);
+	strtohex(abspath, hexname, sizeof(hexname));
+
+	/*Find the matching file and put it in the queue*/
+	find_bak(bakdirpath, hexname, &q);
+
+	/*If found*/
+	if (q.size > 0)
+	{
+		int select;
+		struct stat buf;
+		Node *ptr = q.head;
+
+		printf("[%s backup list]\n", filename);
+		printf("0. Exit\n");
+		/*Print backup file list and prompt*/
+		for (int i=1;i<=(int)q.size;i++)
+		{
+			if (stat((char*)ptr->item, &buf)<0)
+				error(STAT, (char*)ptr->item);
+			printf("%d. %s_%s [size:%ld]\n",
+					i, filename, getbtime((char*)ptr->item), buf.st_size);
+			ptr = ptr->next;
+		}
+		printf("Input >> ");
+
+		/*Get input from user and restore selected*/
+		while (1)
+		{
+			scanf("%d", &select); 
+			if (select == 0)
+			{
+				printf("No file selected.\n");
+				break;
+			}
+			else if (select>0 && select<=(int)q.size)
+			{
+				Node *ptr = q.head;
+				for (int i=1;i<select;i++)
+					ptr = ptr->next;
+				printf("Restoring backup...\n");
+				printf("[%s]\n", filename);
+				copy(ptr->item, abspath);	/*Restore*/
+				cat(abspath);				/*Print*/
+				break;
+			}
+			else
+				printf("Wrong input.\nInput >> ");
+		}
+		/*Free*/
+		for (int i=0;i<(int)q.size;i++)
+			free(dequeue(&q));
+	}
+	/*Not found*/
+	else
+		printf("There's no backup file of %s\n.", filename); 
+	baklog(RESTORE, NULL);
+	baklog(EXIT, NULL);
+	exit(0);
+}
+
+/* ---------------------------------*/
+/**
+ * @brief Find backup file of filename in findpath, enqueue it.
+ *
+ * @param findpath directory to find backup file.
+ * @param filename hexadecimal part of "hex_timestamp"
+ * @param q Queue to save the found items.
+ */
+/* ---------------------------------*/
+void find_bak(const char *findpath, const char *hexname, Queue *q)
+{
+	struct dirent **de;
+	int dirnum;
+	if ((dirnum = scandir(findpath, &de, filter_default, alphasort))<0)
+		error(SCAN, findpath);
+	else
+	{
+		for (int i=0;i<dirnum;i++)
+		{
+			char subpath[PATH_MAX];
+			strcpy(subpath, findpath);
+			strcat(subpath, "/");
+			strcat(subpath, de[i]->d_name);
+			/*If directory, recursive call*/
+			if (de[i]->d_type == DT_DIR)
+				find_bak(subpath, hexname, q);
+			else
+			{
+				char *hex = gethexname(de[i]->d_name);
+				char *dpath= (char*)malloc(PATH_MAX);
+				strcpy(dpath, findpath);
+				strcat(dpath, "/");
+				strcat(dpath, de[i]->d_name);
+
+				if (strcmp(hex, hexname) == 0)
+					enqueue(q, dpath);
+				free(hex);
+			}
+		}
+	}
+}
+

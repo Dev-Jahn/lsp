@@ -19,7 +19,8 @@ enum ErrCode { 	NAMELIM,	/*Exceeded filename limit*/
 				SCAN,		/*Error during scandir()*/
 				CHMOD,		/*Error during chmod()*/
 				SAME,		/*src==dst in copy()*/
-				ONFILE		/*src:dir, dst:reg in copy()*/
+				ONFILE,		/*src:dir, dst:reg in copy()*/
+				PTHCREAT	/*Error during pthread_create()*/
 };
 void error(enum ErrCode err, ...);
 

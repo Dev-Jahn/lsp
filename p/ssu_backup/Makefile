@@ -30,7 +30,7 @@ util.o : util.c
 error.o : error.c
 	$(CC) $(CFLAGS) -c -o $@ $^ $(MACRO)
 
-test : test.o util.o data.o
+test : test.o util.o
 	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
 
 test.o : test.c

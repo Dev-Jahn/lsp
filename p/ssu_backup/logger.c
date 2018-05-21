@@ -57,6 +57,10 @@ void baklog(enum State st, BakEntry *bak)
 
 		switch (st)
 		{
+		case START:
+			fprintf(fp_log, "===========================================\n");
+			fprintf(fp_log, "ssu_backup <pid:%d> Start\n", getpid());
+			break;
 		case INIT:
 			fprintf(fp_log, "Backup daemon initialized.\n");
 			break;
@@ -77,9 +81,14 @@ void baklog(enum State st, BakEntry *bak)
 			timestamp(bakstat.st_mtime, stamp, sizeof(stamp), "%m%d %H:%M:%S");
 			fprintf(fp_log, "Delete oldest [%s, size:%ld, btime:%s]\n",bak->filename, bakstat.st_size, stamp);
 			break;
+		case DIFF:
+			fprintf(fp_log, "Compared [%s] with [%s].\n", "test", "test");
+			break;
+		case RESTORE:
+			fprintf(fp_log, "Restored [%s] from [%s].\n", "test", "test");
+			break;
 		case EXIT:
 			fprintf(fp_log, "ssu_backup <pid:%d> Exit\n", getpid());
-			fprintf(fp_log, "=================================================================\n");
 			break;
 		}
 	}

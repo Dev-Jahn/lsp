@@ -19,23 +19,34 @@
 #include "logger.h"
 #include "error.h"
 
-#define MAX_PROC 32768
+#define MAX_THREAD 100000
+#define FIFO_NAME "data.fifo"
 
 void daemon_backup_dir(const char *srcdir, const char *bakdir);
 void daemon_backup(const char *abspath, const char *bakdir);
-void signal_handler(int signo);
+static void signal_handler(int signo);
+static void send_data(int fifo_fd);
 
 BakTable table;
+pthread_t tids[MAX_THREAD];
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
+int occupied_1 = 0;
+int occupied_2 = 0;
+size_t tcnt = 0;
 
 void daemon_main()
 {
 	int cnt = 0;
-	init_table(&table);
 
-	while (cnt++<3)
+	while (cnt++<100)
 	{
 		if (ON_D(flag))
+		{
 			daemon_backup_dir(targetpath, bakdirpath);
+			for (size_t i=0;i<tcnt;i++)
+				pthread_join(tids[i], NULL);
+		}
 		else
 			daemon_backup(targetpath, bakdirpath);
 		sleep(period);
@@ -51,10 +62,6 @@ void daemon_backup_dir(const char *srcdir, const char *bakdir)
 	strcpy(tgtdir, bakdir);
 	strcat(tgtdir, "/");
 	strcat(tgtdir, basename((char*)srcdir));
-
-	errlog("srcdir:%s",srcdir);
-	errlog("bakdir:%s",bakdir);
-
 
 	if (access(tgtdir, F_OK) < 0)
 		if (mkdir(tgtdir, 0777) < 0)
@@ -73,18 +80,41 @@ void daemon_backup_dir(const char *srcdir, const char *bakdir)
 			if (de[i]->d_type == DT_DIR)
 				daemon_backup_dir(srcpath, tgtdir);
 			else
+			{
+				/*struct argstr as;*/
+				/*as.abspath = srcpath;*/
+				/*as.bakdir = tgtdir;*/
+				errlog("src:%s",srcpath);
+				errlog("tgt:%s",tgtdir);
+
 				daemon_backup(srcpath, tgtdir);
+				/*if (pthread_create(&tids[tcnt], NULL, func_ptr, &as) != 0)*/
+					/*error(PTHCREAT);*/
+				/*tcnt++;*/
+			}
 		}
 	}
+}
+
+void *func_ptr(void *arg)
+{
+	daemon_backup(((struct argstr*)arg)->abspath,
+			((struct argstr*)arg)->bakdir);
+	return NULL;
 }
 
 void daemon_backup(const char *abspath, const char *bakdir)
 {
 	/*Filename and absolute path*/
 	char bakname[NAME_MAX+1] = {0};
-	char *bakpath = (char*)malloc(PATH_MAX * sizeof(char));
+	char *bakpath = (char*)malloc(PATH_MAX);
 	BakEntry *entry;
 	int modified = 1;
+
+	/*pthread_mutex_lock(&mutex);*/
+	/*while (occupied_1)*/
+		/*pthread_cond_wait(&cond, &mutex);*/
+	/*occupied_1 = 1;	*/
 
 	/*Search backup entry in the table*/
 	entry = search_bak(&table, abspath);
@@ -96,6 +126,7 @@ void daemon_backup(const char *abspath, const char *bakdir)
 	}
 	else
 	{
+		/*errlog("tid:%d", pthread_self());*/
 		errlog("entry:%s", entry->filename);
 		errlog("files:%d",entry->fileQue.size);
 
@@ -128,19 +159,32 @@ void daemon_backup(const char *abspath, const char *bakdir)
 		}
 	}
 
+	/*occupied_1 = 0;*/
+	/*pthread_cond_signal(&cond);*/
+	/*pthread_mutex_unlock(&mutex);*/
+
 	if ((modified>0) || !ON_M(flag))
 	{
+		/*pthread_mutex_lock(&mutex);*/
+		/*while (occupied_2)*/
+			/*pthread_cond_wait(&cond, &mutex);*/
+		/*occupied_2 = 1;	*/
+
 		/*Delete the oldest backup file, if file count reaches limit*/
 		if (ON_N(flag) && (entry->fileQue.size == bakmax))
 		{
 			char *oldest = (char*)peek(&(entry->fileQue));
-			errlog("oldest:%s", oldest);
+			/*errlog("oldest:%s", oldest);*/
 			baklog(DELOLD, entry);
 			if(remove(oldest)<0)
 				error(REMOVE, oldest);
 			dequeue(&(entry->fileQue));
 			free(oldest);
 		}
+
+		/*occupied_2 = 0;*/
+		/*pthread_cond_signal(&cond);*/
+		/*pthread_mutex_unlock(&mutex);*/
 
 		/*Make backup file name*/
 		makename(abspath, bakname, sizeof(bakname));
@@ -149,7 +193,7 @@ void daemon_backup(const char *abspath, const char *bakdir)
 		strcat(bakpath, "/");
 		strcat(bakpath, bakname);
 		/*Actual file backup	*/
-		copy(targetpath, bakpath);
+		copy(abspath, bakpath);
 		/*If '-n'is on, add path of backup file to the queue*/
 		if (ON_N(flag))
 			enqueue(&(entry->fileQue), bakpath);
@@ -158,19 +202,7 @@ void daemon_backup(const char *abspath, const char *bakdir)
 
 int daemon_init(void)
 {
-	int pids[MAX_PROC];
-	int pidcnt;
-	/*Find all processes with process name*/
-	pidcnt = findpid(execname, pids, sizeof(pids));
-	/*Kill them all except itself*/
-	for (int i=0;i<pidcnt;i++)
-	{
-		if (pids[i] == getpid())
-			continue;
-		printf("Send siganl to ssu_backup[%d]\n", pids[i]);
-		kill(pids[i], SIGUSR1);
-	}
-
+	
 	printf("Daemon initializing\n");
 	pid_t pid;
 	int fd, maxfd;
@@ -204,16 +236,19 @@ int daemon_init(void)
 	dup(0);
 
 	signal(SIGUSR1, signal_handler);
+	signal(SIGUSR2, signal_handler);
 
 	baklog(INIT, NULL);
 	daemon_main();
 	return 0;
 }
 
-void signal_handler(int signo)
+static void signal_handler(int signo)
 {
-	if (signo == SIGUSR1)
+	switch (signo)
 	{
+		int fifo_fd;
+	case SIGUSR1:
 		baklog(EXIT, NULL);
 		/*Free all heap memories used*/
 		for (int i=0;i<(int)table.cnt;i++)
@@ -223,7 +258,48 @@ void signal_handler(int signo)
 			free(&(table.be[i]));
 		}
 		exit(0);
-	}
-	else
+	case SIGUSR2:
+		/*Send backup table entries to fifo*/
+		if ((fifo_fd = open(fifopath, O_WRONLY)) < 0)
+			error(OPEN, fifopath);
+		else
+		{
+			errlog("fifo opened to write");
+			send_data(fifo_fd);
+		}
+
+		baklog(EXIT, NULL);
+		/*Free all heap memories used*/
+		for (int i=0;i<(int)table.cnt;i++)
+			free(&(table.be[i]));
+		close(fifo_fd);
+		exit(0);
+	default:
 		exit(1);
+	}
+}
+
+static void send_data(int fifo_fd)
+{
+	errlog("send data start");
+
+	write(fifo_fd, &table.cnt, sizeof(size_t));
+	for (int i=0;i<(int)table.cnt;i++)
+	{
+		write(fifo_fd, table.be[i].filename, NAME_MAX);
+		write(fifo_fd, table.be[i].abspath, PATH_MAX);
+		write(fifo_fd, &table.be[i].mode, sizeof(mode_t));
+		write(fifo_fd, &table.be[i].size, sizeof(size_t));
+		write(fifo_fd, &table.be[i].mtime_last, sizeof(time_t));
+
+		write(fifo_fd, &table.be[i].fileQue.size, sizeof(size_t));
+		for (int j=0;j<(int)table.be[i].fileQue.size;j++)
+		{
+			char *tmp = dequeue(&(table.be[i].fileQue));
+			write(fifo_fd, tmp, PATH_MAX);
+			free(tmp);
+		}
+	}
+
+	errlog("send data end");
 }

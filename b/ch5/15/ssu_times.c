@@ -24,26 +24,32 @@ void ssu_do_cmd(char *cmd)
 	clock_t start, end;
 	int status;
 
+	/*Print command of argv*/
 	printf("\ncommand: %s\n", cmd);
+	/*Get start time*/
 	if ((start=times(&tms_start))==-1)
 	{
 		fprintf(stderr, "times error\n");
 		exit(1);
 	}
+	/*Execute command*/
 	if((status = system(cmd))<0)
 	{
 		fprintf(stderr, "system error\n");
 		exit(1);
 	}
+	/*Get end time*/
 	if ((end=times(&tms_end))==-1)
 	{
 		fprintf(stderr, "times error\n");
 		exit(1);
 	}
+	/*calculate and print elapsed time*/
 	ssu_print_times(end-start, &tms_start, &tms_end);
+	/*Print exit status*/
 	ssu_echo_exit(status);
 }
-
+/*Prnt clock time, user, system times*/
 void ssu_print_times(clock_t real, struct tms *tms_start, struct tms *tms_end)
 {
 	static long clocktick = 0;

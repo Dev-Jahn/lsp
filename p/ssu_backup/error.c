@@ -42,7 +42,7 @@ void error(enum ErrCode err, ...)
 		errlog("Need more arguments.\n");
 		break;
 	case MOREARG:
-		errlog("Too much arguments.\n");
+		errlog("Too much arguments. No period is required in -r, -c.\n");
 		break;
 	case NAPRD:
 		errlog("Period must be between 3 and 10.\n");
@@ -76,6 +76,9 @@ void error(enum ErrCode err, ...)
 		break;
 	case CHMOD:
 		errlog("chmod error for '%s'.\n", va_arg(ap, char*));
+		break;
+	case PTHCREAT:
+		errlog("pthread_create error.\n");
 		break;
 	default:
 		errlog("Unknown error.[%d]\n", err);
