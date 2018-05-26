@@ -28,11 +28,8 @@ extern unsigned int flag;
 extern char execname[NAME_MAX];
 extern char targetpath[PATH_MAX];
 extern char bakdirpath[PATH_MAX];
-extern char logdirpath[PATH_MAX];
 extern char fifopath[PATH_MAX];
 extern int period;
 extern size_t bakmax;
-void kill_daemon(void);
-int setopt(int argc, char *argv[]);
 
 #endif

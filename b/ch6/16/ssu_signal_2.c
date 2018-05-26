@@ -8,6 +8,7 @@ static void ssu_signal_handler(int signo);
 
 int main(void)
 {
+	/*When error while hanling signal*/
 	if (signal(SIGINT, ssu_signal_handler) == SIG_ERR)
 	{
 		fprintf(stderr, "cannot handle SIGINT\n");
@@ -28,12 +29,14 @@ int main(void)
 		fprintf(stderr, "cannot handler SIGHUP\n");
 		exit(EXIT_FAILURE);
 	}
+	/*Wait for signal*/
 	while(1)
 		pause();
 	exit(0);
 }
 static void ssu_signal_handler(int signo)
 {
+	/*Action for each signal*/
 	if (signo==SIGINT)
 		printf("caught SIGINT\n");
 	else if (signo == SIGTERM)

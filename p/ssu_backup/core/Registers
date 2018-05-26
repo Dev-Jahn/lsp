@@ -1,0 +1,24 @@
+rax            0x7fbf1dc3f700	140458814863104
+rbx            0x0	0
+rcx            0x7fbf1dd41747	140458815919943
+rdx            0x0	0
+rsi            0x0	0
+rdi            0x7fbf1dc3f700	140458814863104
+rbp            0x7ffd16a90600	0x7ffd16a90600
+rsp            0x7ffd16a905e8	0x7ffd16a905e8
+r8             0xca	202
+r9             0x1	1
+r10            0x0	0
+r11            0x246	582
+r12            0x4019e0	4200928
+r13            0x7ffd16a90720	140724983629600
+r14            0x0	0
+r15            0x0	0
+rip            0x7fbf1e0128d9	0x7fbf1e0128d9 <pthread_join+9>
+eflags         0x10206	[ PF IF RF ]
+cs             0x33	51
+ss             0x2b	43
+ds             0x0	0
+es             0x0	0
+fs             0x0	0
+gs             0x0	0

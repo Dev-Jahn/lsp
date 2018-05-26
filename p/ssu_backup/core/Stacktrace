@@ -1,0 +1,12 @@
+#0  0x00007fbf1e0128d9 in pthread_join (threadid=140458814863104, thread_return=0x0) at pthread_join.c:45
+        pd = 0x7fbf1dc3f700
+        self = <optimized out>
+        result = <optimized out>
+#1  0x0000000000402489 in daemon_main () at daemon.c:51
+        i = 17
+#2  0x0000000000402d04 in daemon_init () at daemon.c:226
+        pid = 22248
+        fd = 0
+        maxfd = 1024
+#3  0x0000000000401b72 in main (argc=5, argv=0x7ffd16a90728) at ssu_backup.c:53
+No locals.

@@ -12,17 +12,99 @@
 #include "data.h"
 #include "io.h"
 #include "util.h"
-#include "error.h"
 
-#include <errno.h>
-
+/* ---------------------------------*/
+/**
+ * @brief Initialize as empty table.
+ *
+ * @param table Pointer of the backup table
+ */
+/* ---------------------------------*/
 void init_table(BakTable *table)
 {
 	table->be = (BakEntry*)malloc(0);
 	table->cnt = 0;
 }
 
-BakEntry *add_bak(BakTable *table, const char *abspath)
+/* ---------------------------------*/
+/**
+ * @brief Make a backup table with existing backups.
+ *
+ * @param table Pointer to table
+ * @param abspath Path of target
+ */
+/* ---------------------------------*/
+void load_table(BakTable *table, const char *abspath)
+{
+	if (ON_D(flag))
+	{
+		struct dirent **de;
+		int dirnum;
+		if ((dirnum = scandir(abspath, &de, filter_default, alphasort)) < 0)
+			error(SCAN, abspath);
+		for (int i=0;i<dirnum;i++)
+		{
+			if (de[i]->d_ino == 0)
+				continue;
+
+			char path[PATH_MAX];
+			strcpy(path, abspath);
+			strcat(path, "/");
+			strcat(path, de[i]->d_name);
+
+			if (de[i]->d_type == DT_DIR)
+				load_table(table, path);
+			else
+				load_entry(table, path);
+		}
+
+		for (int i=0;i<dirnum;i++)
+			free(de[i]);
+		free(de);
+	}
+	else
+		load_entry(table, targetpath);
+}
+
+/* ---------------------------------*/
+/**
+ * @brief Make a backup entry with existing backups.
+ *
+ * @param table Pointer to table
+ * @param abspath Path of target
+ */
+/* ---------------------------------*/
+BakEntry *load_entry(BakTable *table, const char *abspath)
+{
+	char hexname[NAME_MAX+1];
+	Queue q;
+	initQueue(&q);
+	strtohex(abspath, hexname, sizeof(hexname));
+
+	/*Find the matching file and put it in the queue*/
+	find_bak(bakdirpath, hexname, &q);
+
+	BakEntry *e;
+	e = add_entry(table, abspath);
+	/*If found*/
+	if (q.size > 0)
+		/*Transfer to fileque in entry structure*/
+		for (int i=0;i<(int)q.size;)
+			enqueue(&e->fileQue, dequeue(&q));
+	return e;
+}
+
+/* ---------------------------------*/
+/**
+ * @brief Add entry of the target file to the table.
+ *
+ * @param table Pointer of the backup table
+ * @param abspath Absolute path of target file
+ *
+ * @return 
+ */
+/* ---------------------------------*/
+BakEntry *add_entry(BakTable *table, const char *abspath)
 {
 	struct stat statbuf;
 	BakEntry e;
@@ -33,25 +115,24 @@ BakEntry *add_bak(BakTable *table, const char *abspath)
 	strcpy(e.filename, basename((char*)abspath));
 	strcpy(e.abspath, abspath);
 	e.mode = statbuf.st_mode;
-	e.size = statbuf.st_size;
 	e.mtime_last = statbuf.st_mtime;
 #ifdef SHA
 	sha256_file(abspath, e.checksum_last);
 #endif
 	initQueue(&(e.fileQue));
+	e.updateflag = 1;
 
 	memcpy(&(table->be[table->cnt]), &e, sizeof(BakEntry));
 	table->cnt++;
 	return &(table->be[table->cnt-1]);
 }
-BakEntry *renew_bak(BakTable *table, const char *abspath)
+BakEntry *renew_entry(BakTable *table, const char *abspath)
 {
 	struct stat statbuf;
-	BakEntry *e = search_bak(table, abspath);
+	BakEntry *e = search_entry(table, abspath);
 	if (stat(abspath, &statbuf)<0)
 		error(STAT, abspath);
 	e->mode = statbuf.st_mode;
-	e->size = statbuf.st_size;
 	e->mtime_last = statbuf.st_mtime;
 #ifdef SHA
 	sha256_file(abspath, e.checksum_last);
@@ -69,7 +150,7 @@ BakEntry *renew_bak(BakTable *table, const char *abspath)
  * @return matching entry
  */
 /* ---------------------------------*/
-BakEntry *search_bak(BakTable *table, const char *abspath)
+BakEntry *search_entry(BakTable *table, const char *abspath)
 {
 	for (int i=0;i<(int)table->cnt;i++)
 		if(strcmp(table->be[i].abspath,abspath) == 0)
@@ -77,9 +158,9 @@ BakEntry *search_bak(BakTable *table, const char *abspath)
 	return NULL;
 }
 
-int remove_bak(BakTable *table, const char *abspath)
+int remove_entry(BakTable *table, const char *abspath)
 {
-	BakEntry *e = search_bak(table, abspath);
+	BakEntry *e = search_entry(table, abspath);
 	for (int i=0;i<(int)table->cnt;i++)
 		if (e == &(table->be[i]))
 		{
@@ -211,24 +292,15 @@ void compare_bak(const char *abspath)
 	{
 		printf("[Compare with backup '%s_%s']\n",
 				filename, getbtime((char*)q.tail->item));
+		baklog(DIFF, NULL, filename, basename(q.tail->item));
+		int status = 0;
 		pid_t pid;
 		if ((pid = fork()) == 0)
-		{
-			char *argv[] = {
-				"diff",
-				(char*)abspath,
-				(char*)q.tail->item,
-				NULL };
-			char *env[] = {
-				"HOME=/home/jahn",
-				NULL };
-
-			/*execlp("diff", "diff", abspath, (char*)q.tail->item, NULL);*/
-			execve("/usr/bin/diff", argv, env);
-
-		}
+			execlp("diff", "diff", abspath, q.tail->item, NULL);
 		else
-			wait(NULL);
+			wait(&status);
+		if (!WEXITSTATUS(status))
+			printf("File is identical with last backup.\n");
 
 		/*Free*/
 		for (int i=0;i<(int)q.size;i++)
@@ -237,7 +309,6 @@ void compare_bak(const char *abspath)
 	/*Not found*/
 	else
 		printf("There's no backup file of %s\n.", filename); 
-	baklog(DIFF, NULL);
 	baklog(EXIT, NULL);
 	exit(0);
 }
@@ -297,6 +368,7 @@ void restore_bak(const char *abspath)
 				printf("[%s]\n", filename);
 				copy(ptr->item, abspath);	/*Restore*/
 				cat(abspath);				/*Print*/
+				baklog(RESTORE, NULL, filename, basename(ptr->item));
 				break;
 			}
 			else
@@ -309,7 +381,6 @@ void restore_bak(const char *abspath)
 	/*Not found*/
 	else
 		printf("There's no backup file of %s\n.", filename); 
-	baklog(RESTORE, NULL);
 	baklog(EXIT, NULL);
 	exit(0);
 }
@@ -329,30 +400,33 @@ void find_bak(const char *findpath, const char *hexname, Queue *q)
 	int dirnum;
 	if ((dirnum = scandir(findpath, &de, filter_default, alphasort))<0)
 		error(SCAN, findpath);
-	else
+	for (int i=0;i<dirnum;i++)
 	{
-		for (int i=0;i<dirnum;i++)
-		{
-			char subpath[PATH_MAX];
-			strcpy(subpath, findpath);
-			strcat(subpath, "/");
-			strcat(subpath, de[i]->d_name);
-			/*If directory, recursive call*/
-			if (de[i]->d_type == DT_DIR)
-				find_bak(subpath, hexname, q);
-			else
-			{
-				char *hex = gethexname(de[i]->d_name);
-				char *dpath= (char*)malloc(PATH_MAX);
-				strcpy(dpath, findpath);
-				strcat(dpath, "/");
-				strcat(dpath, de[i]->d_name);
+		if (de[i]->d_ino == 0)
+			continue;
 
-				if (strcmp(hex, hexname) == 0)
-					enqueue(q, dpath);
-				free(hex);
-			}
+		char subpath[PATH_MAX];
+		strcpy(subpath, findpath);
+		strcat(subpath, "/");
+		strcat(subpath, de[i]->d_name);
+		if (de[i]->d_type == DT_REG)
+		{
+			char *hex;
+			if ((hex = gethexname(de[i]->d_name)) == NULL)
+				continue;
+			char *dpath= (char*)malloc(PATH_MAX);
+			strcpy(dpath, findpath);
+			strcat(dpath, "/");
+			strcat(dpath, de[i]->d_name);
+
+			if (strcmp(hex, hexname) == 0)
+				enqueue(q, dpath);
+			free(hex);
 		}
 	}
+
+	for (int i=0;i<dirnum;i++)
+		free(de[i]);
+	free(de);
 }
 

@@ -8,7 +8,10 @@ void (*ssu_func)(int);
 
 int main(void)
 {
+	/*Set the signal handler of SIGINT
+	 * and save old handler to glolbal variable*/
 	ssu_func = signal(SIGINT, ssu_signal_handler);
+	/*Infinite loop to wait signal*/
 	while(1)
 	{
 		printf("process running...\n");

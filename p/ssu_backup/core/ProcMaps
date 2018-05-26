@@ -1,0 +1,39 @@
+00400000-00407000 r-xp 00000000 08:16 156423                             /home/jahn/lsp/p/ssu_backup/ssu_backup
+00606000-00607000 r--p 00006000 08:16 156423                             /home/jahn/lsp/p/ssu_backup/ssu_backup
+00607000-0060a000 rw-p 00007000 08:16 156423                             /home/jahn/lsp/p/ssu_backup/ssu_backup
+0060a000-006d0000 rw-p 00000000 00:00 0 
+016db000-016fc000 rw-p 00000000 00:00 0                                  [heap]
+016fc000-01734000 rw-p 00000000 00:00 0                                  [heap]
+7fbf08000000-7fbf08022000 rw-p 00000000 00:00 0 
+7fbf08022000-7fbf0c000000 ---p 00000000 00:00 0 
+7fbf10000000-7fbf10022000 rw-p 00000000 00:00 0 
+7fbf10022000-7fbf14000000 ---p 00000000 00:00 0 
+7fbf16ffe000-7fbf16fff000 ---p 00000000 00:00 0 
+7fbf16fff000-7fbf177ff000 rw-p 00000000 00:00 0 
+7fbf177ff000-7fbf17800000 ---p 00000000 00:00 0 
+7fbf17800000-7fbf18000000 rw-p 00000000 00:00 0 
+7fbf18000000-7fbf18022000 rw-p 00000000 00:00 0 
+7fbf18022000-7fbf1c000000 ---p 00000000 00:00 0 
+7fbf1c43d000-7fbf1c43e000 ---p 00000000 00:00 0 
+7fbf1c43e000-7fbf1cc3e000 rw-p 00000000 00:00 0 
+7fbf1cc3e000-7fbf1cc3f000 ---p 00000000 00:00 0 
+7fbf1cc3f000-7fbf1d43f000 rw-p 00000000 00:00 0 
+7fbf1dc40000-7fbf1de00000 r-xp 00000000 08:16 1578342                    /lib/x86_64-linux-gnu/libc-2.23.so
+7fbf1de00000-7fbf1e000000 ---p 001c0000 08:16 1578342                    /lib/x86_64-linux-gnu/libc-2.23.so
+7fbf1e000000-7fbf1e004000 r--p 001c0000 08:16 1578342                    /lib/x86_64-linux-gnu/libc-2.23.so
+7fbf1e004000-7fbf1e006000 rw-p 001c4000 08:16 1578342                    /lib/x86_64-linux-gnu/libc-2.23.so
+7fbf1e006000-7fbf1e00a000 rw-p 00000000 00:00 0 
+7fbf1e00a000-7fbf1e022000 r-xp 00000000 08:16 1578488                    /lib/x86_64-linux-gnu/libpthread-2.23.so
+7fbf1e022000-7fbf1e221000 ---p 00018000 08:16 1578488                    /lib/x86_64-linux-gnu/libpthread-2.23.so
+7fbf1e221000-7fbf1e222000 r--p 00017000 08:16 1578488                    /lib/x86_64-linux-gnu/libpthread-2.23.so
+7fbf1e222000-7fbf1e223000 rw-p 00018000 08:16 1578488                    /lib/x86_64-linux-gnu/libpthread-2.23.so
+7fbf1e223000-7fbf1e227000 rw-p 00000000 00:00 0 
+7fbf1e227000-7fbf1e24d000 r-xp 00000000 08:16 1578314                    /lib/x86_64-linux-gnu/ld-2.23.so
+7fbf1e428000-7fbf1e42c000 rw-p 00000000 00:00 0 
+7fbf1e44c000-7fbf1e44d000 r--p 00025000 08:16 1578314                    /lib/x86_64-linux-gnu/ld-2.23.so
+7fbf1e44d000-7fbf1e44e000 rw-p 00026000 08:16 1578314                    /lib/x86_64-linux-gnu/ld-2.23.so
+7fbf1e44e000-7fbf1e44f000 rw-p 00000000 00:00 0 
+7ffd16a6f000-7ffd16a92000 rw-p 00000000 00:00 0                          [stack]
+7ffd16ba1000-7ffd16ba4000 r--p 00000000 00:00 0                          [vvar]
+7ffd16ba4000-7ffd16ba6000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]

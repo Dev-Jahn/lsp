@@ -5,8 +5,8 @@
 
 struct argstr
 {
-	char *abspath;
-	char *bakdir;
+	char abspath[PATH_MAX];
+	char bakdir[PATH_MAX];
 };
 
 extern BakTable table;

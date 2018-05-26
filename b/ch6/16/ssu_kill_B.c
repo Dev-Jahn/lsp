@@ -4,6 +4,7 @@
 
 int main(void)
 {
+	/*Wait for signal*/
 	while(1)
 	{
 		printf("\n[OSLAB]");

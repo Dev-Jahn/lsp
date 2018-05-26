@@ -16,7 +16,7 @@ char *gethexname(const char *bakname);
 #ifdef SHA
 int sha256_file(const char *pathname, char output[SHA256_DIGEST_LENGTH*2+1]);
 #endif
-int findpid(const char *procname, int *procs, size_t size);
+int findpid(const char *procname, int *pidbuf, size_t maxpid);
 int filter_default(const struct dirent *dir);
 ssize_t cat(const char *abspath);
 

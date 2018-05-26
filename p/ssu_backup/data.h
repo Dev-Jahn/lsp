@@ -23,15 +23,15 @@ typedef struct _Queue
 
 typedef struct _BakEntry
 {
-	char filename[NAME_MAX];
-	char abspath[PATH_MAX];
-	mode_t mode;
-	size_t size;
-	time_t mtime_last;
+	char filename[NAME_MAX];	/*Basename of target*/
+	char abspath[PATH_MAX];		/*Absolute path of target*/
+	mode_t mode;				/*Mode of target*/
+	time_t mtime_last;			/*Last mtime of target*/
 #ifdef SHA
 	char checksum_last[SHA256_DIGEST_LENGTH*2 + 1];
 #endif
-	Queue fileQue;
+	Queue fileQue;				/*Queue to save backup file path*/
+	char updateflag;			/*Flag to detect deletion*/
 } BakEntry;
 
 typedef struct _BakTable
@@ -42,10 +42,12 @@ typedef struct _BakTable
 
 
 void init_table(BakTable *table);
-BakEntry *add_bak(BakTable *table, const char *abspath);
-BakEntry *renew_bak(BakTable *table, const char *abspath);
-int remove_bak(BakTable *table, const char *abspath);
-BakEntry *search_bak(BakTable *table, const char *abspath);
+void load_table(BakTable *table, const char *abspath);
+BakEntry *load_entry(BakTable *table, const char *abspath);
+BakEntry *add_entry(BakTable *table, const char *abspath);
+BakEntry *renew_entry(BakTable *table, const char *abspath);
+int remove_entry(BakTable *table, const char *abspath);
+BakEntry *search_entry(BakTable *table, const char *abspath);
 
 void initQueue(Queue *q);
 void enqueue(Queue *q, void *data);

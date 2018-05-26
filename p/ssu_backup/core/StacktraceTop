@@ -1,0 +1,4 @@
+pthread_join (threadid=140458814863104, thread_return=0x0) at pthread_join.c:45
+daemon_main () at daemon.c:51
+daemon_init () at daemon.c:226
+main (argc=5, argv=0x7ffd16a90728) at ssu_backup.c:53

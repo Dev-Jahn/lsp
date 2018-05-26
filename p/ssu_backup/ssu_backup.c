@@ -12,7 +12,6 @@
 #include "daemon.h"
 #include "logger.h"
 #include "util.h"
-#include "error.h"
 
 #define MAX_PROC 32768
 #define FIFO_NAME "data.fifo"
@@ -26,14 +25,39 @@ unsigned int flag = 000;				/*option flag*/
 char execname[NAME_MAX];				/*name of executable file*/
 char targetpath[PATH_MAX];				/*backup file path*/
 char bakdirpath[PATH_MAX] = "backup";	/*backup directory path*/
-char logdirpath[PATH_MAX] = "log";		/*log directory path*/
 char fifopath[PATH_MAX];
 int period;
 size_t bakmax; 
 
+static void main_init(int argc, char *argv[]);
+static void kill_daemon(void);
+static int setopt(int argc, char *argv[]);
+
 int main(int argc, char *argv[])
 {
-	/*Set options, get arguments*/
+	main_init(argc, argv);	/*Initialize pathes and directories*/
+	log_init();				/*Initialize log directory*/
+
+	if (ON_P(flag))
+	{
+		umask(0);
+		mkfifo(fifopath, 0777);
+	}
+	init_table(&table);
+	kill_daemon();			/*Kill all existing backup daemon*/
+	baklog(START, NULL);
+	if (ON_R(flag))
+		restore_bak(targetpath);
+	if (ON_C(flag))
+		compare_bak(targetpath);
+	daemon_init();			/*Run backup daemon*/
+}
+
+/*백업디렉토리에 존재하는 파일로 백업테이블 구성*/
+/*현재 입력받은 파일만 남기고 테이블에서 제외*/
+
+static void main_init(int argc, char *argv[])
+{	/*Set options, get arguments*/
 	int argi = setopt(argc, argv);
 	int argnum;
 	if (ON_C(flag)||ON_R(flag))
@@ -53,14 +77,17 @@ int main(int argc, char *argv[])
 	/*Verify that the file exists*/
 	/*Error for wrong file type*/
 	struct stat filestat;
-	if (stat(targetpath, &filestat) < 0)
-		error(NOFILE, targetpath);
-	if (!ON_D(flag) && S_ISDIR(filestat.st_mode))
-		error(NEEDD, targetpath);
-	if (ON_D(flag) && !S_ISDIR(filestat.st_mode))
-		error(NOTDIR, targetpath);
-	if (!S_ISREG(filestat.st_mode) && !S_ISDIR(filestat.st_mode))
-		error(NOTREG, targetpath);
+	if (!ON_R(flag))
+	{
+		if (stat(targetpath, &filestat) < 0)
+			error(NOFILE, targetpath);
+		if (!ON_D(flag) && S_ISDIR(filestat.st_mode))
+			error(NEEDD, targetpath);
+		if (ON_D(flag) && !S_ISDIR(filestat.st_mode))
+			error(NOTDIR, targetpath);
+		if (!S_ISREG(filestat.st_mode) && !S_ISDIR(filestat.st_mode))
+			error(NOTREG, targetpath);
+	}
 
 	/*Convert all pathes to absolute pathes.*/
 	char abspath[PATH_MAX] = {0};
@@ -68,11 +95,9 @@ int main(int argc, char *argv[])
 	strcpy(targetpath, abspath);
 	realpath(bakdirpath, abspath);
 	strcpy(bakdirpath, abspath);
-	realpath(logdirpath, abspath);
-	strcpy(logdirpath, abspath);
 	realpath(FIFO_NAME, fifopath);
 
-	/*Make directory to save backup and log files.*/
+	/*Make directory to save backup.*/
 	struct stat dirstat;
 	if (stat(bakdirpath, &dirstat) < 0)
 	{
@@ -81,37 +106,11 @@ int main(int argc, char *argv[])
 	}
 	else if (!S_ISDIR(dirstat.st_mode))
 		error(MKDIR, bakdirpath);
-	if (stat(logdirpath, &dirstat) < 0)
-	{
-		if (mkdir(logdirpath, 0777) < 0)
-			error(MKDIR, logdirpath);
-	}
-	else if (!S_ISDIR(dirstat.st_mode))
-		error(MKDIR, logdirpath);
-
-	log_init();		/*Initialize log directory*/
-	baklog(START, NULL);
-
-
-	if (ON_P(flag))
-	{
-		remove(fifopath);
-		int old = umask(0);
-		mkfifo(fifopath, 0777);
-		umask(old);
-	}
-	init_table(&table);
-	kill_daemon();	/*Kill all existing backup daemon*/
-	if (ON_R(flag))
-		restore_bak(targetpath);
-	if (ON_C(flag))
-		compare_bak(targetpath);
-	daemon_init();	/*Run backup daemon*/
 }
 
 static void receive_data(int fifo_fd)
 {
-	errlog("receiving start");
+	errlog("Data receiving started");
 
 	read(fifo_fd, &table.cnt, sizeof(size_t));	
 	table.be = realloc(table.be, sizeof(BakEntry)*(table.cnt));
@@ -121,15 +120,13 @@ static void receive_data(int fifo_fd)
 		read(fifo_fd, table.be[i].filename, NAME_MAX);
 		read(fifo_fd, table.be[i].abspath, PATH_MAX);
 		read(fifo_fd, &table.be[i].mode, sizeof(mode_t));
-		read(fifo_fd, &table.be[i].size, sizeof(size_t));
 		read(fifo_fd, &table.be[i].mtime_last, sizeof(time_t));
 
 		initQueue(&table.be[i].fileQue);
 		read(fifo_fd, &table.be[i].fileQue.size, sizeof(size_t));
-		errlog("Qsize:%d", table.be[i].fileQue.size);
+		errlog("Entry:%s\tQueue:%d", table.be[i].filename, table.be[i].fileQue.size);
 		for (int j=0;j<(int)table.be[i].fileQue.size;j++)
 		{
-			errlog("test:%d",j);
 			char *buf = (char*)malloc(PATH_MAX);
 			read(fifo_fd, buf, PATH_MAX);
 			enqueue(&(table.be[i].fileQue), buf);
@@ -137,10 +134,11 @@ static void receive_data(int fifo_fd)
 		}
 	}
 
-	errlog("receiving end");
+	errlog("Data receiving completed");
+	printf("\n");
 }
 
-void kill_daemon(void)
+static void kill_daemon(void)
 {
 	int pids[MAX_PROC], pidcnt, fifo_fd;
 	/*Find all processes with process name*/
@@ -155,22 +153,24 @@ void kill_daemon(void)
 
 		if (ON_P(flag))
 		{
-			printf("Siganl[SIGUSR2]:Preserve previous entries.\n");
+			printf("Siganl[SIGUSR2]:Preserve previous entries.\n\n");
 			kill(pids[i], SIGUSR2);
 
 			/*Open fifo to receive backup table entries*/
 			fifo_fd = open(fifopath, O_RDONLY);
-			errlog("fifo opened to read");
+			errlog("FIFO opened to read\n");
 			receive_data(fifo_fd);
 			close(fifo_fd);
+			remove(fifopath);
 		}
 		else
 		{
-			printf("Siganl[SIGUSR1]:Discard previous entries.\n");
+			printf("Siganl[SIGUSR1]:Discard previous entries.\n\n");
 			kill(pids[i], SIGUSR1);
+			while (kill(pids[i],0) == 0)
+				usleep(1);
 		}
 	}
-
 }
 
 /* ---------------------------------*/
@@ -183,7 +183,7 @@ void kill_daemon(void)
  * @return Index of argument right after option arguments.
  */
 /* ---------------------------------*/
-int setopt(int argc, char *argv[])
+static int setopt(int argc, char *argv[])
 {
 	int c;
 	while ((c=getopt(argc, argv, "drmcn:ps")) != -1)

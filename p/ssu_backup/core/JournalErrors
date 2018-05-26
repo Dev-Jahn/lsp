@@ -1,0 +1,1001 @@
+-- Logs begin at 수 2018-05-23 20:41:21 KST, end at 금 2018-05-25 20:28:28 KST. --
+ 5월 25 20:11:54 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:11:54 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:11:54 PC ssu_backup[21011]: after backup
+ 5월 25 20:11:54 PC ssu_backup[21011]: entry:4
+ 5월 25 20:11:54 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:11:54 PC ssu_backup[21011]: entry:2
+ 5월 25 20:11:54 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:11:57 PC ssu_backup[21011]: before backup
+ 5월 25 20:11:57 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:11:57 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:11:57 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:11:57 PC ssu_backup[21011]: entry:2
+ 5월 25 20:11:57 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:11:57 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:11:57 PC ssu_backup[21011]: entry:1
+ 5월 25 20:11:57 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:11:57 PC ssu_backup[21011]: entry:3
+ 5월 25 20:11:57 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:11:57 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:11:57 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:11:57 PC ssu_backup[21011]: after backup
+ 5월 25 20:11:57 PC ssu_backup[21011]: entry:4
+ 5월 25 20:11:57 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:00 PC ssu_backup[21011]: before backup
+ 5월 25 20:12:00 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:00 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:00 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:12:00 PC ssu_backup[21011]: entry:1
+ 5월 25 20:12:00 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:00 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:00 PC ssu_backup[21011]: entry:2
+ 5월 25 20:12:00 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:00 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:12:00 PC ssu_backup[21011]: entry:3
+ 5월 25 20:12:00 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:00 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:00 PC ssu_backup[21011]: after backup
+ 5월 25 20:12:00 PC ssu_backup[21011]: entry:4
+ 5월 25 20:12:00 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:03 PC ssu_backup[21011]: before backup
+ 5월 25 20:12:03 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:03 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:03 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:12:03 PC ssu_backup[21011]: entry:1
+ 5월 25 20:12:03 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:03 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:03 PC ssu_backup[21011]: entry:2
+ 5월 25 20:12:03 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:03 PC ssu_backup[21011]: entry:3
+ 5월 25 20:12:03 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:12:03 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:03 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:03 PC ssu_backup[21011]: after backup
+ 5월 25 20:12:03 PC ssu_backup[21011]: entry:4
+ 5월 25 20:12:03 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:06 PC ssu_backup[21011]: before backup
+ 5월 25 20:12:06 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:06 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:06 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:12:06 PC ssu_backup[21011]: entry:1
+ 5월 25 20:12:06 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:06 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:06 PC ssu_backup[21011]: entry:2
+ 5월 25 20:12:06 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:12:06 PC ssu_backup[21011]: entry:3
+ 5월 25 20:12:06 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:06 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:06 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:06 PC ssu_backup[21011]: after backup
+ 5월 25 20:12:06 PC ssu_backup[21011]: entry:4
+ 5월 25 20:12:06 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:09 PC ssu_backup[21011]: before backup
+ 5월 25 20:12:09 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:09 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:09 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:12:09 PC ssu_backup[21011]: entry:1
+ 5월 25 20:12:09 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:09 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:09 PC ssu_backup[21011]: entry:2
+ 5월 25 20:12:09 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:12:09 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:09 PC ssu_backup[21011]: after backup
+ 5월 25 20:12:09 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:09 PC ssu_backup[21011]: entry:3
+ 5월 25 20:12:09 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:09 PC ssu_backup[21011]: entry:4
+ 5월 25 20:12:09 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:12 PC ssu_backup[21011]: before backup
+ 5월 25 20:12:12 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:12 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:12 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:12:12 PC ssu_backup[21011]: entry:1
+ 5월 25 20:12:12 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:12 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:12 PC ssu_backup[21011]: entry:2
+ 5월 25 20:12:12 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:12 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:12:12 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:12 PC ssu_backup[21011]: entry:3
+ 5월 25 20:12:12 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:12 PC ssu_backup[21011]: after backup
+ 5월 25 20:12:12 PC ssu_backup[21011]: entry:4
+ 5월 25 20:12:12 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:15 PC ssu_backup[21011]: before backup
+ 5월 25 20:12:15 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:15 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:15 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:12:15 PC ssu_backup[21011]: entry:1
+ 5월 25 20:12:15 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:15 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:15 PC ssu_backup[21011]: entry:2
+ 5월 25 20:12:15 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:12:15 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:15 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:15 PC ssu_backup[21011]: entry:3
+ 5월 25 20:12:15 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:15 PC ssu_backup[21011]: after backup
+ 5월 25 20:12:15 PC ssu_backup[21011]: entry:4
+ 5월 25 20:12:15 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:18 PC ssu_backup[21011]: before backup
+ 5월 25 20:12:18 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:18 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:18 PC ssu_backup[21011]: entry:1
+ 5월 25 20:12:18 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:12:18 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:18 PC ssu_backup[21011]: entry:2
+ 5월 25 20:12:18 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:18 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:18 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:12:18 PC ssu_backup[21011]: entry:3
+ 5월 25 20:12:18 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:18 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:18 PC ssu_backup[21011]: after backup
+ 5월 25 20:12:18 PC ssu_backup[21011]: entry:4
+ 5월 25 20:12:18 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:21 PC ssu_backup[21011]: before backup
+ 5월 25 20:12:21 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:21 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:21 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:12:21 PC ssu_backup[21011]: entry:1
+ 5월 25 20:12:21 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:21 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:21 PC ssu_backup[21011]: ssu_backup[21011]entry:2
+ 5월 25 20:12:21 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:21 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:12:21 PC ssu_backup[21011]: entry:3
+ 5월 25 20:12:21 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:21 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:21 PC ssu_backup[21011]: after backup
+ 5월 25 20:12:21 PC ssu_backup[21011]: entry:4
+ 5월 25 20:12:21 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:24 PC ssu_backup[21011]: before backup
+ 5월 25 20:12:24 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:24 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:24 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:12:24 PC ssu_backup[21011]: entry:1
+ 5월 25 20:12:24 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:24 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:24 PC ssu_backup[21011]: entry:2
+ 5월 25 20:12:24 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:12:24 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:24 PC ssu_backup[21011]: entry:3
+ 5월 25 20:12:24 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:24 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:24 PC ssu_backup[21011]: after backup
+ 5월 25 20:12:24 PC ssu_backup[21011]: entry:4
+ 5월 25 20:12:24 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:27 PC ssu_backup[21011]: before backup
+ 5월 25 20:12:27 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:27 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:27 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:12:27 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:27 PC ssu_backup[21011]: entry:2
+ 5월 25 20:12:27 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:27 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:12:27 PC ssu_backup[21011]: entry:1
+ 5월 25 20:12:27 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:27 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:27 PC ssu_backup[21011]: entry:3
+ 5월 25 20:12:27 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:27 PC ssu_backup[21011]: after backup
+ 5월 25 20:12:27 PC ssu_backup[21011]: entry:4
+ 5월 25 20:12:27 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:30 PC ssu_backup[21011]: before backup
+ 5월 25 20:12:30 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:30 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:30 PC ssu_backup[21011]: entry:1
+ 5월 25 20:12:30 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:12:30 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:30 PC ssu_backup[21011]: entry:2
+ 5월 25 20:12:30 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:30 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:30 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:12:30 PC ssu_backup[21011]: entry:3
+ 5월 25 20:12:30 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:30 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:30 PC ssu_backup[21011]: after backup
+ 5월 25 20:12:30 PC ssu_backup[21011]: entry:4
+ 5월 25 20:12:30 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:33 PC ssu_backup[21011]: before backup
+ 5월 25 20:12:33 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:33 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:33 PC ssu_backup[21011]: entry:1
+ 5월 25 20:12:33 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:12:33 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:33 PC ssu_backup[21011]: entry:2
+ 5월 25 20:12:33 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:33 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:33 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:12:33 PC ssu_backup[21011]: entry:3
+ 5월 25 20:12:33 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:33 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:33 PC ssu_backup[21011]: after backup
+ 5월 25 20:12:33 PC ssu_backup[21011]: entry:4
+ 5월 25 20:12:33 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:36 PC ssu_backup[21011]: before backup
+ 5월 25 20:12:36 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:36 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:36 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:12:36 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:36 PC ssu_backup[21011]: ssu_backup[21011]entry:1
+ 5월 25 20:12:36 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:36 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:12:36 PC ssu_backup[21011]: entry:2
+ 5월 25 20:12:36 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:36 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:36 PC ssu_backup[21011]: entry:3
+ 5월 25 20:12:36 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:36 PC ssu_backup[21011]: entry:4
+ 5월 25 20:12:36 PC ssu_backup[21011]: after backup
+ 5월 25 20:12:36 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:39 PC ssu_backup[21011]: before backup
+ 5월 25 20:12:39 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:39 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:39 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:12:39 PC ssu_backup[21011]: entry:1
+ 5월 25 20:12:39 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:39 PC ssu_backup[21011]: entry:2
+ 5월 25 20:12:39 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:39 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:39 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:12:39 PC ssu_backup[21011]: entry:3
+ 5월 25 20:12:39 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:39 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:39 PC ssu_backup[21011]: after backup
+ 5월 25 20:12:39 PC ssu_backup[21011]: entry:4
+ 5월 25 20:12:39 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:42 PC ssu_backup[21011]: before backup
+ 5월 25 20:12:42 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:42 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:42 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:12:42 PC ssu_backup[21011]: entry:1
+ 5월 25 20:12:42 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:42 PC ssu_backup[21011]: entry:2
+ 5월 25 20:12:42 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:42 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:42 PC ssu_backup[21011]: entry:3
+ 5월 25 20:12:42 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:42 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:12:42 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:42 PC ssu_backup[21011]: after backup
+ 5월 25 20:12:42 PC ssu_backup[21011]: entry:4
+ 5월 25 20:12:42 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:45 PC ssu_backup[21011]: before backup
+ 5월 25 20:12:45 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:45 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:45 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:12:45 PC ssu_backup[21011]: entry:2
+ 5월 25 20:12:45 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:45 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:45 PC ssu_backup[21011]: entry:1
+ 5월 25 20:12:45 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:45 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:12:45 PC ssu_backup[21011]: entry:3
+ 5월 25 20:12:45 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:45 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:45 PC ssu_backup[21011]: after backup
+ 5월 25 20:12:45 PC ssu_backup[21011]: entry:4
+ 5월 25 20:12:45 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:48 PC ssu_backup[21011]: before backup
+ 5월 25 20:12:48 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:48 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:48 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:12:48 PC ssu_backup[21011]: entry:1
+ 5월 25 20:12:48 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:48 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:48 PC ssu_backup[21011]: entry:2
+ 5월 25 20:12:48 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:12:48 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:48 PC ssu_backup[21011]: entry:3
+ 5월 25 20:12:48 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:48 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:48 PC ssu_backup[21011]: after backup
+ 5월 25 20:12:48 PC ssu_backup[21011]: entry:4
+ 5월 25 20:12:48 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:51 PC ssu_backup[21011]: before backup
+ 5월 25 20:12:51 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:51 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:51 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:12:51 PC ssu_backup[21011]: entry:1
+ 5월 25 20:12:51 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:51 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:51 PC ssu_backup[21011]: entry:2
+ 5월 25 20:12:51 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:51 PC ssu_backup[21011]: entry:3
+ 5월 25 20:12:51 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:51 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:12:51 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:51 PC ssu_backup[21011]: after backup
+ 5월 25 20:12:51 PC ssu_backup[21011]: entry:4
+ 5월 25 20:12:51 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:54 PC ssu_backup[21011]: before backup
+ 5월 25 20:12:54 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:54 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:54 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:12:54 PC ssu_backup[21011]: entry:1
+ 5월 25 20:12:54 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:54 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:54 PC ssu_backup[21011]: entry:2
+ 5월 25 20:12:54 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:54 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:12:54 PC ssu_backup[21011]: entry:3
+ 5월 25 20:12:54 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:54 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:54 PC ssu_backup[21011]: after backup
+ 5월 25 20:12:54 PC ssu_backup[21011]: entry:4
+ 5월 25 20:12:54 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:57 PC ssu_backup[21011]: before backup
+ 5월 25 20:12:57 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:57 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:57 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:12:57 PC ssu_backup[21011]: entry:2
+ 5월 25 20:12:57 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:57 PC ssu_backup[21011]: entry:1
+ 5월 25 20:12:57 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:12:57 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:12:57 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:12:57 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:12:57 PC ssu_backup[21011]: entry:3
+ 5월 25 20:12:57 PC ssu_backup[21011]: ssu_backup[21011]after backup
+ 5월 25 20:12:57 PC ssu_backup[21011]: entry:4
+ 5월 25 20:12:57 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:12:57 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:00 PC ssu_backup[21011]: before backup
+ 5월 25 20:13:00 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:00 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:00 PC ssu_backup[21011]: entry:1
+ 5월 25 20:13:00 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:00 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:13:00 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:00 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:13:00 PC ssu_backup[21011]: entry:3
+ 5월 25 20:13:00 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:00 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:00 PC ssu_backup[21011]: entry:2
+ 5월 25 20:13:00 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:00 PC ssu_backup[21011]: after backup
+ 5월 25 20:13:00 PC ssu_backup[21011]: entry:4
+ 5월 25 20:13:00 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:03 PC ssu_backup[21011]: before backup
+ 5월 25 20:13:03 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:03 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:03 PC ssu_backup[21011]: entry:1
+ 5월 25 20:13:03 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:13:03 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:03 PC ssu_backup[21011]: entry:2
+ 5월 25 20:13:03 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:03 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:03 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:13:03 PC ssu_backup[21011]: entry:3
+ 5월 25 20:13:03 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:03 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:03 PC ssu_backup[21011]: after backup
+ 5월 25 20:13:03 PC ssu_backup[21011]: entry:4
+ 5월 25 20:13:03 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:06 PC ssu_backup[21011]: before backup
+ 5월 25 20:13:06 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:06 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:06 PC ssu_backup[21011]: entry:1
+ 5월 25 20:13:06 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:13:06 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:06 PC ssu_backup[21011]: entry:2
+ 5월 25 20:13:06 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:06 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:06 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:13:06 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:06 PC ssu_backup[21011]: after backup
+ 5월 25 20:13:06 PC ssu_backup[21011]: entry:4
+ 5월 25 20:13:06 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:06 PC ssu_backup[21011]: entry:3
+ 5월 25 20:13:06 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:09 PC ssu_backup[21011]: before backup
+ 5월 25 20:13:09 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:09 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:09 PC ssu_backup[21011]: entry:1
+ 5월 25 20:13:09 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:13:09 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:09 PC ssu_backup[21011]: entry:2
+ 5월 25 20:13:09 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:09 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:09 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:13:09 PC ssu_backup[21011]: entry:3
+ 5월 25 20:13:09 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:09 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:09 PC ssu_backup[21011]: after backup
+ 5월 25 20:13:09 PC ssu_backup[21011]: entry:4
+ 5월 25 20:13:09 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:12 PC ssu_backup[21011]: before backup
+ 5월 25 20:13:12 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:12 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:12 PC ssu_backup[21011]: entry:1
+ 5월 25 20:13:12 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:13:12 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:12 PC ssu_backup[21011]: entry:2
+ 5월 25 20:13:12 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:12 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:12 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:13:12 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:12 PC ssu_backup[21011]: after backup
+ 5월 25 20:13:12 PC ssu_backup[21011]: entry:4
+ 5월 25 20:13:12 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:12 PC ssu_backup[21011]: entry:3
+ 5월 25 20:13:12 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:15 PC ssu_backup[21011]: before backup
+ 5월 25 20:13:15 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:15 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:15 PC ssu_backup[21011]: entry:1
+ 5월 25 20:13:15 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:13:15 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:15 PC ssu_backup[21011]: entry:2
+ 5월 25 20:13:15 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:15 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:15 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:13:15 PC ssu_backup[21011]: entry:3
+ 5월 25 20:13:15 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:15 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:15 PC ssu_backup[21011]: after backup
+ 5월 25 20:13:15 PC ssu_backup[21011]: entry:4
+ 5월 25 20:13:15 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:18 PC ssu_backup[21011]: before backup
+ 5월 25 20:13:18 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:18 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:18 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:13:18 PC ssu_backup[21011]: entry:1
+ 5월 25 20:13:18 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:18 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:18 PC ssu_backup[21011]: entry:2
+ 5월 25 20:13:18 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:18 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:13:18 PC ssu_backup[21011]: entry:3
+ 5월 25 20:13:18 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:18 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:18 PC ssu_backup[21011]: after backup
+ 5월 25 20:13:18 PC ssu_backup[21011]: entry:4
+ 5월 25 20:13:18 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:21 PC ssu_backup[21011]: before backup
+ 5월 25 20:13:21 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:21 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:21 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:13:21 PC ssu_backup[21011]: entry:1
+ 5월 25 20:13:21 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:21 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:21 PC ssu_backup[21011]: entry:2
+ 5월 25 20:13:21 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:13:21 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:21 PC ssu_backup[21011]: entry:3
+ 5월 25 20:13:21 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:21 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:21 PC ssu_backup[21011]: after backup
+ 5월 25 20:13:21 PC ssu_backup[21011]: entry:4
+ 5월 25 20:13:21 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:22 PC com.canonical.Unity.Scope.Home[1192]: (unity-scope-home:3976): unity-scope-home-WARNING **: scope.vala:247: Failed to get list of remote scopes: Request failed with error 2
+ 5월 25 20:13:24 PC ssu_backup[21011]: before backup
+ 5월 25 20:13:24 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:24 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:24 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:13:24 PC ssu_backup[21011]: entry:2
+ 5월 25 20:13:24 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:24 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:24 PC ssu_backup[21011]: entry:1
+ 5월 25 20:13:24 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:13:24 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:24 PC ssu_backup[21011]: entry:3
+ 5월 25 20:13:24 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:24 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:24 PC ssu_backup[21011]: after backup
+ 5월 25 20:13:24 PC ssu_backup[21011]: entry:4
+ 5월 25 20:13:24 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:27 PC ssu_backup[21011]: before backup
+ 5월 25 20:13:27 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:27 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:27 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:13:27 PC ssu_backup[21011]: entry:1
+ 5월 25 20:13:27 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:27 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:27 PC ssu_backup[21011]: entry:2
+ 5월 25 20:13:27 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:27 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:13:27 PC ssu_backup[21011]: entry:3
+ 5월 25 20:13:27 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:27 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:27 PC ssu_backup[21011]: after backup
+ 5월 25 20:13:27 PC ssu_backup[21011]: entry:4
+ 5월 25 20:13:27 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:30 PC ssu_backup[21011]: before backup
+ 5월 25 20:13:30 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:30 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:30 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:13:30 PC ssu_backup[21011]: entry:1
+ 5월 25 20:13:30 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:30 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:30 PC ssu_backup[21011]: entry:2
+ 5월 25 20:13:30 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:30 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:13:30 PC ssu_backup[21011]: entry:3
+ 5월 25 20:13:30 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:30 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:30 PC ssu_backup[21011]: after backup
+ 5월 25 20:13:30 PC ssu_backup[21011]: entry:4
+ 5월 25 20:13:30 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:33 PC ssu_backup[21011]: before backup
+ 5월 25 20:13:33 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:33 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:33 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:13:33 PC ssu_backup[21011]: entry:1
+ 5월 25 20:13:33 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:33 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:33 PC ssu_backup[21011]: entry:2
+ 5월 25 20:13:33 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:13:33 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:33 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:33 PC ssu_backup[21011]: entry:3
+ 5월 25 20:13:33 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:33 PC ssu_backup[21011]: entry:4
+ 5월 25 20:13:33 PC ssu_backup[21011]: after backup
+ 5월 25 20:13:33 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:36 PC ssu_backup[21011]: before backup
+ 5월 25 20:13:36 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:36 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:36 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:13:36 PC ssu_backup[21011]: entry:1
+ 5월 25 20:13:36 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:36 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:36 PC ssu_backup[21011]: entry:2
+ 5월 25 20:13:36 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:36 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:13:36 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:36 PC ssu_backup[21011]: after backup
+ 5월 25 20:13:36 PC ssu_backup[21011]: entry:3
+ 5월 25 20:13:36 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:36 PC ssu_backup[21011]: entry:4
+ 5월 25 20:13:36 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:39 PC ssu_backup[21011]: before backup
+ 5월 25 20:13:39 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:39 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:39 PC ssu_backup[21011]: entry:1
+ 5월 25 20:13:39 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:39 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:13:39 PC ssu_backup[21011]: entry:2
+ 5월 25 20:13:39 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:39 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:39 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:13:39 PC ssu_backup[21011]: entry:3
+ 5월 25 20:13:39 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:39 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:39 PC ssu_backup[21011]: after backup
+ 5월 25 20:13:39 PC ssu_backup[21011]: entry:4
+ 5월 25 20:13:39 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:42 PC ssu_backup[21011]: before backup
+ 5월 25 20:13:42 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:42 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:42 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:13:42 PC ssu_backup[21011]: entry:1
+ 5월 25 20:13:42 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:42 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:42 PC ssu_backup[21011]: entry:2
+ 5월 25 20:13:42 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:42 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:13:42 PC ssu_backup[21011]: entry:3
+ 5월 25 20:13:42 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:42 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:42 PC ssu_backup[21011]: after backup
+ 5월 25 20:13:42 PC ssu_backup[21011]: entry:4
+ 5월 25 20:13:42 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:45 PC ssu_backup[21011]: before backup
+ 5월 25 20:13:45 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:45 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:45 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:13:45 PC ssu_backup[21011]: entry:1
+ 5월 25 20:13:45 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:45 PC ssu_backup[21011]: entry:2
+ 5월 25 20:13:45 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:45 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:45 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:13:45 PC ssu_backup[21011]: entry:3
+ 5월 25 20:13:45 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:45 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:45 PC ssu_backup[21011]: after backup
+ 5월 25 20:13:45 PC ssu_backup[21011]: entry:4
+ 5월 25 20:13:45 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:48 PC ssu_backup[21011]: before backup
+ 5월 25 20:13:48 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:48 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:48 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:13:48 PC ssu_backup[21011]: entry:2
+ 5월 25 20:13:48 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:48 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:48 PC ssu_backup[21011]: entry:1
+ 5월 25 20:13:48 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:13:48 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:48 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:48 PC ssu_backup[21011]: after backup
+ 5월 25 20:13:48 PC ssu_backup[21011]: entry:4
+ 5월 25 20:13:48 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:48 PC ssu_backup[21011]: entry:3
+ 5월 25 20:13:48 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:51 PC ssu_backup[21011]: before backup
+ 5월 25 20:13:51 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:51 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:51 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:13:51 PC ssu_backup[21011]: entry:1
+ 5월 25 20:13:51 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:51 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:51 PC ssu_backup[21011]: entry:2
+ 5월 25 20:13:51 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:13:51 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:51 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:51 PC ssu_backup[21011]: entry:3
+ 5월 25 20:13:51 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:51 PC ssu_backup[21011]: entry:4
+ 5월 25 20:13:51 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:51 PC ssu_backup[21011]: after backup
+ 5월 25 20:13:54 PC ssu_backup[21011]: before backup
+ 5월 25 20:13:54 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:54 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:54 PC ssu_backup[21011]: entry:1
+ 5월 25 20:13:54 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:13:54 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:54 PC ssu_backup[21011]: entry:2
+ 5월 25 20:13:54 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:54 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:54 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:13:54 PC ssu_backup[21011]: entry:3
+ 5월 25 20:13:54 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:54 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:54 PC ssu_backup[21011]: after backup
+ 5월 25 20:13:54 PC ssu_backup[21011]: entry:4
+ 5월 25 20:13:54 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:57 PC ssu_backup[21011]: before backup
+ 5월 25 20:13:57 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:57 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:57 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:13:57 PC ssu_backup[21011]: entry:1
+ 5월 25 20:13:57 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:13:57 PC ssu_backup[21011]: entry:2
+ 5월 25 20:13:57 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:13:57 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:57 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:13:57 PC ssu_backup[21011]: entry:3
+ 5월 25 20:13:57 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:13:57 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:13:57 PC ssu_backup[21011]: after backup
+ 5월 25 20:13:57 PC ssu_backup[21011]: entry:4
+ 5월 25 20:13:57 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:14:00 PC ssu_backup[21011]: before backup
+ 5월 25 20:14:00 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:14:00 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:14:00 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:14:00 PC ssu_backup[21011]: entry:1
+ 5월 25 20:14:00 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:14:00 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:14:00 PC ssu_backup[21011]: entry:2
+ 5월 25 20:14:00 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:14:00 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:14:00 PC ssu_backup[21011]: entry:3
+ 5월 25 20:14:00 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:14:00 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:14:00 PC ssu_backup[21011]: after backup
+ 5월 25 20:14:00 PC ssu_backup[21011]: entry:4
+ 5월 25 20:14:00 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:14:03 PC ssu_backup[21011]: before backup
+ 5월 25 20:14:03 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:14:03 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:14:03 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:14:03 PC ssu_backup[21011]: entry:1
+ 5월 25 20:14:03 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:14:03 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:14:03 PC ssu_backup[21011]: entry:2
+ 5월 25 20:14:03 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:14:03 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:14:03 PC ssu_backup[21011]: entry:3
+ 5월 25 20:14:03 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:14:03 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:14:03 PC ssu_backup[21011]: after backup
+ 5월 25 20:14:03 PC ssu_backup[21011]: entry:4
+ 5월 25 20:14:03 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:14:06 PC ssu_backup[21011]: before backup
+ 5월 25 20:14:06 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:14:06 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:14:06 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:14:06 PC ssu_backup[21011]: entry:1
+ 5월 25 20:14:06 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:14:06 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:14:06 PC ssu_backup[21011]: entry:2
+ 5월 25 20:14:06 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:14:06 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:14:06 PC ssu_backup[21011]: entry:3
+ 5월 25 20:14:06 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:14:06 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:14:06 PC ssu_backup[21011]: after backup
+ 5월 25 20:14:06 PC ssu_backup[21011]: entry:4
+ 5월 25 20:14:06 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:14:09 PC ssu_backup[21011]: before backup
+ 5월 25 20:14:09 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:14:09 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:14:09 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:14:09 PC ssu_backup[21011]: entry:1
+ 5월 25 20:14:09 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:14:09 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:14:09 PC ssu_backup[21011]: entry:2
+ 5월 25 20:14:09 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:14:09 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:14:09 PC ssu_backup[21011]: entry:3
+ 5월 25 20:14:09 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:14:09 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:14:09 PC ssu_backup[21011]: after backup
+ 5월 25 20:14:09 PC ssu_backup[21011]: entry:4
+ 5월 25 20:14:09 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:14:12 PC ssu_backup[21011]: before backup
+ 5월 25 20:14:12 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:14:12 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:14:12 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:14:12 PC ssu_backup[21011]: entry:1
+ 5월 25 20:14:12 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:14:12 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:14:12 PC ssu_backup[21011]: entry:2
+ 5월 25 20:14:12 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:14:12 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:14:12 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:14:12 PC ssu_backup[21011]: after backup
+ 5월 25 20:14:12 PC ssu_backup[21011]: entry:4
+ 5월 25 20:14:12 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:14:12 PC ssu_backup[21011]: entry:3
+ 5월 25 20:14:12 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:14:15 PC ssu_backup[21011]: before backup
+ 5월 25 20:14:15 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:14:15 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:14:15 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:14:15 PC ssu_backup[21011]: entry:1
+ 5월 25 20:14:15 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:14:15 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:14:15 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:14:15 PC ssu_backup[21011]: entry:2
+ 5월 25 20:14:15 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:14:15 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:14:15 PC ssu_backup[21011]: entry:3
+ 5월 25 20:14:15 PC ssu_backup[21011]: after backup
+ 5월 25 20:14:15 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:14:15 PC ssu_backup[21011]: entry:4
+ 5월 25 20:14:15 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:14:18 PC ssu_backup[21011]: before backup
+ 5월 25 20:14:18 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:14:18 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:14:18 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:14:18 PC ssu_backup[21011]: entry:2
+ 5월 25 20:14:18 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:14:18 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:14:18 PC ssu_backup[21011]: entry:3
+ 5월 25 20:14:18 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:14:18 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:14:18 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:14:18 PC ssu_backup[21011]: after backup
+ 5월 25 20:14:18 PC ssu_backup[21011]: entry:4
+ 5월 25 20:14:18 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:14:18 PC ssu_backup[21011]: entry:1
+ 5월 25 20:14:18 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:14:21 PC ssu_backup[21011]: before backup
+ 5월 25 20:14:21 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:14:21 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:14:21 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:14:21 PC ssu_backup[21011]: entry:2
+ 5월 25 20:14:21 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:14:21 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:14:21 PC ssu_backup[21011]: entry:1
+ 5월 25 20:14:21 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:14:21 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:14:21 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:14:21 PC ssu_backup[21011]: entry:3
+ 5월 25 20:14:21 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:14:21 PC ssu_backup[21011]: entry:4
+ 5월 25 20:14:21 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:14:21 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/test
+ 5월 25 20:14:21 PC ssu_backup[21011]: after backup
+ 5월 25 20:14:21 PC ssu_backup[21011]: added /home/jahn/lsp/p/ssu_backup/dir/test
+ 5월 25 20:14:21 PC ssu_backup[21011]: entry:test
+ 5월 25 20:14:21 PC ssu_backup[21011]: Thread END//tid:3449681664/path:/home/jahn/lsp/p/ssu_backup/dir/test
+ 5월 25 20:14:24 PC ssu_backup[21011]: before backup
+ 5월 25 20:14:24 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:14:24 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:14:24 PC ssu_backup[21011]: entry:1
+ 5월 25 20:14:24 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:14:24 PC ssu_backup[21011]: entry:2
+ 5월 25 20:14:24 PC ssu_backup[21011]: Thread END//tid:3449681664/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:14:24 PC ssu_backup[21011]: Thread END//tid:3458074368/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:14:24 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:14:24 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:14:24 PC ssu_backup[21011]: entry:3
+ 5월 25 20:14:24 PC ssu_backup[21011]: Thread END//tid:3466467072/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:14:24 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:14:24 PC ssu_backup[21011]: src:/home/jahn/lsp/p/ssu_backup/dir/test
+ 5월 25 20:14:24 PC ssu_backup[21011]: entry:4
+ 5월 25 20:14:24 PC ssu_backup[21011]: Thread END//tid:3474859776/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:14:24 PC ssu_backup[21011]: after backup
+ 5월 25 20:14:24 PC ssu_backup[21011]: entry:test
+ 5월 25 20:14:24 PC ssu_backup[21011]: Thread END//tid:3483252480/path:/home/jahn/lsp/p/ssu_backup/dir/test
+ 5월 25 20:16:45 PC ssu_backup[21562]: Daemon initializing
+ 5월 25 20:16:45 PC ssu_backup[21563]: before backup
+ 5월 25 20:16:45 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:16:45 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:16:45 PC ssu_backup[21563]: added /home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:16:45 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:16:45 PC ssu_backup[21563]: entry:1
+ 5월 25 20:16:45 PC ssu_backup[21563]: Thread END//tid:236627712/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:16:45 PC ssu_backup[21563]: added /home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:16:45 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:16:45 PC ssu_backup[21563]: entry:2
+ 5월 25 20:16:45 PC ssu_backup[21563]: Thread END//tid:228235008/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:16:45 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:16:45 PC ssu_backup[21563]: added /home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:16:45 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:16:45 PC ssu_backup[21563]: entry:3
+ 5월 25 20:16:45 PC ssu_backup[21563]: Thread END//tid:219842304/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:16:45 PC ssu_backup[21563]: after backup
+ 5월 25 20:16:45 PC ssu_backup[21563]: added /home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:16:45 PC ssu_backup[21563]: entry:4
+ 5월 25 20:16:45 PC ssu_backup[21563]: Thread END//tid:211449600/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:16:48 PC ssu_backup[21563]: before backup
+ 5월 25 20:16:48 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:16:48 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:16:48 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:16:48 PC ssu_backup[21563]: entry:1
+ 5월 25 20:16:48 PC ssu_backup[21563]: Thread END//tid:211449600/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:16:48 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:16:48 PC ssu_backup[21563]: entry:2
+ 5월 25 20:16:48 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:16:48 PC ssu_backup[21563]: Thread END//tid:219842304/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:16:48 PC ssu_backup[21563]: entry:3
+ 5월 25 20:16:48 PC ssu_backup[21563]: Thread END//tid:228235008/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:16:48 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:16:48 PC ssu_backup[21563]: after backup
+ 5월 25 20:16:48 PC ssu_backup[21563]: entry:4
+ 5월 25 20:16:48 PC ssu_backup[21563]: Thread END//tid:236627712/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:16:51 PC ssu_backup[21563]: before backup
+ 5월 25 20:16:51 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:16:51 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:16:51 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:16:51 PC ssu_backup[21563]: entry:1
+ 5월 25 20:16:51 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:16:51 PC ssu_backup[21563]: entry:2
+ 5월 25 20:16:51 PC ssu_backup[21563]: Thread END//tid:211449600/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:16:51 PC ssu_backup[21563]: Thread END//tid:219842304/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:16:51 PC ssu_backup[21563]: entry:3
+ 5월 25 20:16:51 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:16:51 PC ssu_backup[21563]: Thread END//tid:228235008/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:16:51 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:16:51 PC ssu_backup[21563]: after backup
+ 5월 25 20:16:51 PC ssu_backup[21563]: entry:4
+ 5월 25 20:16:51 PC ssu_backup[21563]: Thread END//tid:236627712/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:16:54 PC ssu_backup[21563]: before backup
+ 5월 25 20:16:54 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:16:54 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:16:54 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:16:54 PC ssu_backup[21563]: entry:1
+ 5월 25 20:16:54 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:16:54 PC ssu_backup[21563]: Thread END//tid:211449600/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:16:54 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:16:54 PC ssu_backup[21563]: entry:2
+ 5월 25 20:16:54 PC ssu_backup[21563]: Thread END//tid:219842304/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:16:54 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:16:54 PC ssu_backup[21563]: after backup
+ 5월 25 20:16:54 PC ssu_backup[21563]: entry:3
+ 5월 25 20:16:54 PC ssu_backup[21563]: Thread END//tid:228235008/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:16:54 PC ssu_backup[21563]: entry:4
+ 5월 25 20:16:54 PC ssu_backup[21563]: Thread END//tid:236627712/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:16:57 PC ssu_backup[21563]: before backup
+ 5월 25 20:16:57 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:16:57 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:16:57 PC ssu_backup[21563]: entry:1
+ 5월 25 20:16:57 PC ssu_backup[21563]: Thread END//tid:211449600/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:16:57 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:16:57 PC ssu_backup[21563]: entry:2
+ 5월 25 20:16:57 PC ssu_backup[21563]: Thread END//tid:219842304/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:16:57 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:16:57 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:16:57 PC ssu_backup[21563]: entry:3
+ 5월 25 20:16:57 PC ssu_backup[21563]: Thread END//tid:228235008/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:16:57 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:16:57 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/test
+ 5월 25 20:16:57 PC ssu_backup[21563]: entry:4
+ 5월 25 20:16:57 PC ssu_backup[21563]: Thread END//tid:236627712/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:16:57 PC ssu_backup[21563]: added /home/jahn/lsp/p/ssu_backup/dir/test
+ 5월 25 20:16:57 PC ssu_backup[21563]: after backup
+ 5월 25 20:16:57 PC ssu_backup[21563]: entry:test
+ 5월 25 20:16:57 PC ssu_backup[21563]: Thread END//tid:4294964992/path:/home/jahn/lsp/p/ssu_backup/dir/test
+ 5월 25 20:17:00 PC ssu_backup[21563]: before backup
+ 5월 25 20:17:00 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:17:00 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:17:00 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:17:00 PC ssu_backup[21563]: entry:1
+ 5월 25 20:17:00 PC ssu_backup[21563]: Thread END//tid:4294964992/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:17:00 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:17:00 PC ssu_backup[21563]: entry:2
+ 5월 25 20:17:00 PC ssu_backup[21563]: Thread END//tid:211449600/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:17:00 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:17:00 PC ssu_backup[21563]: entry:3
+ 5월 25 20:17:00 PC ssu_backup[21563]: Thread END//tid:219842304/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:17:00 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:17:00 PC ssu_backup[21563]: src:/home/jahn/lsp/p/ssu_backup/dir/test
+ 5월 25 20:17:00 PC ssu_backup[21563]: entry:4
+ 5월 25 20:17:00 PC ssu_backup[21563]: after backup
+ 5월 25 20:17:00 PC ssu_backup[21563]: Thread END//tid:228235008/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:17:00 PC ssu_backup[21563]: entry:test
+ 5월 25 20:17:00 PC ssu_backup[21563]: Thread END//tid:236627712/path:/home/jahn/lsp/p/ssu_backup/dir/test
+ 5월 25 20:22:42 PC com.canonical.Unity.Scope.Home[1192]: (unity-scope-home:3976): unity-scope-home-WARNING **: scope.vala:247: Failed to get list of remote scopes: Request failed with error 2
+ 5월 25 20:28:19 PC ssu_backup[22247]: Daemon initializing
+ 5월 25 20:28:19 PC ssu_backup[22248]: before backup
+ 5월 25 20:28:19 PC ssu_backup[22248]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:28:19 PC ssu_backup[22248]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:28:19 PC ssu_backup[22248]: added /home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:28:19 PC ssu_backup[22248]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:28:19 PC ssu_backup[22248]: entry:1
+ 5월 25 20:28:19 PC ssu_backup[22248]: Thread END//tid:499382016/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:28:19 PC ssu_backup[22248]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:28:19 PC ssu_backup[22248]: added /home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:28:19 PC ssu_backup[22248]: entry:2
+ 5월 25 20:28:19 PC ssu_backup[22248]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:28:19 PC ssu_backup[22248]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:28:19 PC ssu_backup[22248]: Thread END//tid:402650880/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:28:19 PC ssu_backup[22248]: added /home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:28:19 PC ssu_backup[22248]: after backup
+ 5월 25 20:28:19 PC ssu_backup[22248]: entry:3
+ 5월 25 20:28:19 PC ssu_backup[22248]: Thread END//tid:490989312/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:28:19 PC ssu_backup[22248]: added /home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:28:19 PC ssu_backup[22248]: entry:4
+ 5월 25 20:28:19 PC ssu_backup[22248]: Thread END//tid:482596608/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:28:22 PC ssu_backup[22248]: before backup
+ 5월 25 20:28:22 PC ssu_backup[22248]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:28:22 PC ssu_backup[22248]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:28:22 PC ssu_backup[22248]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:28:22 PC ssu_backup[22248]: entry:2
+ 5월 25 20:28:22 PC ssu_backup[22248]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:28:22 PC ssu_backup[22248]: Thread END//tid:490989312/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:28:22 PC ssu_backup[22248]: entry:1
+ 5월 25 20:28:22 PC ssu_backup[22248]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:28:22 PC ssu_backup[22248]: Thread END//tid:482596608/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:28:22 PC ssu_backup[22248]: entry:3
+ 5월 25 20:28:22 PC ssu_backup[22248]: Thread END//tid:402650880/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:28:22 PC ssu_backup[22248]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:28:22 PC ssu_backup[22248]: after backup
+ 5월 25 20:28:22 PC ssu_backup[22248]: entry:4
+ 5월 25 20:28:22 PC ssu_backup[22248]: Thread END//tid:499382016/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:28:25 PC ssu_backup[22248]: before backup
+ 5월 25 20:28:25 PC ssu_backup[22248]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:28:25 PC ssu_backup[22248]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:28:25 PC ssu_backup[22248]: entry:1
+ 5월 25 20:28:25 PC ssu_backup[22248]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:28:25 PC ssu_backup[22248]: Thread END//tid:482596608/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:28:25 PC ssu_backup[22248]: entry:2
+ 5월 25 20:28:25 PC ssu_backup[22248]: Thread END//tid:490989312/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:28:25 PC ssu_backup[22248]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:28:25 PC ssu_backup[22248]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:28:25 PC ssu_backup[22248]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:28:25 PC ssu_backup[22248]: src:/home/jahn/lsp/p/ssu_backup/dir/test
+ 5월 25 20:28:25 PC ssu_backup[22248]: entry:3
+ 5월 25 20:28:25 PC ssu_backup[22248]: Thread END//tid:402650880/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:28:25 PC ssu_backup[22248]: entry:4
+ 5월 25 20:28:25 PC ssu_backup[22248]: after backup
+ 5월 25 20:28:25 PC ssu_backup[22248]: Thread END//tid:499382016/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:28:25 PC ssu_backup[22248]: added /home/jahn/lsp/p/ssu_backup/dir/test
+ 5월 25 20:28:25 PC ssu_backup[22248]: entry:test
+ 5월 25 20:28:25 PC ssu_backup[22248]: Thread END//tid:394258176/path:/home/jahn/lsp/p/ssu_backup/dir/test
+ 5월 25 20:28:28 PC ssu_backup[22248]: before backup
+ 5월 25 20:28:28 PC ssu_backup[22248]: src:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:28:28 PC ssu_backup[22248]: src:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:28:28 PC ssu_backup[22248]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2
+ 5월 25 20:28:28 PC ssu_backup[22248]: entry:2
+ 5월 25 20:28:28 PC ssu_backup[22248]: Thread END//tid:482596608/path:/home/jahn/lsp/p/ssu_backup/dir/2
+ 5월 25 20:28:28 PC ssu_backup[22248]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:28:28 PC ssu_backup[22248]: entry:1
+ 5월 25 20:28:28 PC ssu_backup[22248]: Thread END//tid:394258176/path:/home/jahn/lsp/p/ssu_backup/dir/1
+ 5월 25 20:28:28 PC ssu_backup[22248]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3
+ 5월 25 20:28:28 PC ssu_backup[22248]: entry:3
+ 5월 25 20:28:28 PC ssu_backup[22248]: Thread END//tid:490989312/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/3
+ 5월 25 20:28:28 PC ssu_backup[22248]: src:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:28:28 PC ssu_backup[22248]: src:/home/jahn/lsp/p/ssu_backup/dir/test
+ 5월 25 20:28:28 PC ssu_backup[22248]: entry:4
+ 5월 25 20:28:28 PC ssu_backup[22248]: Thread END//tid:402650880/path:/home/jahn/lsp/p/ssu_backup/dir/dir2/dir3/4
+ 5월 25 20:28:28 PC ssu_backup[22248]: after backup
+ 5월 25 20:28:28 PC ssu_backup[22248]: entry:test
+ 5월 25 20:28:28 PC ssu_backup[22248]: Thread END//tid:499382016/path:/home/jahn/lsp/p/ssu_backup/dir/test

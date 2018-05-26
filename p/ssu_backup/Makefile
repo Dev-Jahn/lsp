@@ -6,7 +6,7 @@ LIBS2	= -lssl -lcrypto -lpthread
 #MACRO	= -DSHA1
 all : $(NAME) done
 
-$(NAME) : ssu_backup.o daemon.o io.o data.o logger.o util.o error.o
+$(NAME) : ssu_backup.o daemon.o io.o data.o logger.o util.o gc.o
 	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
 
 ssu_backup.o : ssu_backup.c
@@ -27,9 +27,9 @@ logger.o : logger.c
 util.o : util.c
 	$(CC) $(CFLAGS) -c -o $@ $^ $(MACRO)
 
-error.o : error.c
+gc.o : gc.c
 	$(CC) $(CFLAGS) -c -o $@ $^ $(MACRO)
-
+	
 test : test.o util.o
 	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
 

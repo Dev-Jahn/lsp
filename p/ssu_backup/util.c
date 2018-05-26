@@ -13,7 +13,7 @@
 #include <openssl/sha.h>
 #endif
 #include "util.h"
-#include "error.h"
+#include "logger.h"
 
 /* ---------------------------------*/
 /**
@@ -133,7 +133,10 @@ char *gethexname(const char *bakname)
 		{
 			strncpy(name, bakname, i);
 			name[i] = 0;
-			return name;
+			if (fnmatch("[0-9a-f]*",name,0))
+				return NULL;
+			else
+				return name;
 		}
 	return NULL;
 }
@@ -211,27 +214,34 @@ int filter_pid(const struct dirent *dir)
  * @return number of pids found
  */
 /* ---------------------------------*/
-int findpid(const char *procname, int *pidbuf, size_t bufsize)
+int findpid(const char *procname, int *pidbuf, size_t maxpid)
 {
-	struct dirent **entries;
+	struct dirent **de;
 	char pathname[NAME_MAX];
 	char execname[NAME_MAX];
 	char buf[1024], *ptr;
 	int dircnt, pidcnt=0, fd;
 	pid_t pid;
-	if ((dircnt = scandir("/proc", &entries, filter_pid, alphasort))<0)
+	if ((dircnt = scandir("/proc", &de, filter_pid, alphasort))<0)
 		return -1;
-	else if (dircnt > (int)bufsize)
+	else if (dircnt > (int)maxpid)
+	{
+		for (int i=0;i<dircnt;i++)
+			free(de[i]);
+		free(de);
 		return -1;
+	}
 	else
 	{
 		for (int i=0;i<dircnt;i++)
 		{
+			if (de[i]->d_ino == 0)
+				continue;
 			strcpy(pathname, "/proc/");
-			strcat(pathname, entries[i]->d_name);
+			strcat(pathname, de[i]->d_name);
 			strcat(pathname, "/stat");
 			if ((fd = open(pathname, O_RDONLY))<0)
-				return -1;
+				continue;
 			else
 			{
 				read(fd, buf, 1024);
@@ -246,6 +256,10 @@ int findpid(const char *procname, int *pidbuf, size_t bufsize)
 				}
 			}
 		}
+		for (int i=0;i<dircnt;i++)
+			free(de[i]);
+		free(de);
+
 		return pidcnt;
 	}
 }

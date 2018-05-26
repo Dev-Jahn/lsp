@@ -1,0 +1,6 @@
+SHELL=/bin/bash
+TERM=xterm-256color
+PATH=(custom, user)
+LANG=ko_KR.UTF-8
+LANGUAGE=ko_KR
+XDG_RUNTIME_DIR=<set>

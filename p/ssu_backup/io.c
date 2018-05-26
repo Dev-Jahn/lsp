@@ -13,7 +13,7 @@
 #include <string.h>
 #include "io.h"
 #include "ssu_backup.h"
-#include "error.h"
+#include "logger.h"
 
 #define O_OVERWR O_RDWR|O_CREAT|O_TRUNC
 #define O_NOVERW O_RDWR|O_CREAT|O_EXCL

@@ -1,0 +1,16 @@
+=> 0x7fbf1e0128d9 <pthread_join+9>:	mov    0x2d0(%rdi),%eax
+   0x7fbf1e0128df <pthread_join+15>:	test   %eax,%eax
+   0x7fbf1e0128e1 <pthread_join+17>:	js     0x7fbf1e0129e0 <pthread_join+272>
+   0x7fbf1e0128e7 <pthread_join+23>:	cmp    0x628(%rdi),%rdi
+   0x7fbf1e0128ee <pthread_join+30>:	mov    $0x16,%eax
+   0x7fbf1e0128f3 <pthread_join+35>:	je     0x7fbf1e0129dd <pthread_join+269>
+   0x7fbf1e0128f9 <pthread_join+41>:	push   %r15
+   0x7fbf1e0128fb <pthread_join+43>:	push   %r14
+   0x7fbf1e0128fd <pthread_join+45>:	push   %r13
+   0x7fbf1e0128ff <pthread_join+47>:	push   %r12
+   0x7fbf1e012901 <pthread_join+49>:	push   %rbp
+   0x7fbf1e012902 <pthread_join+50>:	push   %rbx
+   0x7fbf1e012903 <pthread_join+51>:	mov    %rsi,%rbp
+   0x7fbf1e012906 <pthread_join+54>:	mov    %rdi,%rbx
+   0x7fbf1e012909 <pthread_join+57>:	sub    $0x38,%rsp
+   0x7fbf1e01290d <pthread_join+61>:	mov    %fs:0x10,%r14
