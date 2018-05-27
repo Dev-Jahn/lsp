@@ -19,7 +19,8 @@
 #include "logger.h"
 #include "gc.h"
 
-#define MAX_HEAP 4294967296
+/*#define MAX_HEAP 4294967296*/
+#define MAX_HEAP 41943040
 #define MAX_THREAD 100000
 #define FIFO_NAME "data.fifo"
 
@@ -41,6 +42,7 @@ void daemon_main()
 {
 	sigset_t set, oldset;
 	sigfillset(&set);
+	sigdelset(&set,SIGABRT);
 
 	if (!ON_P(flag))
 		load_table(&table, targetpath);
@@ -102,7 +104,7 @@ void daemon_backup_dir(const char *srcdir, const char *bakdir)
 	if ((dirnum = scandir(srcdir,&de,filter_default,alphasort)) < 0)
 	{
 		baklog(DELDIR, NULL, basename((char*)srcdir));
-		raise(SIGUSR1);
+		raise(SIGABRT);
 	}
 
 	for (int i=0;i<dirnum;i++)
@@ -152,11 +154,17 @@ void *func_ptr(void *arg)
 }
 void daemon_backup(const char *abspath, const char *bakdir)
 {
+	BakEntry *entry;
+	int modified = 0;
 	/*Filename and absolute path*/
 	char bakname[NAME_MAX+1] = {0};
 	char *bakpath = (char*)malloc(PATH_MAX);
-	BakEntry *entry;
-	int modified = 0;
+	/*Make backup file name*/
+	makename(abspath, bakname, sizeof(bakname));
+	/*Make full path*/
+	strcpy(bakpath,bakdir);
+	strcat(bakpath, "/");
+	strcat(bakpath, bakname);
 	
 	/*Lock the critical section*/
 	lock();	
@@ -169,16 +177,17 @@ void daemon_backup(const char *abspath, const char *bakdir)
 	{
 		errlog("Added %s to table", abspath);
 		entry = load_entry(&table, abspath);
+		modified = 1;
 	}
 
 	/*Check if file is modified*/
-	modified = check_modified(abspath, entry);
+	modified = modified ? 1 : check_modified(abspath, entry);
 
 	/*When file deleted*/
 	if (modified<0)
 	{
 		baklog(DELFILE, entry);
-		raise(SIGUSR1);
+		raise(SIGABRT);
 	}
 
 	/*Delete the oldest backup file, if file count reaches limit*/
@@ -214,23 +223,18 @@ void daemon_backup(const char *abspath, const char *bakdir)
 	/*Unlock the critical section*/
 	unlock();
 
-	/*Make backup file name*/
-	makename(abspath, bakname, sizeof(bakname));
-	/*Make full path*/
-	strcpy(bakpath,bakdir);
-	strcat(bakpath, "/");
-	strcat(bakpath, bakname);
-
+	
 	/*Actual file backup	*/
 	copy(abspath, bakpath);
 	/*If '-n'is on, add path of backup file to the queue*/
 	if (ON_N(flag))
 		enqueue(&(entry->fileQue), bakpath);
+	else
+		free(bakpath);
 }
 
 int daemon_init(void)
 {
-	errlog("Daemon initializing");
 	pid_t pid;
 	int fd, maxfd;
 	/* 1)Create new child process for daemon.*/
@@ -241,7 +245,10 @@ int daemon_init(void)
 	}
 	/* Terminate parent process.*/
 	else if (pid!=0)
+	{
+		errlog("Daemon initializing[%d]",pid);
 		exit(0);
+	}
 	pid = getpid();
 	/* 2)Create new session.*/
 	setsid();
@@ -271,17 +278,14 @@ int daemon_init(void)
 
 static void setsig()
 {
-	struct sigaction act_1;
-	struct sigaction act_2;
-	sigfillset(&act_1.sa_mask);
-	sigfillset(&act_2.sa_mask);
-	act_1.sa_flags = SA_SIGINFO;
-	act_2.sa_flags = SA_SIGINFO;
-	act_1.sa_sigaction = signal_handler;
-	act_2.sa_sigaction = signal_handler;
+	struct sigaction act;
+	sigfillset(&act.sa_mask);
+	act.sa_flags = SA_SIGINFO;
+	act.sa_sigaction = signal_handler;
 
-	sigaction(SIGUSR1, &act_1, NULL);
-	sigaction(SIGUSR2, &act_2, NULL);
+	sigaction(SIGUSR1, &act, NULL);
+	sigaction(SIGUSR2, &act, NULL);
+	sigaction(SIGABRT, &act, NULL);
 }
 
 static void signal_handler(int signo, siginfo_t *info, void *arg)
@@ -290,23 +294,15 @@ static void signal_handler(int signo, siginfo_t *info, void *arg)
 	switch (signo)
 	{
 		int fifo_fd;
-	case SIGUSR1:
-		if (info->si_pid == getpid())
-			baklog(EXIT, NULL);
-		else
-		{
-			baklog(SIGNAL1, NULL, info->si_pid);
-			baklog(EXIT, NULL);
-		}
+	case SIGABRT:
+		baklog(EXIT, NULL);
+		break;
 
-		/*Free all heap memories used*/
-		for (int i=0;i<(int)table.cnt;i++)
-		{
-			for (int j=0;j<(int)table.be[i].fileQue.size;j++)
-				free(dequeue(&(table.be[i].fileQue)));
-			free(&(table.be[i]));
-		}
-		exit(0);
+	case SIGUSR1:
+		baklog(SIGNAL1, NULL, info->si_pid);
+		baklog(EXIT, NULL);
+		break;
+
 	case SIGUSR2:
 		baklog(SIGNAL2, NULL, info->si_pid);
 		baklog(EXIT, NULL);
@@ -315,15 +311,13 @@ static void signal_handler(int signo, siginfo_t *info, void *arg)
 			error(OPEN, fifopath);
 		else
 			send_data(fifo_fd);
-
-		/*Free all heap memories used*/
-		for (int i=0;i<(int)table.cnt;i++)
-			free(&(table.be[i]));
 		close(fifo_fd);
-		exit(0);
+		break;
+
 	default:
 		exit(1);
 	}
+	exit(0);
 }
 
 static void send_data(int fifo_fd)
@@ -333,17 +327,18 @@ static void send_data(int fifo_fd)
 	write(fifo_fd, &table.cnt, sizeof(size_t));
 	for (int i=0;i<(int)table.cnt;i++)
 	{
+		errlog("name:%s",table.be[i].filename);
 		write(fifo_fd, table.be[i].filename, NAME_MAX);
 		write(fifo_fd, table.be[i].abspath, PATH_MAX);
 		write(fifo_fd, &table.be[i].mode, sizeof(mode_t));
 		write(fifo_fd, &table.be[i].mtime_last, sizeof(time_t));
 
+		errlog("Qsize:%ld",table.be[i].fileQue.size);
 		write(fifo_fd, &table.be[i].fileQue.size, sizeof(size_t));
-		for (int j=0;j<(int)table.be[i].fileQue.size;j++)
+		for (int j=0;j<(int)table.be[i].fileQue.size;)
 		{
 			char *tmp = dequeue(&(table.be[i].fileQue));
 			write(fifo_fd, tmp, PATH_MAX);
-			free(tmp);
 		}
 	}
 

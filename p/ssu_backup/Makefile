@@ -3,8 +3,13 @@ CC		= gcc
 CFLAGS	= -W -Wall -ggdb
 LIBS	= -lpthread
 LIBS2	= -lssl -lcrypto -lpthread
+sha_exist := $(shell if [ -f "/usr/include/openssl/sha.h" ];then echo 1;else echo 0;fi)
+#asdf := $(wildcard /usr/include/openssl/sha.h)
 #MACRO	= -DSHA1
-all : $(NAME) done
+all : detect $(NAME) done
+
+detect :
+	@echo $(sha_exist)
 
 $(NAME) : ssu_backup.o daemon.o io.o data.o logger.o util.o gc.o
 	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)

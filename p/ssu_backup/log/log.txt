@@ -1,0 +1,389 @@
+===========================================
+[0526 23:29:20] ssu_backup <pid:16547> Start
+[0526 23:29:20] Backup daemon <pid:16548> initialized.
+[0526 23:29:20] target1.txt [size:12/mtime:0526 23:20:07]
+[0526 23:29:20] target2.txt [size:25/mtime:0526 22:29:47]
+[0526 23:29:20] target3.txt [size:21/mtime:0526 22:29:18]
+[0526 23:29:25] target3.txt [size:21/mtime:0526 22:29:18]
+[0526 23:29:25] target2.txt [size:25/mtime:0526 22:29:47]
+[0526 23:29:25] target1.txt [size:12/mtime:0526 23:20:07]
+[0526 23:29:30] target3.txt [size:21/mtime:0526 22:29:18]
+[0526 23:29:30] target2.txt [size:25/mtime:0526 22:29:47]
+[0526 23:29:30] target1.txt is deleted.
+[0526 23:29:35] Delete oldest [target2.txt, size:25, btime:0526 23:29:20]
+[0526 23:29:35] target2.txt [size:25/mtime:0526 22:29:47]
+[0526 23:29:35] Delete oldest [target3.txt, size:21, btime:0526 23:29:20]
+[0526 23:29:35] target3.txt [size:21/mtime:0526 22:29:18]
+[0526 23:29:40] Delete oldest [target2.txt, size:25, btime:0526 23:29:25]
+[0526 23:29:40] target2.txt [size:25/mtime:0526 22:29:47]
+[0526 23:29:40] Delete oldest [target3.txt, size:21, btime:0526 23:29:25]
+[0526 23:29:40] target3.txt [size:21/mtime:0526 22:29:18]
+[0526 23:29:43] Received SIGUSR1 from <pid:16571>. Discard current entries.
+[0526 23:29:43] ssu_backup <pid:16548> Exit
+===========================================
+[0526 23:29:43] ssu_backup <pid:16571> Start
+[0526 23:29:43] ssu_backup <pid:16571> Exit
+===========================================
+[0526 23:30:56] ssu_backup <pid:16606> Start
+[0526 23:30:56] ssu_backup <pid:16606> Exit
+===========================================
+[0526 23:31:03] ssu_backup <pid:16607> Start
+[0526 23:31:03] ssu_backup <pid:16607> Exit
+===========================================
+[0526 23:31:50] ssu_backup <pid:16616> Start
+[0526 23:31:56] ssu_backup <pid:16616> Exit
+===========================================
+[0526 23:33:27] ssu_backup <pid:16671> Start
+[0526 23:33:27] ssu_backup <pid:16671> Exit
+===========================================
+[0526 23:34:33] ssu_backup <pid:16713> Start
+[0526 23:34:33] ssu_backup <pid:16713> Exit
+===========================================
+[0526 23:34:57] ssu_backup <pid:16756> Start
+[0526 23:34:57] ssu_backup <pid:16756> Exit
+===========================================
+[0526 23:35:53] ssu_backup <pid:16802> Start
+[0526 23:35:53] ssu_backup <pid:16802> Exit
+===========================================
+[0526 23:37:31] ssu_backup <pid:16914> Start
+[0526 23:37:31] ssu_backup <pid:16914> Exit
+===========================================
+[0526 23:37:45] ssu_backup <pid:16923> Start
+[0526 23:37:53] ssu_backup <pid:16923> Exit
+===========================================
+[0526 23:40:01] ssu_backup <pid:16966> Start
+[0526 23:40:01] ssu_backup <pid:16966> Exit
+===========================================
+[0526 23:56:34] ssu_backup <pid:17317> Start
+[0526 23:56:34] ssu_backup <pid:17317> Exit
+===========================================
+[0526 23:57:25] ssu_backup <pid:17391> Start
+[0526 23:57:25] ssu_backup <pid:17391> Exit
+===========================================
+[0526 23:57:32] ssu_backup <pid:17393> Start
+[0526 23:57:34] ssu_backup <pid:17393> Exit
+===========================================
+[0526 23:57:50] ssu_backup <pid:17399> Start
+[0527 00:17:23] ssu_backup <pid:17399> Exit
+===========================================
+[0527 00:20:54] ssu_backup <pid:17640> Start
+[0527 00:20:54] Backup daemon <pid:17641> initialized.
+[0527 00:20:54] test.txt [size:9/mtime:0526 23:04:57]
+[0527 00:20:57] test.txt [size:9/mtime:0526 23:04:57]
+[0527 00:21:00] test.txt [size:9/mtime:0526 23:04:57]
+[0527 00:21:03] Received SIGUSR2 from <pid:17649>. Transfer current entries.
+[0527 00:21:03] ssu_backup <pid:17641> Exit
+===========================================
+[0527 00:21:03] ssu_backup <pid:17649> Start
+[0527 00:21:03] Backup daemon <pid:17651> initialized.
+[0527 00:21:03] Delete oldest [test.txt, size:9, btime:0527 00:20:54]
+[0527 00:21:03] test.txt [size:9/mtime:0526 23:04:57]
+[0527 00:21:06] Delete oldest [test.txt, size:9, btime:0527 00:20:57]
+[0527 00:21:06] test.txt [size:9/mtime:0526 23:04:57]
+[0527 00:21:09] [0527 00:21:09] ssu_backup <pid:17651> Exit
+===========================================
+[0527 00:21:26] ssu_backup <pid:17653> Start
+[0527 00:21:26] Backup daemon <pid:17654> initialized.
+[0527 00:21:26] Delete oldest [target2.txt, size:25, btime:0526 23:29:30]
+[0527 00:21:26] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:21:26] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:21:26] Delete oldest [target3.txt, size:21, btime:0526 23:29:30]
+[0527 00:21:26] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:21:29] Delete oldest [target3.txt, size:21, btime:0526 23:29:35]
+[0527 00:21:29] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:21:29] Delete oldest [target1.txt, size:12, btime:0526 23:29:20]
+[0527 00:21:29] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:21:29] Delete oldest [target2.txt, size:25, btime:0526 23:29:35]
+[0527 00:21:29] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:21:30] Received SIGUSR2 from <pid:17666>. Transfer current entries.
+[0527 00:21:30] ssu_backup <pid:17654> Exit
+===========================================
+[0527 00:22:25] ssu_backup <pid:17681> Start
+[0527 00:22:25] Backup daemon <pid:17682> initialized.
+[0527 00:22:25] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:22:25] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:22:25] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:22:28] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:22:28] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:22:28] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:22:29] Received SIGUSR2 from <pid:17694>. Transfer current entries.
+[0527 00:22:29] ssu_backup <pid:17682> Exit
+===========================================
+[0527 00:22:29] ssu_backup <pid:17694> Start
+[0527 00:22:29] Backup daemon <pid:17695> initialized.
+[0527 00:22:29] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:22:29] target1.txt is modified. [size:12/mtime:0526 23:20:07]
+[0527 00:22:29] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:22:29]  is deleted.
+[0527 00:22:32] Delete oldest [target3.txt, size:21, btime:0527 00:22:25]
+[0527 00:22:32] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:22:32] Delete oldest [target2.txt, size:25, btime:0527 00:22:25]
+[0527 00:22:32] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:22:32] Delete oldest [target1.txt, size:12, btime:0527 00:22:25]
+[0527 00:22:32] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:22:35] [0527 00:22:35] ssu_backup <pid:17695> Exit
+===========================================
+[0527 00:29:45] ssu_backup <pid:17879> Start
+[0527 00:29:45] Backup daemon <pid:17880> initialized.
+[0527 00:29:45] Delete oldest [target3.txt, size:21, btime:0527 00:22:28]
+[0527 00:29:45] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:29:45] Delete oldest [target1.txt, size:12, btime:0527 00:22:28]
+[0527 00:29:45] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:29:45] Delete oldest [target2.txt, size:25, btime:0527 00:22:28]
+[0527 00:29:45] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:29:47] Received SIGUSR2 from <pid:17886>. Transfer current entries.
+[0527 00:29:47] ssu_backup <pid:17880> Exit
+===========================================
+[0527 00:30:13] ssu_backup <pid:17887> Start
+[0527 00:30:13] Backup daemon <pid:17888> initialized.
+[0527 00:30:13] Delete oldest [target3.txt, size:21, btime:0527 00:22:29]
+[0527 00:30:13] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:30:13] Delete oldest [target1.txt, size:12, btime:0527 00:22:29]
+[0527 00:30:13] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:30:13] Delete oldest [target2.txt, size:25, btime:0527 00:22:29]
+[0527 00:30:13] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:30:14] Received SIGUSR2 from <pid:17894>. Transfer current entries.
+[0527 00:30:14] ssu_backup <pid:17888> Exit
+===========================================
+[0527 00:36:22] ssu_backup <pid:17980> Start
+[0527 00:36:22] Backup daemon <pid:17981> initialized.
+[0527 00:36:22] Delete oldest [target1.txt, size:12, btime:0527 00:22:32]
+[0527 00:36:22] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:36:22] Delete oldest [target3.txt, size:21, btime:0527 00:22:32]
+[0527 00:36:22] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:36:22] Delete oldest [target2.txt, size:25, btime:0527 00:22:32]
+[0527 00:36:22] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:36:24] Received SIGUSR2 from <pid:17988>. Transfer current entries.
+[0527 00:36:24] ssu_backup <pid:17981> Exit
+===========================================
+[0527 00:36:24] ssu_backup <pid:17988> Start
+[0527 00:36:24] Backup daemon <pid:17989> initialized.
+[0527 00:36:24] Delete oldest [target3.txt, size:21, btime:0527 00:29:45]
+[0527 00:36:24] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:36:24] Delete oldest [target1.txt, size:12, btime:0527 00:29:45]
+[0527 00:36:24] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:36:24] Delete oldest [target2.txt, size:25, btime:0527 00:29:45]
+[0527 00:36:24] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:36:27] Delete oldest [target3.txt, size:21, btime:0527 00:30:13]
+[0527 00:36:27] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:36:27] Delete oldest [target2.txt, size:25, btime:0527 00:30:13]
+[0527 00:36:27] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:36:27] Delete oldest [target1.txt, size:12, btime:0527 00:30:13]
+[0527 00:36:27] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:36:30] Delete oldest [target3.txt, size:21, btime:0527 00:36:22]
+[0527 00:36:30] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:36:30] Delete oldest [target1.txt, size:12, btime:0527 00:36:22]
+[0527 00:36:30] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:36:30] Delete oldest [target2.txt, size:25, btime:0527 00:36:22]
+[0527 00:36:30] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:36:33] Delete oldest [target3.txt, size:21, btime:0527 00:36:24]
+[0527 00:36:33] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:36:33] Delete oldest [target2.txt, size:25, btime:0527 00:36:24]
+[0527 00:36:33] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:36:33] Delete oldest [target1.txt, size:12, btime:0527 00:36:24]
+[0527 00:36:33] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:36:36] Delete oldest [target3.txt, size:21, btime:0527 00:36:27]
+[0527 00:36:36] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:36:36] Delete oldest [target1.txt, size:12, btime:0527 00:36:27]
+[0527 00:36:36] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:36:36] Delete oldest [target2.txt, size:25, btime:0527 00:36:27]
+[0527 00:36:36] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:36:39] Delete oldest [target3.txt, size:21, btime:0527 00:36:30]
+[0527 00:36:39] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:36:39] Delete oldest [target1.txt, size:12, btime:0527 00:36:30]
+[0527 00:36:39] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:36:39] Delete oldest [target2.txt, size:25, btime:0527 00:36:30]
+[0527 00:36:39] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:36:42] Delete oldest [target3.txt, size:21, btime:0527 00:36:33]
+[0527 00:36:42] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:36:42] Delete oldest [target2.txt, size:25, btime:0527 00:36:33]
+[0527 00:36:42] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:36:42] Delete oldest [target1.txt, size:12, btime:0527 00:36:33]
+[0527 00:36:42] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:36:45] Delete oldest [target3.txt, size:21, btime:0527 00:36:36]
+[0527 00:36:45] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:36:45] Delete oldest [target2.txt, size:25, btime:0527 00:36:36]
+[0527 00:36:45] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:36:45] Delete oldest [target1.txt, size:12, btime:0527 00:36:36]
+[0527 00:36:45] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:36:48] Received SIGUSR1 from <pid:18035>. Discard current entries.
+[0527 00:36:48] ssu_backup <pid:17989> Exit
+===========================================
+[0527 00:36:48] ssu_backup <pid:18035> Start
+[0527 00:36:48] ssu_backup <pid:18035> Exit
+===========================================
+[0527 00:37:00] ssu_backup <pid:18036> Start
+[0527 00:37:00] Backup daemon <pid:18037> initialized.
+[0527 00:37:00] Delete oldest [target3.txt, size:21, btime:0527 00:36:39]
+[0527 00:37:00] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:37:00] Delete oldest [target2.txt, size:25, btime:0527 00:36:39]
+[0527 00:37:00] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:37:00] Delete oldest [target1.txt, size:12, btime:0527 00:36:39]
+[0527 00:37:00] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:37:03] Delete oldest [target3.txt, size:21, btime:0527 00:36:42]
+[0527 00:37:03] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:37:03] Delete oldest [target1.txt, size:12, btime:0527 00:36:42]
+[0527 00:37:03] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:37:03] Delete oldest [target2.txt, size:25, btime:0527 00:36:42]
+[0527 00:37:03] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:37:03] Received SIGUSR2 from <pid:18047>. Transfer current entries.
+[0527 00:37:03] ssu_backup <pid:18037> Exit
+===========================================
+[0527 00:37:03] ssu_backup <pid:18047> Start
+[0527 00:37:03] Backup daemon <pid:18048> initialized.
+[0527 00:37:03] Delete oldest [target2.txt, size:25, btime:0527 00:36:45]
+[0527 00:37:03] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:37:03] Delete oldest [target1.txt, size:12, btime:0527 00:36:45]
+[0527 00:37:03] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:37:03] Delete oldest [target3.txt, size:21, btime:0527 00:36:45]
+[0527 00:37:03] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:37:06] Delete oldest [target3.txt, size:21, btime:0527 00:37:00]
+[0527 00:37:06] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:37:06] Delete oldest [target1.txt, size:12, btime:0527 00:37:00]
+[0527 00:37:06] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:37:06] Delete oldest [target2.txt, size:25, btime:0527 00:37:00]
+[0527 00:37:06] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:37:09] Delete oldest [target3.txt, size:21, btime:0527 00:37:03]
+[0527 00:37:09] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:37:09] Delete oldest [target1.txt, size:12, btime:0527 00:37:03]
+[0527 00:37:09] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:37:09] Delete oldest [target2.txt, size:25, btime:0527 00:37:03]
+[0527 00:37:09] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:37:12] [0527 00:37:12] ssu_backup <pid:18048> Exit
+===========================================
+[0527 00:37:20] ssu_backup <pid:18064> Start
+[0527 00:37:20] Backup daemon <pid:18065> initialized.
+[0527 00:37:20] target3.txt is modified. [size:21/mtime:0526 22:29:18]
+[0527 00:37:20] target1.txt is modified. [size:12/mtime:0526 23:20:07]
+[0527 00:37:20] target2.txt is modified. [size:25/mtime:0526 22:29:47]
+[0527 00:37:23] Delete oldest [target3.txt, size:21, btime:0527 00:37:06]
+[0527 00:37:23] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:37:23] Delete oldest [target1.txt, size:12, btime:0527 00:37:06]
+[0527 00:37:23] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:37:23] Delete oldest [target2.txt, size:25, btime:0527 00:37:06]
+[0527 00:37:23] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:37:26] Delete oldest [target3.txt, size:21, btime:0527 00:37:09]
+[0527 00:37:26] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:37:26] Delete oldest [target1.txt, size:12, btime:0527 00:37:09]
+[0527 00:37:26] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:37:26] Delete oldest [target2.txt, size:25, btime:0527 00:37:09]
+[0527 00:37:26] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:37:29] Delete oldest [target3.txt, size:21, btime:0527 00:37:20]
+[0527 00:37:29] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:37:29] Delete oldest [target1.txt, size:12, btime:0527 00:37:20]
+[0527 00:37:29] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:37:29] Delete oldest [target2.txt, size:25, btime:0527 00:37:20]
+[0527 00:37:29] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:37:31] Received SIGUSR2 from <pid:18084>. Transfer current entries.
+[0527 00:37:31] ssu_backup <pid:18065> Exit
+===========================================
+[0527 00:37:31] ssu_backup <pid:18084> Start
+[0527 00:37:31] Backup daemon <pid:18085> initialized.
+[0527 00:37:31] Delete oldest [target3.txt, size:21, btime:0527 00:37:23]
+[0527 00:37:31] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:37:31] Delete oldest [target1.txt, size:12, btime:0527 00:37:23]
+[0527 00:37:31] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:37:31] Delete oldest [target2.txt, size:25, btime:0527 00:37:23]
+[0527 00:37:31] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:37:34] Delete oldest [target3.txt, size:21, btime:0527 00:37:26]
+[0527 00:37:34] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:37:34] Delete oldest [target1.txt, size:12, btime:0527 00:37:26]
+[0527 00:37:34] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:37:34] Delete oldest [target2.txt, size:25, btime:0527 00:37:26]
+[0527 00:37:34] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:37:37] Delete oldest [target3.txt, size:21, btime:0527 00:37:29]
+[0527 00:37:37] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:37:37] Delete oldest [target2.txt, size:25, btime:0527 00:37:29]
+[0527 00:37:37] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:37:37] Delete oldest [target1.txt, size:12, btime:0527 00:37:29]
+[0527 00:37:37] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:37:40] Delete oldest [target3.txt, size:21, btime:0527 00:37:31]
+[0527 00:37:40] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:37:40] Delete oldest [target2.txt, size:25, btime:0527 00:37:31]
+[0527 00:37:40] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:37:40] Delete oldest [target1.txt, size:12, btime:0527 00:37:31]
+[0527 00:37:40] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:37:43] Delete oldest [target3.txt, size:21, btime:0527 00:37:34]
+[0527 00:37:43] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:37:43] Delete oldest [target1.txt, size:12, btime:0527 00:37:34]
+[0527 00:37:43] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:37:43] Delete oldest [target2.txt, size:25, btime:0527 00:37:34]
+[0527 00:37:43] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:37:46] Delete oldest [target3.txt, size:21, btime:0527 00:37:37]
+[0527 00:37:46] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:37:46] Delete oldest [target1.txt, size:12, btime:0527 00:37:37]
+[0527 00:37:46] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:37:46] Delete oldest [target2.txt, size:25, btime:0527 00:37:37]
+[0527 00:37:46] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:37:49] Delete oldest [target3.txt, size:21, btime:0527 00:37:40]
+[0527 00:37:49] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:37:49] Delete oldest [target1.txt, size:12, btime:0527 00:37:40]
+[0527 00:37:49] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:37:49] Delete oldest [target2.txt, size:25, btime:0527 00:37:40]
+[0527 00:37:49] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:37:52] Delete oldest [target3.txt, size:21, btime:0527 00:37:43]
+[0527 00:37:52] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:37:52] Delete oldest [target2.txt, size:25, btime:0527 00:37:43]
+[0527 00:37:52] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:37:52] Delete oldest [target1.txt, size:12, btime:0527 00:37:43]
+[0527 00:37:52] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:37:55] Delete oldest [target3.txt, size:21, btime:0527 00:37:46]
+[0527 00:37:55] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:37:55] Delete oldest [target1.txt, size:12, btime:0527 00:37:46]
+[0527 00:37:55] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:37:55] Delete oldest [target2.txt, size:25, btime:0527 00:37:46]
+[0527 00:37:55] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:37:58] Delete oldest [target3.txt, size:21, btime:0527 00:37:49]
+[0527 00:37:58] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:37:58] Delete oldest [target1.txt, size:12, btime:0527 00:37:49]
+[0527 00:37:58] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:37:58] Delete oldest [target2.txt, size:25, btime:0527 00:37:49]
+[0527 00:37:58] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:37:58] Received SIGUSR1 from <pid:18135>. Discard current entries.
+[0527 00:37:58] ssu_backup <pid:18085> Exit
+===========================================
+[0527 00:37:58] ssu_backup <pid:18135> Start
+[0527 00:37:58] ssu_backup <pid:18135> Exit
+===========================================
+[0527 00:38:01] ssu_backup <pid:18136> Start
+[0527 00:38:01] Backup daemon <pid:18137> initialized.
+[0527 00:38:01] Delete oldest [target2.txt, size:25, btime:0527 00:37:52]
+[0527 00:38:01] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:38:01] Delete oldest [target3.txt, size:21, btime:0527 00:37:52]
+[0527 00:38:01] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:38:01] Delete oldest [target1.txt, size:12, btime:0527 00:37:52]
+[0527 00:38:01] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:38:04] Delete oldest [target3.txt, size:21, btime:0527 00:37:55]
+[0527 00:38:04] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:38:04] Delete oldest [target2.txt, size:25, btime:0527 00:37:55]
+[0527 00:38:04] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:38:04] Delete oldest [target1.txt, size:12, btime:0527 00:37:55]
+[0527 00:38:04] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:38:05] Received SIGUSR2 from <pid:18148>. Transfer current entries.
+[0527 00:38:05] ssu_backup <pid:18137> Exit
+===========================================
+[0527 00:38:05] ssu_backup <pid:18148> Start
+[0527 00:38:05] Backup daemon <pid:18149> initialized.
+[0527 00:38:05] Delete oldest [target3.txt, size:21, btime:0527 00:37:58]
+[0527 00:38:05] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:38:05] Delete oldest [target2.txt, size:25, btime:0527 00:37:58]
+[0527 00:38:05] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:38:05] Delete oldest [target1.txt, size:12, btime:0527 00:37:58]
+[0527 00:38:05] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:38:08] Delete oldest [target3.txt, size:21, btime:0527 00:38:01]
+[0527 00:38:08] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:38:08] Delete oldest [target2.txt, size:25, btime:0527 00:38:01]
+[0527 00:38:08] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:38:08] Delete oldest [target1.txt, size:12, btime:0527 00:38:01]
+[0527 00:38:08] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:38:11] Delete oldest [target3.txt, size:21, btime:0527 00:38:04]
+[0527 00:38:11] target3.txt [size:21/mtime:0526 22:29:18]
+[0527 00:38:11] Delete oldest [target1.txt, size:12, btime:0527 00:38:04]
+[0527 00:38:11] target1.txt [size:12/mtime:0526 23:20:07]
+[0527 00:38:11] Delete oldest [target2.txt, size:25, btime:0527 00:38:04]
+[0527 00:38:11] target2.txt [size:25/mtime:0526 22:29:47]
+[0527 00:38:13] Received SIGUSR1 from <pid:18164>. Discard current entries.
+[0527 00:38:13] ssu_backup <pid:18149> Exit
+===========================================
+[0527 00:38:13] ssu_backup <pid:18164> Start
+[0527 00:38:13] ssu_backup <pid:18164> Exit

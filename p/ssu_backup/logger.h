@@ -5,19 +5,19 @@
 #include "data.h"
 
 extern char logpath[PATH_MAX];
-enum State { 	START,
-				INIT,
-				BACKUP,
-				MODIFIED,
-				ADDED,
-				DELFILE,
-				DELDIR,
-				DELOLD,
-				DIFF,
-				RESTORE,
-				SIGNAL1,
-				SIGNAL2,
-				EXIT };
+enum State { 	START,		/*Program started*/
+				INIT,		/*Daemon initialized*/
+				BACKUP,		/*Backup file saved*/
+				MODIFIED,	/*File modification detected*/
+				ADDED,		/*New file created in directory*/
+				DELFILE,	/*Target file has been deleted*/
+				DELDIR,		/*Target dir has been deleted*/
+				DELOLD,		/*Oldest backup deleted*/
+				DIFF,		/*Comparing target with latest backup*/
+				RESTORE,	/*Restoring target*/
+				SIGNAL1,	/*Received SIGUSR1*/
+				SIGNAL2,	/*Received SIGUSR2*/
+				EXIT };		/*Exiting the program*/
 
 enum ErrCode { 	NAMELIM,	/*Exceeded filename limit*/
 				PATHLIM,	/*Exceeded pathname limit*/
@@ -33,12 +33,13 @@ enum ErrCode { 	NAMELIM,	/*Exceeded filename limit*/
 				MKDIR,		/*Error during mkdir()*/
 				OPEN,		/*Error during open()*/
 				STAT,		/*Error during stat()*/
-				REMOVE,
+				REMOVE,		/*Error during remove()*/
 				SCAN,		/*Error during scandir()*/
 				CHMOD,		/*Error during chmod()*/
 				SAME,		/*src==dst in copy()*/
 				ONFILE,		/*src:dir, dst:reg in copy()*/
-				PTHCREAT	/*Error during pthread_create()*/
+				PTHCREAT,	/*Error during pthread_create()*/
+				RREAL
 };
 
 

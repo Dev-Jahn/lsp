@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "data.h"
+#include "logger.h"
 #include "gc.h"
 
 Queue gcQue;
@@ -20,14 +21,20 @@ int gc_check()
 {
 	if (used>=limit)
 	{
-		gc_flush();
+		gc_collect();
 		return 1;
 	}
 	else
 		return 0;
 }
 
-void gc_flush(void)
+void gc_clear(void)
+{
+	while (used > 0)
+		gc_free();
+}
+
+void gc_collect(void)
 {
 	while (used > limit * maintain_ratio)
 		gc_free();
@@ -47,5 +54,6 @@ void gc_free(void)
 	struct memblock *mb = dequeue(&gcQue);
 	free(mb->address);
 	used -= mb->size;
+	errlog("Freeing %d bytes", mb->size);
 	free(mb);
 }

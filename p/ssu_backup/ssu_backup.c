@@ -35,8 +35,8 @@ static int setopt(int argc, char *argv[]);
 
 int main(int argc, char *argv[])
 {
-	main_init(argc, argv);	/*Initialize pathes and directories*/
 	log_init();				/*Initialize log directory*/
+	main_init(argc, argv);	/*Initialize pathes and directories*/
 
 	if (ON_P(flag))
 	{
@@ -52,9 +52,6 @@ int main(int argc, char *argv[])
 		compare_bak(targetpath);
 	daemon_init();			/*Run backup daemon*/
 }
-
-/*백업디렉토리에 존재하는 파일로 백업테이블 구성*/
-/*현재 입력받은 파일만 남기고 테이블에서 제외*/
 
 static void main_init(int argc, char *argv[])
 {	/*Set options, get arguments*/
@@ -92,6 +89,10 @@ static void main_init(int argc, char *argv[])
 	/*Convert all pathes to absolute pathes.*/
 	char abspath[PATH_MAX] = {0};
 	realpath(targetpath, abspath);
+	if (ON_R(flag) &&
+			access(targetpath, F_OK) &&
+			strcmp(abspath, targetpath))
+		error(RREAL);
 	strcpy(targetpath, abspath);
 	realpath(bakdirpath, abspath);
 	strcpy(bakdirpath, abspath);
@@ -124,7 +125,7 @@ static void receive_data(int fifo_fd)
 
 		initQueue(&table.be[i].fileQue);
 		read(fifo_fd, &table.be[i].fileQue.size, sizeof(size_t));
-		errlog("Entry:%s\tQueue:%d", table.be[i].filename, table.be[i].fileQue.size);
+		errlog("Entry:%s  Queue:%d", table.be[i].filename, table.be[i].fileQue.size);
 		for (int j=0;j<(int)table.be[i].fileQue.size;j++)
 		{
 			char *buf = (char*)malloc(PATH_MAX);
@@ -149,11 +150,11 @@ static void kill_daemon(void)
 		if (pids[i] == getpid())
 			continue;
 
-		printf("Send siganl to ssu_backup[%d]\n", pids[i]);
+		errlog("Send siganl to ssu_backup[%d]\n", pids[i]);
 
 		if (ON_P(flag))
 		{
-			printf("Siganl[SIGUSR2]:Preserve previous entries.\n\n");
+			errlog("(SIGUSR2) >> Preserve previous entries");
 			kill(pids[i], SIGUSR2);
 
 			/*Open fifo to receive backup table entries*/
@@ -165,7 +166,7 @@ static void kill_daemon(void)
 		}
 		else
 		{
-			printf("Siganl[SIGUSR1]:Discard previous entries.\n\n");
+			errlog("(SIGUSR1) >> Discard previous entries");
 			kill(pids[i], SIGUSR1);
 			while (kill(pids[i],0) == 0)
 				usleep(1);

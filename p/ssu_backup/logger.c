@@ -8,6 +8,7 @@
 #include <stdarg.h>
 #include <limits.h>
 #include <string.h>
+#include <signal.h>
 #include <time.h>
 #include "ssu_backup.h"
 #include "logger.h"
@@ -58,7 +59,7 @@ void baklog(enum State st, BakEntry *bak, ...)
 		filelog( "ssu_backup <pid:%d> Start\n", getpid());
 		break;
 	case INIT:
-		filelog("Backup daemon initialized.\n");
+		filelog("Backup daemon <pid:%d> initialized.\n", getpid());
 		break;
 	case BACKUP:
 		if (stat((char*)(&bak->abspath),&bakstat)<0)
@@ -172,66 +173,137 @@ void error(enum ErrCode err, ...)
 	va_list ap;
 	va_start(ap, err);
 
+	char errstr[1024];
+	char substr[1024];
+	strcpy(errstr, "ERROR: ");
 	switch (err)
 	{
 	case NAMELIM:
-		errlog("Filename is too long. [Limit : %d bytes]\n", NAME_MAX);
+		strcpy(substr,
+			"Filename is too long. [Limit : %d bytes]\n");
+		strcat(errstr,substr);
+		errlog(errstr, NAME_MAX);
 		break;
 	case PATHLIM:
-		errlog("Pathname is too long. [Limit : %d bytes]\n", PATH_MAX);
+		strcpy(substr,
+			"Pathname is too long. [Limit : %d bytes]\n");
+		strcat(errstr,substr);
+		errlog(errstr, PATH_MAX);
 		break;
 	case NAOPT:
-		errlog("'%s' is undefined option. Please check the help page. 'ssu_backup -h'\n", va_arg(ap, char*));
+		strcpy(substr,
+			"'%s' is undefined option. Please check the help page. 'ssu_backup -h'\n");
+		strcat(errstr,substr);
+		errlog(errstr, va_arg(ap, char*));
 		break;
 	case RONLY:
-		errlog("Option 'r' cannot be used with other options.\n");
+		strcpy(substr,
+			"Option 'r' cannot be used with other options.\n");
+		strcat(errstr,substr);
+		errlog(errstr);
+		
 		break;
 	case LESSARG:
-		errlog("Need more arguments.\n");
+		strcpy(substr,
+			"Need more arguments.\n");
+		strcat(errstr,substr);
+		errlog(errstr);
 		break;
 	case MOREARG:
-		errlog("Too much arguments. No period is required in -r, -c.\n");
+		strcpy(substr,
+			"Too much arguments. No period is required in -r, -c.\n");
+		strcat(errstr,substr);
+		errlog(errstr);
 		break;
 	case NAPRD:
-		errlog("Period must be between 3 and 10.\n");
+		strcpy(substr,
+			"Period must be between 3 and 10.\n");
+		strcat(errstr,substr);
+		errlog(errstr);
 		break;
 	case NOFILE:
-		errlog("There is no file named '%s'.\n", va_arg(ap, char*));
+		strcpy(substr,
+			"There is no file named '%s'.\n");
+		strcat(errstr,substr);
+		errlog(errstr, va_arg(ap, char*));
 		break;
 	case NEEDD:
-		errlog("'%s' is directory. Use '-d' option.\n", va_arg(ap, char*));
+		strcpy(substr,
+			"'%s' is directory. Use '-d' option.\n");
+		strcat(errstr,substr);
+		errlog(errstr, va_arg(ap, char*));
 		break;
 	case NOTDIR:
-		errlog("'%s' is not a directory.\n", va_arg(ap, char*));
+		strcpy(substr,
+			"'%s' is not a directory.\n");
+		strcat(errstr,substr);
+		errlog(errstr, va_arg(ap, char*));
 		break;
 	case NOTREG:
-		errlog("'%s' is not a regular file.\n", va_arg(ap, char*));
+		strcpy(substr,
+			"'%s' is not a regular file.\n");
+		strcat(errstr,substr);
+		errlog(errstr, va_arg(ap, char*));
 		break;
 	case MKDIR:
-		errlog("mkdir error for '%s'.\n", va_arg(ap, char*));
+		strcpy(substr,
+			"mkdir error for '%s'.\n");
+		strcat(errstr,substr);
+		errlog(errstr, va_arg(ap, char*));
 		break;
 	case OPEN:
-		errlog("open error for '%s'.\n", va_arg(ap, char*));
+		strcpy(substr,
+			"open error for '%s'.\n");
+		strcat(errstr,substr);
+		errlog(errstr, va_arg(ap, char*));
 		break;
 	case STAT:
-		errlog("stat error for '%s'.\n", va_arg(ap, char*));
+		strcpy(substr,
+			"stat error for '%s'.\n");
+		strcat(errstr,substr);
+		errlog(errstr, va_arg(ap, char*));
 		break;
 	case REMOVE:
-		errlog("remove error for '%s'.\n", va_arg(ap, char*));
+		strcpy(substr,
+			"remove error for '%s'.\n");
+		strcat(errstr,substr);
+		errlog(errstr, va_arg(ap, char*));
 		break;
 	case SCAN:
-		errlog("scandir error for '%s'.\n", va_arg(ap, char*));
+		strcpy(substr,
+			"scandir error for '%s'.\n");
+		strcat(errstr,substr);
+		errlog(errstr, va_arg(ap, char*));
 		break;
 	case CHMOD:
-		errlog("chmod error for '%s'.\n", va_arg(ap, char*));
+		strcpy(substr,
+			"chmod error for '%s'.\n");
+		strcat(errstr,substr);
+		errlog(errstr, va_arg(ap, char*));
 		break;
 	case PTHCREAT:
-		errlog("pthread_create error.\n");
+		strcpy(substr,
+			"pthread_create error.\n");
+		strcat(errstr,substr);
+		errlog(errstr);
+		break;
+	case RREAL:
+		strcpy(substr,
+			"When restoring non-existing file, use absolute path.\n");
+		strcat(errstr,substr);
+		errlog(errstr);
 		break;
 	default:
-		errlog("Unknown error.[%d]\n", err);
+		strcpy(substr,
+			"Unknown error.[%d]\n");
+		strcat(errstr,substr);
+		errlog(errstr, err);
 	}
 
 	va_end(ap);
-	exit(1);
+	/*If the process is daemon, call signal handler*/
+	if (getpgrp() == getsid(0))
+		raise(SIGABRT);
+	else
+		exit(1);
 }

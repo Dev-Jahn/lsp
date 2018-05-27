@@ -290,7 +290,7 @@ void compare_bak(const char *abspath)
 	/*If found*/
 	if (q.size > 0)
 	{
-		printf("[Compare with backup '%s_%s']\n",
+		printf("\n[Compare with backup '%s_%s']\n",
 				filename, getbtime((char*)q.tail->item));
 		baklog(DIFF, NULL, filename, basename(q.tail->item));
 		int status = 0;
@@ -308,7 +308,7 @@ void compare_bak(const char *abspath)
 	}
 	/*Not found*/
 	else
-		printf("There's no backup file of %s\n.", filename); 
+		printf("There's no backup file of '%s'.\n", filename); 
 	baklog(EXIT, NULL);
 	exit(0);
 }
@@ -323,6 +323,7 @@ void restore_bak(const char *abspath)
 {
 	char hexname[NAME_MAX+1];
 	char *filename = basename((char*)abspath);
+	errlog("%s",abspath);
 	Queue q;
 	initQueue(&q);
 	strtohex(abspath, hexname, sizeof(hexname));
@@ -337,7 +338,7 @@ void restore_bak(const char *abspath)
 		struct stat buf;
 		Node *ptr = q.head;
 
-		printf("[%s backup list]\n", filename);
+		printf("\n[%s backup list]\n", filename);
 		printf("0. Exit\n");
 		/*Print backup file list and prompt*/
 		for (int i=1;i<=(int)q.size;i++)
@@ -365,14 +366,17 @@ void restore_bak(const char *abspath)
 				for (int i=1;i<select;i++)
 					ptr = ptr->next;
 				printf("Restoring backup...\n");
-				printf("[%s]\n", filename);
+				printf("\n[%s]\n", filename);
 				copy(ptr->item, abspath);	/*Restore*/
 				cat(abspath);				/*Print*/
 				baklog(RESTORE, NULL, filename, basename(ptr->item));
 				break;
 			}
 			else
+			{
 				printf("Wrong input.\nInput >> ");
+				getchar();
+			}
 		}
 		/*Free*/
 		for (int i=0;i<(int)q.size;i++)
@@ -380,7 +384,7 @@ void restore_bak(const char *abspath)
 	}
 	/*Not found*/
 	else
-		printf("There's no backup file of %s\n.", filename); 
+		printf("There's no backup file of '%s'.\n", filename); 
 	baklog(EXIT, NULL);
 	exit(0);
 }
