@@ -10,16 +10,23 @@
 #include <string.h>
 #include <signal.h>
 #include <time.h>
+#include <errno.h>
 #include "ssu_backup.h"
 #include "logger.h"
 #include "data.h"
 #include "util.h"
 
-#include <errno.h>
-
 char logdirpath[PATH_MAX] = "log";		/*log directory path*/
 char logpath[PATH_MAX];
 
+/*Internal usage*/
+static void filelog(const char *, ...);
+
+/* ---------------------------------*/
+/**
+ * @brief Create log directory and path
+ */
+/* ---------------------------------*/
 void log_init(void)
 {
 	char abspath[PATH_MAX] = {0};
@@ -39,6 +46,15 @@ void log_init(void)
 	strcat(logpath, "log.txt");
 }
 
+/* ---------------------------------*/
+/**
+ * @brief Print the log to file for corresponding situation.
+ *
+ * @param st Current state
+ * @param bak Entry data of backup
+ * @param ... Additional arguments
+ */
+/* ---------------------------------*/
 void baklog(enum State st, BakEntry *bak, ...)
 {
 	va_list ap;
@@ -119,6 +135,14 @@ void baklog(enum State st, BakEntry *bak, ...)
 	va_end(ap);	
 }
 
+/* ---------------------------------*/
+/**
+ * @brief Print formatted string to log file
+ *
+ * @param format Format string
+ * @param ... Additional arguments
+ */
+/* ---------------------------------*/
 void filelog(const char *format, ...)
 {
 	va_list ap;
@@ -134,11 +158,12 @@ void filelog(const char *format, ...)
 
 	va_end(ap);
 }
+
 /* ---------------------------------*/
 /**
- * @brief 
+ * @brief Print log to syslog and stderr
  *
- * @param format Format string for logging
+ * @param format Format string
  * @param ... Argument for additional information
  */
 /* ---------------------------------*/
@@ -154,18 +179,12 @@ void errlog(const char *format, ...)
 	va_end(ap);
 }
 
-/*
- *처리안한 에러
- *SAME
- *ONFILE
- */
-
 /* ---------------------------------*/
 /**
  * @brief Comprehensive error processing.
  *
  * @param err Error code. See header file for more info
- * @param ... Argument for additional information
+ * @param ... Arguments for additional information
  */
 /* ---------------------------------*/
 void error(enum ErrCode err, ...)
@@ -208,16 +227,24 @@ void error(enum ErrCode err, ...)
 			"Need more arguments.\n");
 		strcat(errstr,substr);
 		errlog(errstr);
+		usage();
 		break;
 	case MOREARG:
 		strcpy(substr,
 			"Too much arguments. No period is required in -r, -c.\n");
 		strcat(errstr,substr);
 		errlog(errstr);
+		usage();
 		break;
 	case NAPRD:
 		strcpy(substr,
 			"Period must be between 3 and 10.\n");
+		strcat(errstr,substr);
+		errlog(errstr);
+		break;
+	case NACNT:
+		strcpy(substr,
+			"Argument of '-n' must be natural number.\n");
 		strcat(errstr,substr);
 		errlog(errstr);
 		break;

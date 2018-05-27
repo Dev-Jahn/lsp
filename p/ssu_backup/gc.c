@@ -4,10 +4,20 @@
 #include "logger.h"
 #include "gc.h"
 
+struct memblock
+{
+	void *address;
+	size_t size;
+};
+
 Queue gcQue;
 size_t used;
 size_t limit;
 float maintain_ratio;
+
+/*Internal usage*/
+static void gc_collect();
+static void gc_free();
 
 void gc_start(size_t maxheap, float ratio)
 {

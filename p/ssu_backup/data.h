@@ -44,7 +44,6 @@ typedef struct _BakTable
 void init_table(BakTable *table);
 void load_table(BakTable *table, const char *abspath);
 BakEntry *load_entry(BakTable *table, const char *abspath);
-BakEntry *add_entry(BakTable *table, const char *abspath);
 BakEntry *renew_entry(BakTable *table, const char *abspath);
 int remove_entry(BakTable *table, const char *abspath);
 BakEntry *search_entry(BakTable *table, const char *abspath);
@@ -57,6 +56,5 @@ void *peek(Queue *q);
 int check_modified(const char *abspath, BakEntry *e);
 void compare_bak(const char *abspath);
 void restore_bak(const char *abspath);
-void find_bak(const char *findpath, const char *hexname, Queue *q);
 
 #endif

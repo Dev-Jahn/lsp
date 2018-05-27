@@ -4,7 +4,7 @@
 #include <limits.h>
 #include "data.h"
 
-extern char logpath[PATH_MAX];
+/*Backup logging state*/
 enum State { 	START,		/*Program started*/
 				INIT,		/*Daemon initialized*/
 				BACKUP,		/*Backup file saved*/
@@ -19,6 +19,7 @@ enum State { 	START,		/*Program started*/
 				SIGNAL2,	/*Received SIGUSR2*/
 				EXIT };		/*Exiting the program*/
 
+/*Error code of fatal errors*/
 enum ErrCode { 	NAMELIM,	/*Exceeded filename limit*/
 				PATHLIM,	/*Exceeded pathname limit*/
 				NAOPT,		/*Undefined option*/
@@ -26,6 +27,7 @@ enum ErrCode { 	NAMELIM,	/*Exceeded filename limit*/
 				LESSARG,	/*Not enough arguments in command*/
 				MOREARG,	/*Too many arguments in command*/
 				NAPRD,		/*Period value is out of range*/
+				NACNT,		/*'-n'count invalid*/
 				NOFILE,		/*Can't find the file with given path*/
 				NEEDD,		/*Path is directory, but no '-d'*/
 				NOTDIR,		/*'-d' on, but not a directory*/
@@ -36,16 +38,12 @@ enum ErrCode { 	NAMELIM,	/*Exceeded filename limit*/
 				REMOVE,		/*Error during remove()*/
 				SCAN,		/*Error during scandir()*/
 				CHMOD,		/*Error during chmod()*/
-				SAME,		/*src==dst in copy()*/
-				ONFILE,		/*src:dir, dst:reg in copy()*/
 				PTHCREAT,	/*Error during pthread_create()*/
-				RREAL
+				RREAL		/*Used relative path in -r*/
 };
-
 
 void log_init(void);
 void baklog(enum State st, BakEntry *bak, ...);
-void filelog(const char *format, ...);
 void errlog(const char *format, ...);
 void error(enum ErrCode err, ...);
 

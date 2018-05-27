@@ -8,6 +8,7 @@
 #include <string.h>
 #include <limits.h>
 #include <libgen.h>
+#include <fnmatch.h>
 #include "ssu_backup.h"
 #include "daemon.h"
 #include "logger.h"
@@ -15,13 +16,15 @@
 
 #define MAX_PROC 32768
 #define FIFO_NAME "data.fifo"
+#define SMODE 0664
+
 /*
  *현재는 백업시 모드도 동일하게 백업하도록 구현.
  *별도의 세이브파일에 모드 저장, 정해진 모드로만 백업하도록 수정.
  *복원시 모드를 읽어와서 복원.
  */
 
-unsigned int flag = 000;				/*option flag*/
+unsigned int flag = 0000;				/*option flag*/
 char execname[NAME_MAX];				/*name of executable file*/
 char targetpath[PATH_MAX];				/*backup file path*/
 char bakdirpath[PATH_MAX] = "backup";	/*backup directory path*/
@@ -29,31 +32,45 @@ char fifopath[PATH_MAX];
 int period;
 size_t bakmax; 
 
-static void main_init(int argc, char *argv[]);
-static void kill_daemon(void);
-static int setopt(int argc, char *argv[]);
+/*Internal usage*/
+static void main_init(int, char *[]);
+static void kill_daemon();
+static void receive_data(int);
+static int setopt(int, char *[]);
 
 int main(int argc, char *argv[])
 {
 	log_init();				/*Initialize log directory*/
 	main_init(argc, argv);	/*Initialize pathes and directories*/
-
-	if (ON_P(flag))
+	if (ON_H(flag))
 	{
-		umask(0);
-		mkfifo(fifopath, 0777);
+		usage();
+		exit(0);
 	}
-	init_table(&table);
+
+	
+	init_table(&table);		/*Initialize backup table*/
 	kill_daemon();			/*Kill all existing backup daemon*/
-	baklog(START, NULL);
-	if (ON_R(flag))
+	baklog(START, NULL);	/*Print to logfile*/
+
+	if (ON_R(flag))			/*If -r option on*/
 		restore_bak(targetpath);
-	if (ON_C(flag))
+
+	if (ON_C(flag))			/*If -c option on*/
 		compare_bak(targetpath);
+
 	daemon_init();			/*Run backup daemon*/
 }
 
-static void main_init(int argc, char *argv[])
+/* ---------------------------------*/
+/**
+ * @brief Parse arguments and set the pathes
+ *
+ * @param argc argc of main()
+ * @param argv[] argv of main()
+ */
+/* ---------------------------------*/
+void main_init(int argc, char *argv[])
 {	/*Set options, get arguments*/
 	int argi = setopt(argc, argv);
 	int argnum;
@@ -89,9 +106,7 @@ static void main_init(int argc, char *argv[])
 	/*Convert all pathes to absolute pathes.*/
 	char abspath[PATH_MAX] = {0};
 	realpath(targetpath, abspath);
-	if (ON_R(flag) &&
-			access(targetpath, F_OK) &&
-			strcmp(abspath, targetpath))
+	if (ON_R(flag) && access(targetpath, F_OK) && strcmp(abspath, targetpath))
 		error(RREAL);
 	strcpy(targetpath, abspath);
 	realpath(bakdirpath, abspath);
@@ -109,39 +124,15 @@ static void main_init(int argc, char *argv[])
 		error(MKDIR, bakdirpath);
 }
 
-static void receive_data(int fifo_fd)
-{
-	errlog("Data receiving started");
-
-	read(fifo_fd, &table.cnt, sizeof(size_t));	
-	table.be = realloc(table.be, sizeof(BakEntry)*(table.cnt));
-
-	for (int i=0;i<(int)table.cnt;i++)
-	{
-		read(fifo_fd, table.be[i].filename, NAME_MAX);
-		read(fifo_fd, table.be[i].abspath, PATH_MAX);
-		read(fifo_fd, &table.be[i].mode, sizeof(mode_t));
-		read(fifo_fd, &table.be[i].mtime_last, sizeof(time_t));
-
-		initQueue(&table.be[i].fileQue);
-		read(fifo_fd, &table.be[i].fileQue.size, sizeof(size_t));
-		errlog("Entry:%s  Queue:%d", table.be[i].filename, table.be[i].fileQue.size);
-		for (int j=0;j<(int)table.be[i].fileQue.size;j++)
-		{
-			char *buf = (char*)malloc(PATH_MAX);
-			read(fifo_fd, buf, PATH_MAX);
-			enqueue(&(table.be[i].fileQue), buf);
-			table.be[i].fileQue.size--;
-		}
-	}
-
-	errlog("Data receiving completed");
-	printf("\n");
-}
-
-static void kill_daemon(void)
+/* ---------------------------------*/
+/**
+ * @brief kill all processes with current process name 
+ */
+/* ---------------------------------*/
+void kill_daemon(void)
 {
 	int pids[MAX_PROC], pidcnt, fifo_fd;
+
 	/*Find all processes with process name*/
 	pidcnt = findpid(execname, pids, sizeof(pids));
 	/*Kill them all except itself*/
@@ -149,11 +140,12 @@ static void kill_daemon(void)
 	{
 		if (pids[i] == getpid())
 			continue;
-
 		errlog("Send siganl to ssu_backup[%d]\n", pids[i]);
-
 		if (ON_P(flag))
 		{
+			umask(0);
+			mkfifo(fifopath, 0777);
+
 			errlog("(SIGUSR2) >> Preserve previous entries");
 			kill(pids[i], SIGUSR2);
 
@@ -168,10 +160,52 @@ static void kill_daemon(void)
 		{
 			errlog("(SIGUSR1) >> Discard previous entries");
 			kill(pids[i], SIGUSR1);
+
+			/*Wait until all processes are terminated*/
 			while (kill(pids[i],0) == 0)
 				usleep(1);
 		}
 	}
+}
+
+/* ---------------------------------*/
+/**
+ * @brief Receive backup table through named pipe
+ *
+ * @param fifo_fd Descriptor of named pipe
+ */
+/* ---------------------------------*/
+void receive_data(int fifo_fd)
+{
+	errlog("Data receiving started");
+
+	/*Get the table size*/
+	read(fifo_fd, &table.cnt, sizeof(size_t));	
+	table.be = realloc(table.be, sizeof(BakEntry)*(table.cnt));
+
+	/*Get all entries in the table*/
+	for (int i=0;i<(int)table.cnt;i++)
+	{
+		read(fifo_fd, table.be[i].filename, NAME_MAX);
+		read(fifo_fd, table.be[i].abspath, PATH_MAX);
+		read(fifo_fd, &table.be[i].mode, sizeof(mode_t));
+		read(fifo_fd, &table.be[i].mtime_last, sizeof(time_t));
+
+		initQueue(&table.be[i].fileQue);
+		read(fifo_fd, &table.be[i].fileQue.size, sizeof(size_t));
+		errlog("Entry:%s  Queue:%d", table.be[i].filename, table.be[i].fileQue.size);
+		/*Transfer file queue to entry*/
+		for (int j=0;j<(int)table.be[i].fileQue.size;j++)
+		{
+			char *buf = (char*)malloc(PATH_MAX);
+			read(fifo_fd, buf, PATH_MAX);
+			enqueue(&(table.be[i].fileQue), buf);
+			table.be[i].fileQue.size--;
+		}
+	}
+
+	errlog("Data receiving completed");
+	printf("\n");
 }
 
 /* ---------------------------------*/
@@ -184,10 +218,13 @@ static void kill_daemon(void)
  * @return Index of argument right after option arguments.
  */
 /* ---------------------------------*/
-static int setopt(int argc, char *argv[])
+int setopt(int argc, char *argv[])
 {
 	int c;
-	while ((c=getopt(argc, argv, "drmcn:ps")) != -1)
+#ifdef SHA
+	while ((c=getopt(argc, argv, "drmcpshn:")) != -1)
+#endif
+	while ((c=getopt(argc, argv, "drmcphn:")) != -1)
 	{
 		char ch[2] = {0};
 		switch(c)
@@ -206,13 +243,20 @@ static int setopt(int argc, char *argv[])
 			break;
 		case 'n':
 			flag = flag|OPT_N;
+			if (fnmatch("[0-9]*", optarg, 0))
+				error(NACNT);
 			bakmax = atoi(optarg);
 			break;
 		case 'p':
 			flag = flag|OPT_P;
 			break;
+#ifdef SHA
 		case 's':
 			flag = flag|OPT_S;
+			break;
+#endif
+		case 'h':
+			flag = flag|OPT_H;
 			break;
 		case '?':
 			ch[0] = optopt;
@@ -224,4 +268,25 @@ static int setopt(int argc, char *argv[])
 			error(RONLY);
 	}
 	return optind;
+}
+
+/* ---------------------------------*/
+/**
+ * @brief Print usage
+ */
+/* ---------------------------------*/
+void usage(void)
+{
+	printf("\n[Usage]\n");
+	printf("ssu_backup <FILENAME> [PERIOD]... [OPTION]...\n");
+	printf("[PERIOD] Integer from 3 to 10\n");
+	printf("[OPTION] -d\tBackup directory\n");
+	printf("         -m\tBackup only if modified\n");
+	printf("         -n N\tMaintain N backups\n");
+	printf("         -r\tRestore from backups\n");
+	printf("         -c\tCompare with backup\n");
+	printf("         -p\tPreserve previous table\n");
+#ifdef SHA
+	printf("         -s\tStrict modification check with SHA256\n");
+#endif
 }

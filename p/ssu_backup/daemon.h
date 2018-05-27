@@ -11,6 +11,5 @@ struct argstr
 
 extern BakTable table;
 int daemon_init(void);
-void *func_ptr(void *arg);
 
 #endif

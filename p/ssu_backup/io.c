@@ -21,10 +21,10 @@
 
 /* ---------------------------------*/
 /**
- * @brief src가 파일일 경우에만 사용 
+ * @brief copy src file to dst location
  *
- * @param src 복사할 원본 파일
- * @param dst 복사후 생성할 파일명
+ * @param src source
+ * @param dst destination
  */
 /* ---------------------------------*/
 void copy(const char *src, const char *dst)
@@ -43,10 +43,10 @@ void copy(const char *src, const char *dst)
 
 /* ---------------------------------*/
 /**
- * @brief 권한만 복사
+ * @brief copy the mode of the src to dst
  *
- * @param src 복사원본
- * @param dst 대상
+ * @param src source
+ * @param dst destination
  */
 /* ---------------------------------*/
 void copy_mode(const char *src, const char *dst)

@@ -21,7 +21,7 @@
  *
  * @param str String to convert
  * @param buf Buffer to save the converted string 
- * @param bufsize size of buf
+ * @param bufsize Size of buffer
  *
  * @return Length of the converted string
  */
@@ -35,6 +35,7 @@ ssize_t strtohex(const char *str, char *buf, size_t bufsize)
 		sprintf(buf+i*2,"%02x", str[i]);
 	return len*2;
 }
+
 /* ---------------------------------*/
 /**
  * @brief Convert hexadeciaml string to corresponding ASCII string.
@@ -42,7 +43,7 @@ ssize_t strtohex(const char *str, char *buf, size_t bufsize)
  * @param str String to convert
  * @param buf Buff
  * @param buf Buffer to save the converted string 
- * @param bufsize size of buf
+ * @param bufsize Size of buffer
  *
  * @return Length of the converted string
  */
@@ -61,6 +62,19 @@ ssize_t hextostr(const char *str, char *buf, size_t bufsize)
 	}
 	return len/2;
 }
+
+/* ---------------------------------*/
+/**
+ * @brief Make timestamp with given format
+ *
+ * @param when Time to create stamp
+ * @param buf Buffer to save timestamp
+ * @param bufsize Size of buffer
+ * @param format Format string
+ *
+ * @return Length of timestamp
+ */
+/* ---------------------------------*/
 ssize_t timestamp(time_t when, char *buf, size_t  bufsize, const char *format)
 {
 	int len;
@@ -71,15 +85,16 @@ ssize_t timestamp(time_t when, char *buf, size_t  bufsize, const char *format)
 	else
 		return len;
 }
+
 /* ---------------------------------*/
 /**
  * @brief Convert the path string to 'hexadecimal-code_time-stamp' form.
  *
  * @param pathname Absolute path of target file
  * @param buf Buffer to save the converted string
- * @param bufsize size of buf
+ * @param bufsize Size of buffer
  *
- * @return backup time
+ * @return Backup time
  */
 /* ---------------------------------*/
 time_t makename(const char *pathname, char *buf, size_t bufsize)
@@ -98,13 +113,14 @@ time_t makename(const char *pathname, char *buf, size_t bufsize)
 	}
 	return btime;
 }
+
 /* ---------------------------------*/
 /**
  * @brief Get pointer of timestamp part from backup filename.
  *
  * @param bakname Filename excluding path
  *
- * @return position of timestamp starting
+ * @return Position of timestamp starting
  */
 /* ---------------------------------*/
 char *getbtime(const char *bakname)
@@ -115,6 +131,7 @@ char *getbtime(const char *bakname)
 			return (char*)(bakname+i+1);
 	return NULL;
 }
+
 /* ---------------------------------*/
 /**
  * @brief Get hexadecimal part from backup filename.
@@ -140,7 +157,18 @@ char *gethexname(const char *bakname)
 		}
 	return NULL;
 }
+
 #ifdef SHA
+/* ---------------------------------*/
+/**
+ * @brief Hash the file to 32 byte, convert to 64 digit hex string
+ *
+ * @param pathname File to hash
+ * @param output Buffer to save result
+ *
+ * @return Size of the file, -1 when error
+ */
+/* ---------------------------------*/
 int sha256_file(const char *pathname, char output[SHA256_DIGEST_LENGTH*2+1])
 {
 	int fd, nbytes = 0, filesize = 0;
@@ -174,11 +202,11 @@ int sha256_file(const char *pathname, char output[SHA256_DIGEST_LENGTH*2+1])
 
 /* ---------------------------------*/
 /**
- * @brief scandir 엔트리에서 부모(..)와 현재디렉토리(.)를 제거
+ * @brief Remove '..' and '.' from entries
  *
- * @param dir 디렉토리의 엔트리
+ * @param dir Directory entry
  *
- * @return 포함여부 
+ * @return To include, 1. To exclude, 0.
  */
 /* ---------------------------------*/
 int filter_default(const struct dirent *dir)
@@ -191,11 +219,11 @@ int filter_default(const struct dirent *dir)
 
 /* ---------------------------------*/
 /**
- * @brief catch pid form only
+ * @brief Get pid form only
  *
- * @param dir directory entry
+ * @param dir Directory entry
  *
- * @return if pid 1, else 0
+ * @return If pid, 1. Else 0
  */
 /* ---------------------------------*/
 int filter_pid(const struct dirent *dir)
@@ -209,9 +237,9 @@ int filter_pid(const struct dirent *dir)
  *
  * @param procname Name of the process to find
  * @param procs Buffer array to save pid
- * @param size size of buffer
+ * @param size Size of buffer
  *
- * @return number of pids found
+ * @return Number of pids found
  */
 /* ---------------------------------*/
 int findpid(const char *procname, int *pidbuf, size_t maxpid)
@@ -264,6 +292,15 @@ int findpid(const char *procname, int *pidbuf, size_t maxpid)
 	}
 }
 
+/* ---------------------------------*/
+/**
+ * @brief Print the contents of the file
+ *
+ * @param abspath Absolute path of target file
+ *
+ * @return Success, 0. Else -1.
+ */
+/* ---------------------------------*/
 ssize_t cat(const char *abspath)
 {
 	FILE *fp;

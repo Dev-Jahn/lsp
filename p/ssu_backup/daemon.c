@@ -24,34 +24,46 @@
 #define MAX_THREAD 100000
 #define FIFO_NAME "data.fifo"
 
-void daemon_backup_dir(const char *srcdir, const char *bakdir);
-void daemon_backup(const char *abspath, const char *bakdir);
-static void setsig();
-static void signal_handler(int signo, siginfo_t *info, void *);
-static void send_data(int fifo_fd);
-static void lock();
-static void unlock();
-
 BakTable table;
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
 int occupied = 0, first = 1;
 Queue threadQue;
 
+/*Internal usage*/
+static void daemon_backup_dir(const char *, const char *);
+static void daemon_backup(const char *, const char *);
+static void *func_ptr(void *);
+static void setsig();
+static void signal_handler(int, siginfo_t *, void *);
+static void send_data(int);
+static void lock();
+static void unlock();
+
+/* ---------------------------------*/
+/**
+ * @brief Main routine of daemon
+ */
+/* ---------------------------------*/
 void daemon_main()
 {
+	/*Signal set to block while backup*/
 	sigset_t set, oldset;
 	sigfillset(&set);
 	sigdelset(&set,SIGABRT);
 
+	/*Make the backup entry table from existing backups	*/
 	if (!ON_P(flag))
 		load_table(&table, targetpath);
 	initQueue(&threadQue);
 	gc_start(MAX_HEAP, 0.5);
 
+	/*Backup routine*/
 	while (1)
 	{
+		/*Run garbage collector*/
 		gc_check();
+
 		/*Block all signals during backup*/
 		sigprocmask(SIG_BLOCK, &set, &oldset);
 
@@ -62,7 +74,6 @@ void daemon_main()
 			while(threadQue.size)
 			{
 				pthread_t *tid = (pthread_t*)dequeue(&threadQue);
-				/*errlog("joining %lu",*tid);*/
 				pthread_join(*tid, NULL);
 				free(tid);
 			}
@@ -91,6 +102,14 @@ void daemon_main()
 	exit(0);
 }
 
+/* ---------------------------------*/
+/**
+ * @brief Backup given directory recursively
+ *
+ * @param srcdir Absolute path of source to backup
+ * @param bakdir Absoute path of location to backup
+ */
+/* ---------------------------------*/
 void daemon_backup_dir(const char *srcdir, const char *bakdir)
 {
 	struct dirent **de;
@@ -144,14 +163,30 @@ void daemon_backup_dir(const char *srcdir, const char *bakdir)
 	free(de);
 }
 
+/* ---------------------------------*/
+/**
+ * @brief function to start the thread
+ *
+ * @param arg argument structure
+ *
+ * @return pointer of used structure
+ */
+/* ---------------------------------*/
 void *func_ptr(void *arg)
 {
 	daemon_backup(((struct argstr*)arg)->abspath,
 			((struct argstr*)arg)->bakdir);
-	/*errlog("Thread END//tid:%lu/path:%s",pthread_self(),((struct argstr*)arg)->abspath);*/
-
 	return arg;
 }
+
+/* ---------------------------------*/
+/**
+ * @brief Backup single file
+ *
+ * @param abspath Absolute path to target
+ * @param bakdir backup location
+ */
+/* ---------------------------------*/
 void daemon_backup(const char *abspath, const char *bakdir)
 {
 	BakEntry *entry;
@@ -233,6 +268,13 @@ void daemon_backup(const char *abspath, const char *bakdir)
 		free(bakpath);
 }
 
+/* ---------------------------------*/
+/**
+ * @brief Initialize daemon process
+ *
+ * @return 0, when initialized successfully
+ */
+/* ---------------------------------*/
 int daemon_init(void)
 {
 	pid_t pid;
@@ -276,7 +318,12 @@ int daemon_init(void)
 	return 0;
 }
 
-static void setsig()
+/* ---------------------------------*/
+/**
+ * @brief Set signal handlers
+ */
+/* ---------------------------------*/
+void setsig(void)
 {
 	struct sigaction act;
 	sigfillset(&act.sa_mask);
@@ -288,7 +335,16 @@ static void setsig()
 	sigaction(SIGABRT, &act, NULL);
 }
 
-static void signal_handler(int signo, siginfo_t *info, void *arg)
+/* ---------------------------------*/
+/**
+ * @brief Handler function
+ *
+ * @param signo Sinal number
+ * @param info Additional infomation
+ * @param arg Context structure
+ */
+/* ---------------------------------*/
+void signal_handler(int signo, siginfo_t *info, void *arg)
 {
 	arg++;
 	switch (signo)
@@ -320,7 +376,14 @@ static void signal_handler(int signo, siginfo_t *info, void *arg)
 	exit(0);
 }
 
-static void send_data(int fifo_fd)
+/* ---------------------------------*/
+/**
+ * @brief Send current backup table to newly created process
+ *
+ * @param fifo_fd Descriptor of named pipe
+ */
+/* ---------------------------------*/
+void send_data(int fifo_fd)
 {
 	errlog("Data sending started");
 
@@ -345,7 +408,12 @@ static void send_data(int fifo_fd)
 	errlog("Data sending completed");
 }
 
-static void lock()
+/* ---------------------------------*/
+/**
+ * @brief Lock the critical section
+ */
+/* ---------------------------------*/
+void lock(void)
 {
 	if (ON_D(flag))
 	{
@@ -356,7 +424,12 @@ static void lock()
 	}
 }
 
-static void unlock()
+/* ---------------------------------*/
+/**
+ * @brief Unlock the critical section
+ */
+/* ---------------------------------*/
+void unlock(void)
 {
 	if (ON_D(flag))
 	{

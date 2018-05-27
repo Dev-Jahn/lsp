@@ -13,6 +13,10 @@
 #include "io.h"
 #include "util.h"
 
+/*Internal usage*/
+static BakEntry *add_entry(BakTable *, const char *);
+static void find_bak(const char *, const char *, Queue *);
+
 /* ---------------------------------*/
 /**
  * @brief Initialize as empty table.
@@ -101,7 +105,7 @@ BakEntry *load_entry(BakTable *table, const char *abspath)
  * @param table Pointer of the backup table
  * @param abspath Absolute path of target file
  *
- * @return 
+ * @return Pointer of added entry
  */
 /* ---------------------------------*/
 BakEntry *add_entry(BakTable *table, const char *abspath)
@@ -145,9 +149,9 @@ BakEntry *renew_entry(BakTable *table, const char *abspath)
  * @brief Find the matching entry in the table.
  *
  * @param table Backup table
- * @param abspath absolute path of backup file
+ * @param abspath Absolute path of target file
  *
- * @return matching entry
+ * @return Matching entry
  */
 /* ---------------------------------*/
 BakEntry *search_entry(BakTable *table, const char *abspath)
@@ -158,6 +162,16 @@ BakEntry *search_entry(BakTable *table, const char *abspath)
 	return NULL;
 }
 
+/* ---------------------------------*/
+/**
+ * @brief Remove entry from backup table
+ *
+ * @param table Backup table
+ * @param abspath Absolute path of target file
+ *
+ * @return Success 0, else -1
+ */
+/* ---------------------------------*/
 int remove_entry(BakTable *table, const char *abspath)
 {
 	BakEntry *e = search_entry(table, abspath);
@@ -171,6 +185,14 @@ int remove_entry(BakTable *table, const char *abspath)
 		}
 	return -1;
 }
+
+/* ---------------------------------*/
+/**
+ * @brief Initialize queue
+ *
+ * @param q Queue
+ */
+/* ---------------------------------*/
 void initQueue(Queue *q)
 {
 	q->head = NULL;
@@ -183,7 +205,7 @@ void initQueue(Queue *q)
  * @brief Insert node at the tail. 
  *
  * @param q Queue
- * @param item
+ * @param item Pointer of item to put in
  */
 /* ---------------------------------*/
 void enqueue(Queue *q, void *item)
@@ -273,7 +295,7 @@ int check_modified(const char *abspath, BakEntry *e)
 /**
  * @brief Compare file with latest backup
  *
- * @param abspath
+ * @param abspath Absolute path of target file
  */
 /* ---------------------------------*/
 void compare_bak(const char *abspath)
@@ -316,7 +338,7 @@ void compare_bak(const char *abspath)
 /**
  * @brief Restore file from backup
  *
- * @param abspath File to restore
+ * @param abspath Absolute path of target file
  */
 /* ---------------------------------*/
 void restore_bak(const char *abspath)
