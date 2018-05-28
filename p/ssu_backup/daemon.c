@@ -53,7 +53,7 @@ void daemon_main()
 	sigdelset(&set,SIGABRT);
 
 	/*Make the backup entry table from existing backups	*/
-	if (!ON_P(flag))
+	if (table.cnt == 0)
 		load_table(&table, targetpath);
 	initQueue(&threadQue);
 	gc_start(MAX_HEAP, 0.5);
@@ -394,7 +394,11 @@ void send_data(int fifo_fd)
 		write(fifo_fd, table.be[i].filename, NAME_MAX);
 		write(fifo_fd, table.be[i].abspath, PATH_MAX);
 		write(fifo_fd, &table.be[i].mode, sizeof(mode_t));
+#ifdef HASH
+		write(fifo_fd, &table.be[i].checksum_last, 65);
+#else
 		write(fifo_fd, &table.be[i].mtime_last, sizeof(time_t));
+#endif
 
 		errlog("Qsize:%ld",table.be[i].fileQue.size);
 		write(fifo_fd, &table.be[i].fileQue.size, sizeof(size_t));

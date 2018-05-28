@@ -7,6 +7,9 @@
 #include <string.h>
 #include <libgen.h>
 #include <time.h>
+#ifdef HASH
+#include <openssl/sha.h>
+#endif
 #include "ssu_backup.h"
 #include "logger.h"
 #include "data.h"
@@ -119,9 +122,10 @@ BakEntry *add_entry(BakTable *table, const char *abspath)
 	strcpy(e.filename, basename((char*)abspath));
 	strcpy(e.abspath, abspath);
 	e.mode = statbuf.st_mode;
-	e.mtime_last = statbuf.st_mtime;
-#ifdef SHA
+#ifdef HASH
 	sha256_file(abspath, e.checksum_last);
+#else
+	e.mtime_last = statbuf.st_mtime;
 #endif
 	initQueue(&(e.fileQue));
 	e.updateflag = 1;
@@ -137,9 +141,10 @@ BakEntry *renew_entry(BakTable *table, const char *abspath)
 	if (stat(abspath, &statbuf)<0)
 		error(STAT, abspath);
 	e->mode = statbuf.st_mode;
+#ifdef HASH
+	sha256_file(abspath, e->checksum_last);
+#else
 	e->mtime_last = statbuf.st_mtime;
-#ifdef SHA
-	sha256_file(abspath, e.checksum_last);
 #endif
 	return e;
 }
@@ -279,7 +284,7 @@ int check_modified(const char *abspath, BakEntry *e)
 	struct stat buf;
 	if (stat(abspath, &buf)<0)
 		return -1;
-#ifdef SHA
+#ifdef HASH
 	char checksum[SHA256_DIGEST_LENGTH*2+1];	
 	sha256_file(abspath, checksum);
 	if (strcmp(e->checksum_last, checksum) == 0)

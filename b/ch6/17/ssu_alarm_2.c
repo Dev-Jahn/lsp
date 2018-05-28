@@ -12,21 +12,27 @@ int main(void)
 	char buf[LINE_MAX];
 	int n;
 
+	/*Set signal handler*/
 	if (signal(SIGALRM, ssu_alarm) == SIG_ERR)
 	{
 		fprintf(stderr, "SIGALRM error\n");
 		exit(1);
 	}
 
+	/*Raise SIGALRM after 10sec*/
 	alarm(10);
 
+	/*Read from stdin*/
 	if ((n = read(STDIN_FILENO, buf, LINE_MAX)) < 0)
 	{
 		fprintf(stderr, "read() error\n");
 		exit(1);
 	}
 
+	/*Meaningless*/
 	alarm(0);
+	
+	/*Print buffer*/
 	write(STDOUT_FILENO, buf, n);
 	exit(0);
 }

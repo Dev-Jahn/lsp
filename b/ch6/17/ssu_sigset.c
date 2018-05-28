@@ -5,7 +5,9 @@
 int main(void)
 {
 	sigset_t set;
+	/*Fill signal set with 0*/
 	sigemptyset(&set);
+	/*Add SIGINT to set*/
 	sigaddset(&set, SIGINT);
 
 	switch (sigismember(&set, SIGINT))

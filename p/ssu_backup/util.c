@@ -9,7 +9,7 @@
 #include <fnmatch.h>
 #include <limits.h>
 #include <time.h>
-#ifdef SHA
+#ifdef HASH
 #include <openssl/sha.h>
 #endif
 #include "util.h"
@@ -158,7 +158,7 @@ char *gethexname(const char *bakname)
 	return NULL;
 }
 
-#ifdef SHA
+#ifdef HASH 
 /* ---------------------------------*/
 /**
  * @brief Hash the file to 32 byte, convert to 64 digit hex string

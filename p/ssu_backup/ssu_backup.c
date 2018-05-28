@@ -47,7 +47,6 @@ int main(int argc, char *argv[])
 		usage();
 		exit(0);
 	}
-
 	
 	init_table(&table);		/*Initialize backup table*/
 	kill_daemon();			/*Kill all existing backup daemon*/
@@ -189,7 +188,11 @@ void receive_data(int fifo_fd)
 		read(fifo_fd, table.be[i].filename, NAME_MAX);
 		read(fifo_fd, table.be[i].abspath, PATH_MAX);
 		read(fifo_fd, &table.be[i].mode, sizeof(mode_t));
+#ifdef HASH
+		read(fifo_fd, &table.be[i].checksum_last, 65);
+#else
 		read(fifo_fd, &table.be[i].mtime_last, sizeof(time_t));
+#endif
 
 		initQueue(&table.be[i].fileQue);
 		read(fifo_fd, &table.be[i].fileQue.size, sizeof(size_t));
@@ -221,10 +224,11 @@ void receive_data(int fifo_fd)
 int setopt(int argc, char *argv[])
 {
 	int c;
-#ifdef SHA
+#ifdef HASH
 	while ((c=getopt(argc, argv, "drmcpshn:")) != -1)
-#endif
+#else
 	while ((c=getopt(argc, argv, "drmcphn:")) != -1)
+#endif
 	{
 		char ch[2] = {0};
 		switch(c)
@@ -250,7 +254,7 @@ int setopt(int argc, char *argv[])
 		case 'p':
 			flag = flag|OPT_P;
 			break;
-#ifdef SHA
+#ifdef HASH
 		case 's':
 			flag = flag|OPT_S;
 			break;
@@ -286,7 +290,7 @@ void usage(void)
 	printf("         -r\tRestore from backups\n");
 	printf("         -c\tCompare with backup\n");
 	printf("         -p\tPreserve previous table\n");
-#ifdef SHA
+#ifdef HASH 
 	printf("         -s\tStrict modification check with SHA256\n");
 #endif
 }

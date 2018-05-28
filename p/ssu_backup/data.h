@@ -4,7 +4,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <limits.h>
-#ifdef SHA
+#ifdef HASH
 #include <openssl/sha.h>
 #endif
 
@@ -26,9 +26,16 @@ typedef struct _BakEntry
 	char filename[NAME_MAX];	/*Basename of target*/
 	char abspath[PATH_MAX];		/*Absolute path of target*/
 	mode_t mode;				/*Mode of target*/
-	time_t mtime_last;			/*Last mtime of target*/
-#ifdef SHA
-	char checksum_last[SHA256_DIGEST_LENGTH*2 + 1];
+#ifdef HASH
+	union
+	{
+		time_t mtime_last;			/*Last mtime of target*/
+		char checksum_last[SHA256_DIGEST_LENGTH*2 + 1];
+	} _modcheck;
+#define mtime_last _modcheck.mtime_last
+#define checksum_last _modcheck.checksum_last
+#else
+	time_t mtime_last;
 #endif
 	Queue fileQue;				/*Queue to save backup file path*/
 	char updateflag;			/*Flag to detect deletion*/

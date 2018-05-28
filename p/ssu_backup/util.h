@@ -3,7 +3,7 @@
 
 #include <sys/types.h>
 #include <dirent.h>
-#ifdef SHA
+#ifdef HASH
 #include <openssl/sha.h>
 #endif
 
@@ -13,7 +13,7 @@ ssize_t timestamp(time_t when, char *buf, size_t  bufsize, const char *format);
 time_t makename(const char *pathname, char *buf, size_t bufsize);
 char *getbtime(const char *bakname);
 char *gethexname(const char *bakname);
-#ifdef SHA
+#ifdef HASH
 int sha256_file(const char *pathname, char output[SHA256_DIGEST_LENGTH*2+1]);
 #endif
 int findpid(const char *procname, int *pidbuf, size_t maxpid);
