@@ -15,7 +15,7 @@ int main(void)
 	sigemptyset(&act_int.sa_mask);
 	sigaddset(&act_int.sa_mask, SIGQUIT);
 	act_int.sa_flags = 0;
-
+	/*Set handler*/
 	if (sigaction(SIGINT, &act_int, NULL)<0)
 	{
 		fprintf(stderr, "sigaction(SIGINT) error\n");
@@ -26,7 +26,7 @@ int main(void)
 	sigemptyset(&act_quit.sa_mask);
 	sigaddset(&act_quit.sa_mask, SIGINT);
 	act_quit.sa_flags = 0;
-
+	/*Set handler*/
 	if (sigaction(SIGQUIT, &act_quit, NULL)<0)
 	{
 		fprintf(stderr, "sigaction(SIGQUIT) error\n");
