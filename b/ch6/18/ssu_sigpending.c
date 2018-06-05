@@ -9,6 +9,7 @@ int main(void)
 	sigset_t sig_set;
 	int count = 0;
 
+	/*Block all signals*/
 	sigfillset(&sig_set);
 	sigprocmask(SIG_SETMASK, &sig_set, NULL);
 
@@ -16,7 +17,7 @@ int main(void)
 	{
 		printf("count: %d\n", count++);
 		sleep(1);
-
+		/*Get pending set*/
 		if (sigpending(&pendingset) == 0)
 		{
 			if (sigismember(&pendingset, SIGINT))

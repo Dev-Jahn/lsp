@@ -30,7 +30,7 @@ io.o : io.c
 data.o : data.c
 logger.o : logger.c
 util.o : util.c
-gc.o : gc.c dummy
+gc.o : gc.c
 dummy :
 	
 done :

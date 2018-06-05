@@ -15,6 +15,7 @@ int main(void)
 	sig_act.sa_flags = 0;
 	sig_act.sa_handler = ssu_signal_handler;
 
+	/*Set handler*/
 	if(sigaction(SIGUSR1, &sig_act, NULL) != 0)
 	{
 		fprintf(stderr, "sigaction() error\n");
@@ -24,7 +25,7 @@ int main(void)
 	{
 		sigemptyset(&sig_set);
 		sigaddset(&sig_set, SIGUSR1);
-
+		/*Block signal*/
 		if (sigprocmask(SIG_SETMASK, &sig_set, NULL) !=0)
 		{
 			fprintf(stderr, "sigprocmask() error\n");
@@ -32,13 +33,17 @@ int main(void)
 		}
 		else
 		{
+			/*Send signal*/
 			printf("SIGUSR1 signals are now blocked\n");
 			kill(getpid(), SIGUSR1);
 			printf("after kill()\n");
+			/*Check pending signals*/
 			ssu_check_pending(SIGUSR1, "SIGUSR1");
+			/*Unblock signal*/
 			sigemptyset(&sig_set);
 			sigprocmask(SIG_SETMASK, &sig_set, NULL);
 			printf("SIGUSR1 signals are no longer blocked\n");
+			/*Check pending signals*/
 			ssu_check_pending(SIGUSR1, "SIGUSR1");
 		}
 	}
@@ -49,9 +54,10 @@ int main(void)
 void ssu_check_pending(int signo, char *signame)
 {
 	sigset_t sig_set;
-
+	/*Get pending set*/
 	if (sigpending(&sig_set) != 0)
 		printf("sigpending() error\n");
+	/*Check it*/
 	else if (sigismember(&sig_set, signo))
 		printf("a %s signal is pending\n", signame);
 	else
