@@ -81,7 +81,13 @@ void baklog(enum State st, BakEntry *bak, ...)
 		if (stat((char*)(&bak->abspath),&bakstat)<0)
 			error(STAT, &bak->abspath);
 #ifdef HASH
-		filelog("%s [size:%ld/hash:%s]\n",bak->filename, bakstat.st_size, bak->checksum_last);
+		if (ON_S(flag))
+			filelog("%s [size:%ld/hash:%s]\n",bak->filename, bakstat.st_size, bak->checksum_last);
+		else
+		{
+			timestamp(bak->mtime_last, stamp, sizeof(stamp), "%m%d %H:%M:%S");
+			filelog("%s [size:%ld/mtime:%s]\n",bak->filename, bakstat.st_size, stamp);
+		}
 #else
 		timestamp(bak->mtime_last, stamp, sizeof(stamp), "%m%d %H:%M:%S");
 		filelog("%s [size:%ld/mtime:%s]\n",bak->filename, bakstat.st_size, stamp);
@@ -91,8 +97,13 @@ void baklog(enum State st, BakEntry *bak, ...)
 		if (stat((char*)(&bak->abspath),&bakstat)<0)
 			error(STAT, &bak->abspath);
 #ifdef HASH
-
-		filelog("%s is modified. [size:%ld/hash:%s]\n",bak->filename, bakstat.st_size, bak->checksum_last);
+		if (ON_S(flag))
+			filelog("%s is modified. [size:%ld/hash:%s]\n",bak->filename, bakstat.st_size, bak->checksum_last);
+		else
+		{
+			timestamp(bak->mtime_last, stamp, sizeof(stamp), "%m%d %H:%M:%S");
+			filelog("%s is modified. [size:%ld/mtime:%s]\n",bak->filename, bakstat.st_size, stamp);
+		}
 #else
 		timestamp(bak->mtime_last, stamp, sizeof(stamp), "%m%d %H:%M:%S");
 		filelog("%s is modified. [size:%ld/mtime:%s]\n",bak->filename, bakstat.st_size, stamp);

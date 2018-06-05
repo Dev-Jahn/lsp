@@ -395,7 +395,10 @@ void send_data(int fifo_fd)
 		write(fifo_fd, table.be[i].abspath, PATH_MAX);
 		write(fifo_fd, &table.be[i].mode, sizeof(mode_t));
 #ifdef HASH
-		write(fifo_fd, &table.be[i].checksum_last, 65);
+		if (ON_S(flag))
+			write(fifo_fd, &table.be[i].checksum_last, 65);
+		else
+			write(fifo_fd, &table.be[i].mtime_last, sizeof(time_t));
 #else
 		write(fifo_fd, &table.be[i].mtime_last, sizeof(time_t));
 #endif

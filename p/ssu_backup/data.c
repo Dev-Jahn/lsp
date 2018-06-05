@@ -123,7 +123,10 @@ BakEntry *add_entry(BakTable *table, const char *abspath)
 	strcpy(e.abspath, abspath);
 	e.mode = statbuf.st_mode;
 #ifdef HASH
-	sha256_file(abspath, e.checksum_last);
+	if (ON_S(flag))
+		sha256_file(abspath, e.checksum_last);
+	else
+		e.mtime_last = statbuf.st_mtime;
 #else
 	e.mtime_last = statbuf.st_mtime;
 #endif
@@ -142,7 +145,10 @@ BakEntry *renew_entry(BakTable *table, const char *abspath)
 		error(STAT, abspath);
 	e->mode = statbuf.st_mode;
 #ifdef HASH
-	sha256_file(abspath, e->checksum_last);
+	if (ON_S(flag))
+		sha256_file(abspath, e->checksum_last);
+	else
+		e->mtime_last = statbuf.st_mtime;
 #else
 	e->mtime_last = statbuf.st_mtime;
 #endif
@@ -285,15 +291,19 @@ int check_modified(const char *abspath, BakEntry *e)
 	if (stat(abspath, &buf)<0)
 		return -1;
 #ifdef HASH
-	char checksum[SHA256_DIGEST_LENGTH*2+1];	
-	sha256_file(abspath, checksum);
-	if (strcmp(e->checksum_last, checksum) == 0)
+	if (ON_S(flag))
+	{
+		char checksum[SHA256_DIGEST_LENGTH*2+1];	
+		sha256_file(abspath, checksum);
+		if (strcmp(e->checksum_last, checksum) == 0)
+			return 0;
+	}
+	else if (buf.st_mtime == e->mtime_last)
 #else
 	if (buf.st_mtime == e->mtime_last)
 #endif
 		return 0;
-	else
-		return 1;
+	return 1;
 }
 
 /* ---------------------------------*/

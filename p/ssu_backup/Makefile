@@ -7,11 +7,12 @@ SRCS	= ssu_backup.c daemon.c io.c data.c logger.c util.c gc.c
 CC		= gcc
 CFLAGS	= -W -Wall -ggdb -c
 LIBS	= -lpthread
-LIBS2	= -lssl -lcrypto -lpthread
+LIBS2	= -lpthread -lssl -lcrypto
 SHA 	:= $(shell if [ -f "/usr/include/openssl/sha.h" ];then echo 1;else echo 0;fi)
 
 ifeq ($(SHA),1)
-MACRO	= -DSHA1
+MACRO	= -DHASH
+LIBS 	= $(LIBS2)
 else
 MACRO 	=
 endif
@@ -30,7 +31,7 @@ io.o : io.c
 data.o : data.c
 logger.o : logger.c
 util.o : util.c
-gc.o : gc.c dummy
+gc.o : gc.c
 dummy :
 	
 done :

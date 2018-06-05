@@ -189,7 +189,10 @@ void receive_data(int fifo_fd)
 		read(fifo_fd, table.be[i].abspath, PATH_MAX);
 		read(fifo_fd, &table.be[i].mode, sizeof(mode_t));
 #ifdef HASH
-		read(fifo_fd, &table.be[i].checksum_last, 65);
+		if (ON_S(flag))
+			read(fifo_fd, &table.be[i].checksum_last, 65);
+		else
+			read(fifo_fd, &table.be[i].mtime_last, sizeof(time_t));
 #else
 		read(fifo_fd, &table.be[i].mtime_last, sizeof(time_t));
 #endif

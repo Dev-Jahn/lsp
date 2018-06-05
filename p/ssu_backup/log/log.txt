@@ -245,3 +245,133 @@
 ===========================================
 [0529 03:13:39] ssu_backup <pid:11672> Start
 [0529 03:13:39] ssu_backup <pid:11672> Exit
+===========================================
+[0529 15:26:39] ssu_backup <pid:14093> Start
+[0529 15:26:39] Backup daemon <pid:14094> initialized.
+[0529 15:26:39] test [size:4/mtime:0529 15:26:31]
+[0529 15:26:42] Delete oldest [test, size:4, btime:0529 15:26:39]
+[0529 15:26:42] test [size:4/mtime:0529 15:26:31]
+[0529 15:26:45] Delete oldest [test, size:4, btime:0529 15:26:42]
+[0529 15:26:45] test [size:4/mtime:0529 15:26:31]
+[0529 15:26:48] Delete oldest [test, size:4, btime:0529 15:26:45]
+[0529 15:26:48] test [size:4/mtime:0529 15:26:31]
+[0529 15:26:49] Received SIGUSR1 from <pid:14099>. Discard current entries.
+[0529 15:26:49] ssu_backup <pid:14094> Exit
+===========================================
+[0529 15:26:49] ssu_backup <pid:14099> Start
+[0529 15:26:49] Backup daemon <pid:14100> initialized.
+[0529 15:26:58] Delete oldest [test, size:4, btime:0529 15:26:48]
+[0529 15:26:58] test is modified. [size:4/mtime:0529 15:26:57]
+[0529 15:27:06] Received SIGUSR1 from <pid:14112>. Discard current entries.
+[0529 15:27:06] ssu_backup <pid:14100> Exit
+===========================================
+[0529 15:27:06] ssu_backup <pid:14112> Start
+[0529 15:27:06] Backup daemon <pid:14113> initialized.
+[0529 15:27:24] Delete oldest [test, size:4, btime:0529 15:26:58]
+[0529 15:27:24] test is modified. [size:5/hash:a883dafc480d466ee04e0d6da986bd78eb1fdd2178d04693723da3a8f95d42f4]
+[0529 15:27:48] Delete oldest [test, size:5, btime:0529 15:27:24]
+[0529 15:27:48] test is modified. [size:4/hash:181210f8f9c779c26da1d9b2075bde0127302ee0e3fca38c9a83f5b1dd8e5d3b]
+[0529 15:27:54] Delete oldest [test, size:4, btime:0529 15:27:48]
+[0529 15:27:54] test is modified. [size:5/hash:a883dafc480d466ee04e0d6da986bd78eb1fdd2178d04693723da3a8f95d42f4]
+[0529 15:29:04] Received SIGUSR1 from <pid:14155>. Discard current entries.
+[0529 15:29:04] ssu_backup <pid:14113> Exit
+===========================================
+[0529 15:29:04] ssu_backup <pid:14155> Start
+[0529 15:29:04] Backup daemon <pid:14156> initialized.
+[0529 15:29:04] target3.txt [size:21/hash:b6b4d61b716f3cd5ad3ce88dcb0aa41ac74b5f51284e8cc7666006f2bcfc8856]
+[0529 15:29:04] target1.txt [size:12/hash:c128a30ae703d3b34d8d22f0bd69a5eb55f1678342ffc78da9fcdb80f03e0d3c]
+[0529 15:29:04] target2.txt [size:25/hash:c49af88338a5211b63fce7eff59aadae73b392a8cb4917e834aed596ca352bed]
+[0529 15:29:07] Delete oldest [target3.txt, size:21, btime:0529 15:29:04]
+[0529 15:29:07] target3.txt [size:21/hash:b6b4d61b716f3cd5ad3ce88dcb0aa41ac74b5f51284e8cc7666006f2bcfc8856]
+[0529 15:29:07] Delete oldest [target1.txt, size:12, btime:0529 15:29:04]
+[0529 15:29:07] target1.txt [size:12/hash:c128a30ae703d3b34d8d22f0bd69a5eb55f1678342ffc78da9fcdb80f03e0d3c]
+[0529 15:29:07] Delete oldest [target2.txt, size:25, btime:0529 15:29:04]
+[0529 15:29:07] target2.txt [size:25/hash:c49af88338a5211b63fce7eff59aadae73b392a8cb4917e834aed596ca352bed]
+[0529 15:29:10] Delete oldest [target3.txt, size:21, btime:0529 15:29:07]
+[0529 15:29:10] target3.txt [size:21/hash:b6b4d61b716f3cd5ad3ce88dcb0aa41ac74b5f51284e8cc7666006f2bcfc8856]
+[0529 15:29:10] Delete oldest [target1.txt, size:12, btime:0529 15:29:07]
+[0529 15:29:10] target1.txt [size:12/hash:c128a30ae703d3b34d8d22f0bd69a5eb55f1678342ffc78da9fcdb80f03e0d3c]
+[0529 15:29:10] Delete oldest [target2.txt, size:25, btime:0529 15:29:07]
+[0529 15:29:10] target2.txt [size:25/hash:c49af88338a5211b63fce7eff59aadae73b392a8cb4917e834aed596ca352bed]
+[0529 15:29:13] Delete oldest [target3.txt, size:21, btime:0529 15:29:10]
+[0529 15:29:13] target3.txt [size:21/hash:b6b4d61b716f3cd5ad3ce88dcb0aa41ac74b5f51284e8cc7666006f2bcfc8856]
+[0529 15:29:13] Delete oldest [target1.txt, size:12, btime:0529 15:29:10]
+[0529 15:29:13] target1.txt [size:12/hash:c128a30ae703d3b34d8d22f0bd69a5eb55f1678342ffc78da9fcdb80f03e0d3c]
+[0529 15:29:13] Delete oldest [target2.txt, size:25, btime:0529 15:29:10]
+[0529 15:29:13] target2.txt [size:25/hash:c49af88338a5211b63fce7eff59aadae73b392a8cb4917e834aed596ca352bed]
+[0529 15:29:16] Delete oldest [target3.txt, size:21, btime:0529 15:29:13]
+[0529 15:29:16] target3.txt [size:21/hash:b6b4d61b716f3cd5ad3ce88dcb0aa41ac74b5f51284e8cc7666006f2bcfc8856]
+[0529 15:29:16] Delete oldest [target1.txt, size:12, btime:0529 15:29:13]
+[0529 15:29:16] target1.txt [size:12/hash:c128a30ae703d3b34d8d22f0bd69a5eb55f1678342ffc78da9fcdb80f03e0d3c]
+[0529 15:29:16] Delete oldest [target2.txt, size:25, btime:0529 15:29:13]
+[0529 15:29:16] target2.txt [size:25/hash:c49af88338a5211b63fce7eff59aadae73b392a8cb4917e834aed596ca352bed]
+[0529 15:29:17] Received SIGUSR1 from <pid:14184>. Discard current entries.
+[0529 15:29:17] ssu_backup <pid:14156> Exit
+===========================================
+[0529 15:29:17] ssu_backup <pid:14184> Start
+[0529 15:29:17] Backup daemon <pid:14185> initialized.
+[0529 15:29:32] Received SIGUSR1 from <pid:14204>. Discard current entries.
+[0529 15:29:32] ssu_backup <pid:14185> Exit
+===========================================
+[0529 15:29:32] ssu_backup <pid:14204> Start
+[0529 15:29:32] Backup daemon <pid:14205> initialized.
+[0529 15:29:32] target3.txt [size:21/hash:b6b4d61b716f3cd5ad3ce88dcb0aa41ac74b5f51284e8cc7666006f2bcfc8856]
+[0529 15:29:32] target1.txt [size:12/hash:c128a30ae703d3b34d8d22f0bd69a5eb55f1678342ffc78da9fcdb80f03e0d3c]
+[0529 15:29:32] target2.txt [size:25/hash:c49af88338a5211b63fce7eff59aadae73b392a8cb4917e834aed596ca352bed]
+[0529 15:29:35] target3.txt [size:21/hash:b6b4d61b716f3cd5ad3ce88dcb0aa41ac74b5f51284e8cc7666006f2bcfc8856]
+[0529 15:29:35] target2.txt [size:25/hash:c49af88338a5211b63fce7eff59aadae73b392a8cb4917e834aed596ca352bed]
+[0529 15:29:35] target1.txt [size:12/hash:c128a30ae703d3b34d8d22f0bd69a5eb55f1678342ffc78da9fcdb80f03e0d3c]
+[0529 15:29:38] Delete oldest [target3.txt, size:21, btime:0529 15:29:16]
+[0529 15:29:38] target3.txt [size:21/hash:b6b4d61b716f3cd5ad3ce88dcb0aa41ac74b5f51284e8cc7666006f2bcfc8856]
+[0529 15:29:38] Delete oldest [target2.txt, size:25, btime:0529 15:29:16]
+[0529 15:29:38] target2.txt [size:25/hash:c49af88338a5211b63fce7eff59aadae73b392a8cb4917e834aed596ca352bed]
+[0529 15:29:38] Delete oldest [target1.txt, size:12, btime:0529 15:29:16]
+[0529 15:29:38] target1.txt [size:12/hash:c128a30ae703d3b34d8d22f0bd69a5eb55f1678342ffc78da9fcdb80f03e0d3c]
+[0529 15:29:41] Delete oldest [target3.txt, size:21, btime:0529 15:29:32]
+[0529 15:29:41] target3.txt [size:21/hash:b6b4d61b716f3cd5ad3ce88dcb0aa41ac74b5f51284e8cc7666006f2bcfc8856]
+[0529 15:29:41] Delete oldest [target1.txt, size:12, btime:0529 15:29:32]
+[0529 15:29:41] target1.txt [size:12/hash:c128a30ae703d3b34d8d22f0bd69a5eb55f1678342ffc78da9fcdb80f03e0d3c]
+[0529 15:29:41] Delete oldest [target2.txt, size:25, btime:0529 15:29:32]
+[0529 15:29:41] target2.txt [size:25/hash:c49af88338a5211b63fce7eff59aadae73b392a8cb4917e834aed596ca352bed]
+[0529 15:29:44] Delete oldest [target3.txt, size:21, btime:0529 15:29:35]
+[0529 15:29:44] target3.txt [size:21/hash:b6b4d61b716f3cd5ad3ce88dcb0aa41ac74b5f51284e8cc7666006f2bcfc8856]
+[0529 15:29:44] Delete oldest [target2.txt, size:25, btime:0529 15:29:35]
+[0529 15:29:44] target2.txt [size:25/hash:c49af88338a5211b63fce7eff59aadae73b392a8cb4917e834aed596ca352bed]
+[0529 15:29:44] Delete oldest [target1.txt, size:12, btime:0529 15:29:35]
+[0529 15:29:44] target1.txt [size:12/hash:c128a30ae703d3b34d8d22f0bd69a5eb55f1678342ffc78da9fcdb80f03e0d3c]
+[0529 15:29:47] Received SIGUSR1 from <pid:14236>. Discard current entries.
+[0529 15:29:47] ssu_backup <pid:14205> Exit
+===========================================
+[0529 15:29:47] ssu_backup <pid:14236> Start
+[0529 15:29:47] Backup daemon <pid:14237> initialized.
+[0529 15:29:47] Delete oldest [target3.txt, size:21, btime:0529 15:29:38]
+[0529 15:29:47] Delete oldest [target3.txt, size:21, btime:0529 15:29:41]
+[0529 15:29:47] Delete oldest [target3.txt, size:21, btime:0529 15:29:44]
+[0529 15:29:47] target3.txt [size:21/hash:b6b4d61b716f3cd5ad3ce88dcb0aa41ac74b5f51284e8cc7666006f2bcfc8856]
+[0529 15:29:47] Delete oldest [target1.txt, size:12, btime:0529 15:29:38]
+[0529 15:29:47] Delete oldest [target1.txt, size:12, btime:0529 15:29:41]
+[0529 15:29:47] Delete oldest [target1.txt, size:12, btime:0529 15:29:44]
+[0529 15:29:47] target1.txt [size:12/hash:c128a30ae703d3b34d8d22f0bd69a5eb55f1678342ffc78da9fcdb80f03e0d3c]
+[0529 15:29:47] Delete oldest [target2.txt, size:25, btime:0529 15:29:38]
+[0529 15:29:47] Delete oldest [target2.txt, size:25, btime:0529 15:29:41]
+[0529 15:29:47] Delete oldest [target2.txt, size:25, btime:0529 15:29:44]
+[0529 15:29:47] target2.txt [size:25/hash:c49af88338a5211b63fce7eff59aadae73b392a8cb4917e834aed596ca352bed]
+[0529 15:29:50] Delete oldest [target3.txt, size:21, btime:0529 15:29:47]
+[0529 15:29:50] target3.txt [size:21/hash:b6b4d61b716f3cd5ad3ce88dcb0aa41ac74b5f51284e8cc7666006f2bcfc8856]
+[0529 15:29:50] Delete oldest [target1.txt, size:12, btime:0529 15:29:47]
+[0529 15:29:50] target1.txt [size:12/hash:c128a30ae703d3b34d8d22f0bd69a5eb55f1678342ffc78da9fcdb80f03e0d3c]
+[0529 15:29:50] Delete oldest [target2.txt, size:25, btime:0529 15:29:47]
+[0529 15:29:50] target2.txt [size:25/hash:c49af88338a5211b63fce7eff59aadae73b392a8cb4917e834aed596ca352bed]
+[0529 15:29:50] Received SIGUSR1 from <pid:14249>. Discard current entries.
+[0529 15:29:50] ssu_backup <pid:14237> Exit
+===========================================
+[0529 15:29:50] ssu_backup <pid:14249> Start
+[0529 15:29:50] Backup daemon <pid:14250> initialized.
+[0529 15:30:11] Delete oldest [target1.txt, size:12, btime:0529 15:29:50]
+[0529 15:30:11] target1.txt is modified. [size:13/hash:ff2724fc0cbc3c36019536fa29cf2d26dff67df421c470b9f95729d686da1c6f]
+[0529 15:30:41] Received SIGUSR1 from <pid:14316>. Discard current entries.
+[0529 15:30:41] ssu_backup <pid:14250> Exit
+===========================================
+[0529 15:30:41] ssu_backup <pid:14316> Start
+[0529 15:30:41] Compared [target1.txt] with [2f686f6d652f6a61686e2f6c73702f702f7373755f6261636b75702f646972312f746172676574312e747874_0529153011].
+[0529 15:30:41] ssu_backup <pid:14316> Exit
