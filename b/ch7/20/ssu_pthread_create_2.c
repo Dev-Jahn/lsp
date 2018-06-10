@@ -36,10 +36,12 @@ int main(void)
 	for (i=0;i<THREAD_NUM;i++)
 	{
 		sum = sum+i;
+		/*initialize argument struct*/
 		thread_data_array[i].thread_index = i;
 		thread_data_array[i].sum = sum;
 		thread_data_array[i].message = messages[i];
 		printf("Creating thread %d\n", i);
+		/*create new thread with given argument*/
 		if (pthread_create(&tid[i], NULL, ssu_printhello, (void *)&thread_data_array[i])!=0)
 		{
 			fprintf(stderr, "pthread_create error\n");
@@ -56,12 +58,13 @@ void *ssu_printhello(void *arg)
 	char *message;
 	int thread_index;
 	int sum;
-
+	/*parse data from argument structure*/
 	sleep(1);
 	data = (struct thread_data*)arg;
 	thread_index = data->thread_index;
 	sum=data->sum;
 	message = data->message;
+	/*print data*/
 	printf("Thread %d: %s Sum=%d\n", thread_index, message, sum);
 	return NULL;
 }

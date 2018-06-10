@@ -11,12 +11,14 @@ int main(void)
 {
 	pthread_t loc_tid;
 
+	/*create new thread*/
 	if (pthread_create(&loc_tid, NULL, ssu_thread, NULL) !=0)
 	{
 		fprintf(stderr, "pthread_create error\n");
 		exit(1);
 	}
 	sleep(5);
+	/*if thread id is equal*/
 	if (pthread_equal(loc_tid, glo_tid) == 0)
 	{
 		printf("다른 쓰레드\n");
@@ -28,6 +30,7 @@ int main(void)
 
 void *ssu_thread(void *arg)
 {
+	/*get thread id and put it in global variable*/
 	printf("쓰레드에서 자신의 tid를 전역변수에 할당\n");
 	glo_tid = pthread_self();
 	return NULL;

@@ -10,12 +10,14 @@ int main(void)
 {
 	pthread_t tid1, tid2;
 
+	/*create new thread*/
 	if (pthread_create(&tid1, NULL, ssu_thread1, NULL) != 0)
 	{
 		fprintf(stderr, "pthread_create error\n");
 		exit(1);
 	}
 
+	/*create new thread*/
 	if (pthread_create(&tid2, NULL, ssu_thread2, NULL) != 0)
 	{
 		fprintf(stderr, "pthread_create error\n");
@@ -23,6 +25,8 @@ int main(void)
 	}
 
 	printf("thread1의 리턴을 기다림\n");
+
+	/*wait for thread 1 to exit*/
 	pthread_join(tid1, NULL);
 	exit(0);
 }
@@ -31,6 +35,7 @@ void *ssu_thread1(void *arg)
 {
 	int i;
 
+	/*print 5~1*/
 	for (i=5;i != 0;i--)
 	{
 		printf("thread1: %d\n", i);
@@ -45,6 +50,7 @@ void *ssu_thread2(void *arg)
 {
 	int i;
 
+	/*print 8~1*/
 	for (i=8;i != 0;i--)
 	{
 		printf("thread2: %d\n", i);
