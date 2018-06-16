@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <pthread.h>
 
 #define VALUE_DONE 10
@@ -18,8 +19,10 @@ int main(void)
 {
 	pthread_t tid1, tid2;
 
+	/*create new threads*/
 	pthread_create(&tid1, NULL, &ssu_thread1, NULL);
 	pthread_create(&tid2, NULL, &ssu_thread2, NULL);
+	/*wait for threads to exit*/
 	pthread_join(tid1, NULL);
 	pthread_join(tid2, NULL);
 	printf("final value: %d\n", glo_val);
@@ -30,12 +33,15 @@ void *ssu_thread1(void *arg)
 {
 	while(1)
 	{
+		/*wait for signal*/
 		pthread_mutex_lock(&lock);
 		pthread_cond_wait(&cond, &lock);
+		/*if signaled, increase the value*/
 		glo_val++;
 		printf("global value ssu_thread1: %d\n", glo_val);
 		pthread_mutex_unlock(&lock);
 
+		/*if value reaches threshold, exit*/
 		if (glo_val>=VALUE_DONE)
 			return NULL;
 	}
@@ -46,6 +52,7 @@ void *ssu_thread2(void *arg)
 	while (1)
 	{
 		pthread_mutex_lock(&lock);
+		/*if value is out of stop range, send signal*/
 		if (glo_val<VALUE_STOP1||glo_val>VALUE_STOP2)
 			pthread_cond_signal(&cond);
 		else
@@ -58,4 +65,3 @@ void *ssu_thread2(void *arg)
 			return NULL;
 	}
 }
-

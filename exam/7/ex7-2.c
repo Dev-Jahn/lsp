@@ -7,7 +7,7 @@ pthread_cond_t cond1 = PTHREAD_COND_INITIALIZER;
 pthread_cond_t cond2 = PTHREAD_COND_INITIALIZER;
 int length;
 int buf[100];
-
+/*#define A*/
 void *ssu_thread_producer(void *arg)
 {
 	int i;
@@ -15,11 +15,13 @@ void *ssu_thread_producer(void *arg)
 	{
 		pthread_mutex_lock(&mutex);
 		buf[length++] = i;
+		printf("[pro]i:%d len:%d\n", i, length);
 
 		pthread_cond_signal(&cond2);
 
 		if (length == 100)
 			pthread_cond_wait(&cond1, &mutex);
+		
 		pthread_mutex_unlock(&mutex);
 	}
 	return NULL;
@@ -33,6 +35,8 @@ void *ssu_thread_consumer(void *arg)
 	for (i=1;i<=300;i++)
 	{
 		pthread_mutex_lock(&mutex);
+
+		printf("[con]i:%d len:%d\n", i, length);
 
 		pthread_cond_signal(&cond1);
 

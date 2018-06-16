@@ -7,6 +7,7 @@
 int main(void)
 {
 	int flag;
+	/*invalid usage*/
 	if ((flag=fcntl(STDOUT_FILENO, F_DUPFD))==-1)
 	{
 		fprintf(stderr, "Error : Checking CLOSE_ON_EXEC\n");
